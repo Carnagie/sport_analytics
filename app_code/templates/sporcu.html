@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/style_sporcu.css')}}">
+<script src="{{ url_for('static', filename='js/sporcu.js')}}"></script>
+{% endblock %}
+
+{% block content %}
+    <form action="/sporcu" method="post" autocomplete="off" enctype="multipart/form-data">
+    <div class="main_content">
+        <div class="header">Sporcu eklemek için kayit formu..</div>  
+        <div class="info">
+
+        <div class="body_container">
+
+            <div class="inputContainer">
+                <ul class="input_list">
+
+
+                </ul>
+                <div class="backgroundWrapped">
+                <label for="file_photo" class="file">  
+                    <div id="camera_icon" class="camera_icon">
+                    <img class="defaultPhoto" src="static/athlete_images/default.png">
+                    </div>
+                    <label class="file_photo_sporcu">
+                    <h3>Fotoğraf Yükle</h3>
+                    <input style="display: none;" type="file" id="file_photo" class="file_photo" onchange="preview_image(event)" name="item_image"/>
+                    </label>
+                </label>
+
+                <ul class="infoWrap">
+                <li>
+                    <ul class="infoList">
+                        
+                        <li>
+                            <h2>Sporcu ID:</h2>
+                            <input type="number" name="SporcuInf" placeholder="  sayi giriniz">
+                        </li>
+                        <li>
+                            <h2>Sporcu Adı:</h2>
+                            <input type="text" name="SporcuInf" placeholder="  yazi giriniz">
+                        </li>
+                        <li>
+                            <h2>Sporcu Soyadı:</h2>
+                            <input type="text" name="SporcuInf" placeholder="  yazi giriniz">
+                        </li>
+                        <li>
+                            <h2>Sporcu Kilo:</h2>
+                            <input type="number" name="SporcuInf" placeholder="  sayi giriniz (kg olmadan)" step="0.01">
+                        </li>
+                        <li>
+                            <h2>Sporcu Boy:</h2>
+                            <input type="number" name="SporcuInf" placeholder="  sayi giriniz (1.82 2.05 vb)" step="0.01">
+                        </li>
+                        <li>
+                            <h2>Sporcu Mevki:</h2>
+                            <input type="text" name="SporcuInf" placeholder="  yazi giriniz (center 3 5)">
+                        </li>
+                        <li>
+                            <h2>Cinsiyet:</h2>
+                            <select  class="selectBox" name="SporcuInf2">
+                                <option value="erkek">
+                                    Erkek
+                                </option>
+                                <option value="kadin">
+                                    Kadın
+                                </option>
+                            </select>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="infoList2">
+                    <li>
+                        <li>
+                            <h2>Sporcu Üst Vucut Sağlık Durumu:</h2>
+                            <input type="text" name="SporcuInf" placeholder="  yazi giriniz (iyi kötü vb)">
+                        </li>
+                        <li>
+                            <h2>Sporcu Alt Vucut Sağlık Durumu:</h2>
+                            <input type="text" name="SporcuInf" placeholder="  yazi giriniz (iyi kötü vb)">
+                        </li>
+                        <li>
+                            <h2>Sporcu Kıyafet Bedeni:</h2>  
+                            <input type="text" name="SporcuInf" placeholder="yazi giriniz (üst 33 vb)">
+                        </li>
+                        <li>
+                            <h2>Sporcu Telefonu:</h2>
+                            <input type="text" name="SporcuInf" placeholder="  xxx xxx xx xx">
+                        </li>
+                        <li style="display:none;">
+                            <h2>Sporcu Fotoğrafı:</h2>
+                            <input type="text" class="sporcuPhoto" name="SporcuInf" placeholder="  default">
+                        </li>
+                        <li>
+                            <h2>Notlar:</h2>
+                            <input type="text" class="sporcuInf" name="SporcuInf" placeholder="  bahadir takimda harika">
+                        </li>
+                        <li>
+                            <h2>Yas:</h2>
+                            <input type="text" class="sporcuInf" name="SporcuInf2" placeholder="  21 22 vb">
+                        </li>
+                    </ul>
+                </li>
+                </ul>
+                <input type="submit" name="submitSporcu" value="KAYDET" class="buttonSporcu">
+                </div>
+
+
+                
+
+
+            </div>
+
+        </div>      
+        </div>
+    </div>
+    </form>
+
+{% endblock %}

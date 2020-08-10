@@ -1,0 +1,357 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/style_gecmis.css')}}">
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="bg-modal2">
+
+      <div class="modal-content2">
+        <div class="close2">+</div>
+
+        {% if 0 == testType %}
+
+          <div class="tableIn">
+
+            <h3>{{dateKey}}</h3>
+
+            <img style="padding: 20px;" src="{{imageSource}}">
+
+            <h3 style="color: orange">{{sporcuFullName}}</h3>
+              <table class="infoTable0">
+              <tr>
+                <th> Squat </th>
+                <th> Bench Press </th>
+                <th> Row </th>
+                <th> Shoulder Press </th>
+                <th> Dead Lift </th>
+                <th> Hip Trust </th>
+              </tr>
+              <tr>
+                
+                <td>{{ dataDict["squat"] }}</td>
+                <td>{{ dataDict["bench_press"] }}</td>
+                <td>{{ dataDict["row"] }}</td>
+                <td>{{ dataDict["shoulder_press"] }}</td>
+                <td>{{ dataDict["dead_lift"] }}</td>
+                <td>{{ dataDict["hip_trust"] }}</td>
+
+              </tr>
+            </table>
+
+          </div>
+
+        {% endif %}
+
+        {% if 1 == testType %}
+
+          <div class="tableIn">
+            
+            <h3>{{dateKey}}</h3>
+
+            <img style="padding: 20px;" src="{{imageSource}}">
+
+            <ul class="infoHeader2">
+              <li><h2>Total:</h2></li>
+              <li><h2>{{ dataDict["total"] }}</h2></li>
+            </ul>
+
+
+              <table class="infoTable0">
+              <tr>
+                <th> Test </th>
+                <th> Raw  </th>
+                <th> Final  </th>
+                <th> Not</th>
+              </tr>
+              <tr>
+                <td> Deep Squat </td>
+                {% for k in dataDict["deep_squat"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> P. Up Clearing </td>
+                {% for k in dataDict["press_up_clearing"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> T. S. Push Up </td>
+                {% for k in dataDict["trunk_stability_push_up"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> P. Rocking Clearing </td>
+                {% for k in dataDict["posterior_rocking_clearing"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              </table>
+
+              <table class="infoTable0">
+              <tr>
+                <th> Test </th>
+                <th> Raw Left </th>
+                <th> Raw Right </th>
+                <th> Final  </th>
+                <th> Not</th>
+              </tr>
+              <tr>
+                <td> Hudle Step </td>
+                {% for k in dataDict["hurdle_step"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> Inline Lunge </td>
+                {% for k in dataDict["inline_lunge"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> Shoulder Mobility </td>
+                {% for k in dataDict["shoulder_mobility"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> Impingement Clearing </td>
+                {% for k in dataDict["impingement_clearing"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> A. Straight Leg Raise </td>
+                {% for k in dataDict["act_str_leg_raise"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> Rotary Stability </td>
+                {% for k in dataDict["rotary_stability"] %}
+                <td> {{k}} </td>
+                {% endfor %}
+              </tr>
+              </table>
+
+
+
+          </div>
+
+        {% endif %}
+
+        {% if 2 == testType %}
+
+          <div class="tableIn">
+    
+            <h3>{{dateKey}}</h3>
+
+            <img  style="padding: 20px;" src="{{imageSource}}">
+
+            <h3 style="color: orange">{{sporcuFullName}}</h3>
+
+            <ul class="infoHeader2">
+              <li><h2>Limb Length:</h2></li>
+              <li><h2>{{ dataDict["limb_length"] }}</h2></li>
+            </ul>
+            <ul class="infoHeader2">
+              <li><h2>Dominant Leg:</h2></li>
+              <li><h2>{{ dataDict["dominant_leg"] }}</h2></li>
+            </ul>
+              <table class="infoTable0">
+              <tr>
+                <th> Section </th>
+                <th> Left SL </th>
+                <th> Left SL </th>
+                <th> Left SL </th>
+                <th> Right X </th>
+                <th> Right X </th>
+                <th> Right X </th>
+                <th> Deficit </th>
+              </tr>
+              <tr>
+                <td> Anterior </td>
+                {% for k in dataDict["anterior"] %}
+                <td>{{ k }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> Posteromedial </td>
+                {% for k in dataDict["posteromedial"] %}
+                <td>{{ k }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td> Posterolateral </td>
+                {% for k in dataDict["posterolateral"] %}
+                <td>{{ k }}</td>
+                {% endfor %}
+              </tr>
+            </table>
+
+              <table class="infoTable0">
+              <tr>
+                <th> Total Left </th>
+                <th> Total Right </th>
+              </tr>
+
+              <tr>
+                <td>{{ dataDict["total"][0] }}</td>
+                <td>{{ dataDict["total"][1] }}</td>
+              </tr>
+              </table>
+
+          </div>
+
+        {% endif %}
+
+
+        {% if 3 == testType %}
+
+          <div class="tableIn" style="margin-top: 10px;">
+
+            <h3>{{dateKey}}</h3>
+
+
+            <img style="padding: 20px;" src="{{imageSource}}">
+
+
+            <h3 style="color: orange">{{sporcuFullName}}</h3>
+
+
+            <ul class="infoHeader2">
+              <li><h2>Time:</h2></li>
+              <li><h2>{{ dataDict["time"] }}</h2></li>
+            </ul>
+            <ul class="infoHeader2">
+              <li><h2>Location:</h2></li>
+              <li><h2>{{ dataDict["location"] }}</h2></li>
+            </ul>
+            <ul class="infoHeader2">
+              <li><h2>Position:</h2></li>
+              <li><h2>{{ dataDict["position"] }}</h2></li>
+            </ul>
+              <table class="infoTable0">
+              <tr>
+                <th> Jump 1 </th>
+                <th> Jump 2 </th>
+                <th> Jump 3 </th>
+              </tr>
+              <tr>
+                {% for k in dataDict["jumps"] %}
+                <td>{{ k }}</td>
+                {% endfor %}
+              </tr>
+
+            </table>
+
+
+
+          </div>
+
+        {% endif %}
+
+
+      </div>
+
+    </div>
+
+
+    <div class="bg-modal">
+      <form action="/gecmis" method="post" autocomplete="off">
+                <input  style="display: none;" type="text" class="rowDataInput" name="rowDataInput" value="">
+      <div class="modal-content">
+        <div class="close">+</div>
+
+        <h2 class="title">İlgili Tarihi Girin:</h2>
+        <ul class="radios">
+          <li>
+            <input type="radio" class="maximal" name="testType" value="0"> <h2>Maximal Test Sonuçları</h2>
+          </li>
+          <li>
+            <input type="radio" class="fms" name="testType" value="1"> <h2>FMS Test Sonuçları</h2>
+          </li>
+          <li>
+            <input type="radio" class="ybalance" name="testType" value="2"> <h2>Y-Balance Test Sonuçları</h2>
+          </li>
+          <li>
+            <input type="radio" class="jump" name="testType" value="3"> <h2>Sıçrama Test Sonuçları</h2>
+          </li>
+        </ul>
+        <input type="text" name="dateInputText" placeholder="DD/MM/YYYY veya SON">
+        <input type="submit" class="dateButton" name="dateButton" value="GETİR" onclick="getDefaultSelected2();">
+
+      </div>
+
+    </form>
+    </div>
+
+    <div class="main_content">
+        <div class="header">Ölçüm eklemek istediğiniz kişiyi seçip devam edin..</div>  
+
+
+
+        <div class="info">
+
+          <div class="body_container">
+
+              <div class="tableSQL">
+
+
+
+                <table class="customers">
+                  <tr>
+                      <th> <i class="fa fa-list" aria-hidden="true"></i> </th>
+                    {% for hd in tableHeader %}
+                      <th>{{hd}}</th>
+                    {% endfor %}
+                  </tr>
+                  {% for row in table %}
+
+                  <tr>
+
+
+                      <td>  <button class="button" onclick="getID({{loop.index}});">  <h2 style="color: green">✔</h2> </button>  </td>
+
+                      <input style="display: none;" type="text" name="rowDatas" value="{{ row }}">
+
+                    {% for rowData in row %}
+
+                      <td>{{rowData}}</td>
+
+                    {% endfor %}
+
+                  </tr>
+
+                  {% endfor %}
+
+
+                </table>  
+
+              
+            </div>
+
+          </div>
+
+
+
+
+
+
+
+          
+        </div>
+
+    </div>
+
+
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+
+<script src="{{ url_for('static', filename='js/gecmis.js')}}"></script>
+
+{% endblock %}

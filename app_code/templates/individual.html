@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/styles_individual.css')}}">
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<title>WHERE2LIVE</title>
+
+
+	
+</head>
+<body  onload="setDefaultSelected();">
+<form action="/individual" method="post" autocomplete="off">
+
+
+
+
+
+<div class="wrapper">
+
+
+	<div class="bg_modal">
+
+		<div class="modal_content">
+
+			<div class="close"> + </div>
+
+			<ul class="addListColumns" style="margin: 15%">
+
+				{% for key in donatData %}
+
+					<li style="margin:5px"> {{key}} </li>
+
+					<input type="text" name="datas" class="popupInput_add">
+
+				{% endfor %}
+
+			</ul>
+
+			<input type="submit" name="submits" value="ADD ITEM" class="changesButton">
+		</div>
+
+
+	</div>
+
+	<div class="bg_modal_delete">
+
+		<div class="modal_content_delete">
+
+			<div class="close_delete"> + </div>
+
+			<ul class="addListColumns" style="margin: 15%">
+
+				{% for key in donatData[:3] %}
+
+					<li style="margin:5px"> {{key}} </li>
+
+					<input type="text" name="datas2" class="popupInput_del">
+
+				{% endfor %}
+
+			</ul>
+
+			<input type="submit" name="submits" value="DELETE ITEM" class="changesButton_DEL">
+		</div>
+
+
+	</div>
+
+	<div class="bg_modal_update">
+
+		<div class="modal_content_update">
+
+			<div class="close_update"> + </div>
+
+			<ul class="addListColumns" style="margin: 15%">
+
+				{% for key in donatData %}
+
+					<li style="margin:5px"> {{key}} </li>
+
+					<input type="text" name="datas3" class="popupInput_up">
+
+				{% endfor %}
+
+			</ul>
+
+			<input type="submit" name="submits" value="UPDATE ITEM" class="changesButton_UPDATE">
+		</div>
+
+
+	</div>
+
+
+
+    <div class="sidebar">
+        <h2>MAP</h2>
+        <ul>
+            <li><a href="http://localhost:8000"><i class="fas fa-home"></i>ANASAYFA</a></li>
+            <li><a href="http://localhost:8000/profiller"><i class="fas fa-user"></i>PROFILLER</a></li>
+            <li><a href="http://localhost:8000/bulk"><i class="fas fa-project-diagram"></i>EXCEL YUKLE</a></li>
+            <li><a href="http://localhost:8000/individual"><i class="fas fa-address-card"></i>ŞABLON YONET</a></li>
+            <li><a href="http://localhost:8000/sporcu"><i class="fas fa-address-card"></i>SPORCU EKLE</a></li>
+            <li><a href="http://localhost:8000/olcum"><i class="fas fa-blog"></i>ÖLÇÜM EKLE</a></li>
+            <li><a href="http://localhost:8000/gecmis"><i class="fa fa-history" aria-hidden="true"></i>   ÖLÇÜM GEÇMİŞİ</a></li>
+            <li><a href="#"><i class="fas fa-address-book"></i>CONTACT</a></li>
+            <li><a href="#"><i class="fas fa-map-pin"></i>MAP</a></li>
+        </ul> 
+        <div class="social_media">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div style="width: 2px;"></div>
+    <div class="main_content">
+        <div class="header">Yönetmek istediğiniz tabloyu seçin..</div>  
+        <div class="info">
+
+		<div class="body_container">
+
+			<div class="inputContainer">
+				<ul class="input_list">
+
+					<li><h3>Kontrol Etmek İstediğiniz Tabloyu Seçin:</h3></li>
+
+					<li>
+						<select class="tableToChose" name="table1" onclick="getDefaultSelected();">
+							<option value="sporcular">
+							Sporcular
+							</option>
+							<option value="sporcular_olc" selected="selected">
+							Sporcular ve Olcumleri
+							</option>
+						</select>
+					</li>
+
+					<li>
+					<button class="submitButton" type="submit" name="submitButton">Tabloyu Getir</button>
+					</li>
+
+				</ul>
+
+			</div>
+
+			<div class="tableSQL" >
+
+				<i class="fas fa-tools" style="margin-left: 8px"></i>
+				<button id="add" class="addInd" type="button"><i class="fas fa-plus"></i></button> <button id="update" type="button" class="updateInd"><i class="fas fa-edit"></i></button>   <button id="del" class="delInd" type="button"><i class="fas fa-trash-alt"></i></button>
+
+						<table class="customers">
+						  <tr>
+						  	{% for hd in tableHeader %}
+						  		<th>{{hd}}</th>
+						  	{% endfor %}
+						  </tr>
+						  {% for row in table %}
+
+						  <tr>
+
+						  	{% for rowData in row %}
+
+						  		<td>{{rowData}}</td>
+
+						  	{% endfor %}
+
+						  </tr>
+
+						  {% endfor %}
+
+
+						</table>	
+
+			</div>
+
+
+		</div>
+
+
+
+
+
+
+
+        	
+        </div>
+    </div>
+</div>
+
+
+
+</form>
+
+
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+<script src="{{ url_for('static', filename='js/manage.js')}}"></script>
+
+</body>
+</html>

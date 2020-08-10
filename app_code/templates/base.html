@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+{% block links %}
+{% endblock %}
+
+
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<title>ANALITIK</title>
+
+
+	
+</head>
+<body onload="setDefaultSelectedBody()">
+
+
+
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>MENU</h2>
+        <ul>
+            <li><a href="http://localhost:8000"><i class="fas fa-home"></i>ANASAYFA</a></li>
+            <li><a href="http://localhost:8000/profiller"><i class="fas fa-user"></i>PROFILLER</a></li>
+            <li><a href="http://localhost:8000/bulk"><i class="fas fa-project-diagram"></i>EXCEL YUKLE</a></li>
+            <li><a href="http://localhost:8000/individual"><i class="fas fa-address-card"></i>ŞABLON YONET</a></li>
+            <li><a href="http://localhost:8000/sporcu"><i class="fas fa-address-card"></i>SPORCU EKLE</a></li>
+            <li><a href="http://localhost:8000/olcum"><i class="fas fa-blog"></i>ÖLÇÜM EKLE</a></li>
+            <li><a href="http://localhost:8000/gecmis"><i class="fa fa-history" aria-hidden="true"></i>   ÖLÇÜM GEÇMİŞİ</a></li>
+            <li><a href="#"><i class="fas fa-address-book"></i>CONTACT</a></li>
+            <li><a href="#"><i class="fas fa-map-pin"></i>MAP</a></li>
+        </ul> 
+        <div class="social_media">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div style="width: 2px;"></div>
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+
+
+
+
+</body>
+</html>

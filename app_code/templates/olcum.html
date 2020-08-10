@@ -1,0 +1,547 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/style_olcum.css')}}">
+
+{% endblock %}
+
+{% block content %}
+    <div class="bg-modal">
+      <form action="/olcum" method="post" autocomplete="off">
+                <input  style="display: none;" type="text" class="rowDataInput" name="rowDataInput" value="">
+      <div class="modal-content">
+        <div class="close">+</div>
+
+        <ul class="navButtons">
+          <li><button type="button" class="maximalTestForm" ><h3>Maximal Test Formu:</h3></button></li>
+          <li><button type="button" class="fmsTestForm" ><h3>FMS Test Formu:</h3></button></li>
+          <li><button type="button" class="ybalanceTestForm" ><h3>Y - Balance Test Formu:</h3></button></li>
+          <li><button type="button" class="jumpTestForm" ><h3>Sıçrama Test Formu:</h3></button></li>
+          <li><button type="button" class="vertTestForm" ><h3>VERT Test Formu:</h3></button></li>
+        </ul>
+
+
+
+        <div class="maximalTest">
+
+          
+
+          <ul class="maximalTestWrapper">
+
+            <li>
+              <h2>Tarih:</h2>
+              <input type="date" placeholder="dd/mm/yyyy" name="dateMaximal">
+            </li>
+          
+            <li>
+              <h2>Squat:</h2>
+              <input  type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+            </li>
+
+            <li>
+              <h2>Bench Press:</h2>
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+            </li>
+
+            <li>
+              <h2>Row:</h2>
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+            </li>
+
+            <li>
+              <h2>Shoulder Press:</h2>
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+            </li>
+
+            <li>
+              <h2>Dead Lift:</h2>
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+            </li>
+
+            <li>
+              <h2>Hip Trust:</h2>
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+            </li>
+
+            <li>
+              <button type="submit" class="olcumSubmit" name="submits" value="maximalTest"> Ölçüm Ekle </button>
+            </li>
+
+          </ul>
+
+          
+
+        </div>
+
+
+        <div class="fmsTest">
+
+          <ul class="fmsTestWrapper">
+
+            <li>
+              <h2>Tarih:</h2>
+              <input type="date" placeholder="dd/mm/yyyy" name="dateFMS">
+            </li>
+
+            <li>
+              <h2>Deep Squat:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="deepSquat" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Hurdle Step:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Left">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Right">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="hurdleStep" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Inline Lunge:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Left">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Right">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="inlineLunge" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Shoulder Mobility:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Left">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Right">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="shoulderMob" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Impingement Clearing:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Left">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Right">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="impClear" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Active Straight-Leg Raise:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Left">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Right">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="actStrLegRaise" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Trunk Stability Push Up:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="trunkStabPush" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Press Up Clearing:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="pressUpClear" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h2>Rotary Stability:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Left">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw Right">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="rotStab" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h2>Posterior Rocking Clearing:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Raw">
+                </li>
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Final" step="0.01" id="postRockClear" onkeyup="totalCalculator()">
+                </li>
+                <li>
+                <input  type="text" name="fmsTest" placeholder="Not">
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h2>Total:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="fmsTest" placeholder="Total" step="0.01" id="total" onkeyup="totalCalculator()">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+                  <button type="submit" class="olcumSubmit" name="submits" value="fmsTest" > Ölçüm Ekle </button>
+            </li>
+
+          </ul>
+
+
+     
+        </div>
+
+        <div class="ybalanceTest">
+
+          
+
+          <ul class="ybalanceTestWrapper">
+
+            <li>
+              <h2>Tarih:</h2>
+              <input type="date" placeholder="dd/mm/yyyy" name="dateY">
+            </li>
+
+            <li>
+              <h2>Limb Length:</h2>
+              <input class="infosDetailed" type="number" name="ybalanceTest" placeholder="sayi giriniz (cm)" id="limb" onkeyup="totalCalculatorY()">
+            </li>
+
+            <li>
+              <h2>Dominant Leg:</h2>
+              <input class="infosDetailed" type="text" name="ybalanceTest" placeholder="Sag / Sol">
+            </li>
+          
+            <li>
+              <h2>Anterior:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="ant_leftSL1" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="ant_leftSL2" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="ant_leftSL3" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="ant_rightX1" step="0.01"onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="ant_rightX2" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li> 
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="ant_rightX3" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Deficit (%)" id="ant_def" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Posteromedial:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="pos1_leftSL1" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="pos1_leftSL2" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="pos1_leftSL3" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="pos1_rightX1" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="pos1_rightX2" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="pos1_rightX3" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Deficit (%)" id="pos1_def" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Posterolateral:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="pos2_leftSL1" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="pos2_leftSL2" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left SL" id="pos2_leftSL3" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="pos2_rightX1" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="pos2_rightX2" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right X" id="pos2_rightX3" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Deficit (%)" id="pos2_def" step="0.01" onkeyup="totalCalculatorY()">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <h2>Total:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Left (%)" step="0.01" id="totalLeft" onkeyup="totalCalculatorY()">
+                </li>
+                <li>
+                <input  type="number" name="ybalanceTest" placeholder="Right (%)" step="0.01" id="totalRight" onkeyup="totalCalculatorY()">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+                        <button type="submit" class="olcumSubmit" name="submits" value="ybalanceTest"> Ölçüm Ekle </button>
+            </li>
+
+          </ul>
+
+
+
+        </div>
+
+        <div class="jumpTest">
+
+
+          <ul class="jumpTestWrapper">
+
+            <li>
+              <h2>Tarih:</h2>
+              <input type="date" placeholder="dd/mm/yyyy" name="dateJUMP">
+            </li>
+
+            <li>
+              <h2>Time:</h2>
+              <input class="infosDetailed" type="number" name="jumpTest" placeholder="sayi giriniz (sn)">
+            </li>
+
+            <li>
+              <h2>Location:</h2>
+              <input class="infosDetailed" type="text" name="jumpTest" placeholder="yazi giriniz">
+            </li>
+          
+            <li>
+              <h2>Position:</h2>
+                <input class="infosDetailed" type="text" name="jumpTest" placeholder="yazi giriniz">
+            </li>
+
+            <li>
+              <h2>Jumps:</h2>
+              <ul style="display: flex">
+                <li>
+                <input  type="number" name="jumpTest" placeholder="Jump 1 (cm)">
+                </li>
+                <li>
+                <input  type="number" name="jumpTest" placeholder="Jump 2 (cm)">
+                </li>
+                <li>
+                <input  type="number" name="jumpTest" placeholder="Jump 3 (cm)">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+                <button type="submit" class="olcumSubmit" name="submits" value="jumpTest" > Ölçüm Ekle </button>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <div class="vertTest">
+
+
+          <ul class="vertTestWrapper">
+
+            <li>
+              <h2>Tarih:</h2>
+              <input type="date" placeholder="dd/mm/yyyy" name="dateVERT">
+            </li>
+
+            <li>
+              <button type="button" class="addJumpButton" id="add">ADD JUMP</button>
+              <button type="button" class="removeJumpButton" id="remove">REMOVE JUMP</button>
+            </li>
+
+            <li>
+              <h2>Jumps:</h2>
+              <ul class="dynamicInputs" id="dynamicInputs">
+                <li id="base">
+                <input  type="number" name="vertTest" placeholder="Jump (cm)">
+                </li>
+              </ul>
+            </li>
+
+            <li>
+                <button type="submit" class="olcumSubmit" name="submits" value="vertTest" > Ölçüm Ekle </button>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+
+
+
+
+      </div>
+
+    </form>
+    </div>
+
+    <div class="main_content">
+        <div class="header">Ölçüm eklemek istediğiniz kişiyi seçip devam edin..</div>  
+
+
+
+        <div class="info">
+
+          <div class="body_container">
+
+              <div class="tableSQL">
+
+
+
+                <table class="customers">
+                  <tr>
+                      <th> <i class="fa fa-list" aria-hidden="true"></i> </th>
+                    {% for hd in tableHeader %}
+                      <th>{{hd}}</th>
+                    {% endfor %}
+                  </tr>
+                  {% for row in table %}
+
+                  <tr>
+
+
+                      <td>  <button class="button" onclick="getID({{loop.index}});"> <i class="fa fa-plus" aria-hidden="true"></i> </button>  </td>
+
+                      <input style="display: none;" type="text" name="rowDatas" value="{{ row }}">
+
+                    {% for rowData in row %}
+
+                      <td>{{rowData}}</td>
+
+                    {% endfor %}
+
+                  </tr>
+
+                  {% endfor %}
+
+
+                </table>  
+
+              
+            </div>
+
+          </div>
+
+
+
+
+
+
+
+          
+        </div>
+
+    </div>
+
+
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+
+<script src="{{ url_for('static', filename='js/olcum.js')}}"></script>
+
+{% endblock %}

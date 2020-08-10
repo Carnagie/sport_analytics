@@ -1,0 +1,99 @@
+
+{% extends "base.html" %}
+
+{% block links %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/styles_bulk.css')}}">
+{% endblock %}
+
+
+{% block content %}
+    <form action="/bulk" method="post" autocomplete="off">
+    <div class="main_content">
+        <div class="header">Toplu Excell Yüklemek için..</div>  
+        <div class="info">
+
+		<div class="body_container">
+
+			<div class="fileContainer">
+				<ul class="nav_list">
+					
+					<li>  <h3>EXCEL DOSYASININ ADINI GİRİN:</h3> </li>
+					
+					<li>
+				    	<input type="text" name="file1"> <br>
+					</li>
+
+					<li>
+						<h3>HANGİ ŞABLONA EKLEME YAPILACAK:</h3>
+					</li>
+					
+					<li>
+						<select name="table1">
+							<option value="sporcular" >
+							Sporcular
+							</option>
+							<option value="sporcular_olc" >
+							Sporcular ve Ölçümleri
+							</option>
+						</select>
+					</li>
+
+					<li>
+					<button class="submitButton" type="submit" name="submitButton">YÜKLE</button>
+					</li>
+			</ul>
+			</div>
+
+			<div class="tableContainer">
+
+
+				<ul class="table_list">
+
+					<li><h3> Yüklenen Tablo... </h3></li>
+
+				</ul>
+				
+			</div>
+
+
+			<div class="tableSQL" >
+
+						<table class="customers">
+						  <tr>
+						  	{% for hd in tableHeader %}
+						  		<th>{{hd}}</th>
+						  	{% endfor %}
+						  </tr>
+						  {% for row in table %}
+
+						  <tr>
+						  	
+						  	{% for rowData in row %}
+
+						  		<td>{{rowData}}</td>
+
+						  	{% endfor %}
+
+						  </tr>
+
+						  {% endfor %}
+
+
+						</table>	
+
+			</div>
+
+
+		</div>
+
+
+
+
+
+
+
+        	
+        </div>
+    </div>
+    </form>
+{% endblock %}
