@@ -17,6 +17,8 @@ function() {
     document.querySelector('.jumpTest').style.display = 'none';
     document.querySelector('.vertTest').style.display = 'none';
     document.querySelector('.modal-content').style.height = '720px';
+    document.querySelector('.polarTest').style.display = 'none';
+    document.querySelector('.servisTest').style.display = 'none';
 });
 
 $(document).on('click','.fmsTestForm',
@@ -28,6 +30,8 @@ function() {
     document.querySelector('.vertTest').style.display = 'none';
     document.querySelector('.modal-content').style.height = '1040px';
     document.querySelector('.modal-content').style.width = '1000px';
+    document.querySelector('.polarTest').style.display = 'none';
+    document.querySelector('.servisTest').style.display = 'none';
 
 });
 
@@ -39,6 +43,8 @@ function() {
     document.querySelector('.jumpTest').style.display = 'none';
     document.querySelector('.vertTest').style.display = 'none';
     document.querySelector('.modal-content').style.height = '740px';
+    document.querySelector('.polarTest').style.display = 'none';
+    document.querySelector('.servisTest').style.display = 'none';
 });
 
 $(document).on('click','.jumpTestForm',
@@ -49,12 +55,41 @@ function() {
     document.querySelector('.jumpTest').style.display = 'flex';
     document.querySelector('.vertTest').style.display = 'none';
     document.querySelector('.modal-content').style.height = '545px';
+    document.querySelector('.polarTest').style.display = 'none';
+    document.querySelector('.servisTest').style.display = 'none';
 
 });
 
 $(document).on('click','.vertTestForm',
 function() {
     document.querySelector('.vertTest').style.display = 'flex';
+    document.querySelector('.maximalTest').style.display = 'none';
+    document.querySelector('.fmsTest').style.display = 'none';
+    document.querySelector('.ybalanceTest').style.display = 'none';
+    document.querySelector('.jumpTest').style.display = 'none';
+    document.querySelector('.modal-content').style.height = '545px';
+    document.querySelector('.polarTest').style.display = 'none';
+    document.querySelector('.servisTest').style.display = 'none';
+
+});
+
+$(document).on('click','.polarTestForm',
+function() {
+    document.querySelector('.polarTest').style.display = 'flex';
+    document.querySelector('.vertTest').style.display = 'none';
+    document.querySelector('.maximalTest').style.display = 'none';
+    document.querySelector('.fmsTest').style.display = 'none';
+    document.querySelector('.ybalanceTest').style.display = 'none';
+    document.querySelector('.jumpTest').style.display = 'none';
+    document.querySelector('.modal-content').style.height = '545px';
+    document.querySelector('.servisTest').style.display = 'none';
+
+});
+$(document).on('click','.servisTestForm',
+function() {
+    document.querySelector('.servisTest').style.display = 'flex';
+    document.querySelector('.polarTest').style.display = 'none';
+    document.querySelector('.vertTest').style.display = 'none';
     document.querySelector('.maximalTest').style.display = 'none';
     document.querySelector('.fmsTest').style.display = 'none';
     document.querySelector('.ybalanceTest').style.display = 'none';
@@ -126,17 +161,17 @@ function totalCalculatorY(){ // run anytime the value changes
     var ant_Left = Number(( (((ant_leftSL1Value + ant_leftSL2Value + ant_leftSL3Value) / 3) / limbValue) * 100 ));
     var ant_Right = Number(( (((ant_rightX1Value + ant_rightX2Value + ant_rightX3Value) / 3) / limbValue) * 100 ));
 
-    document.getElementById('ant_def').value = Math.abs(ant_Left - ant_Right).toPrecision(3);
+    document.getElementById('ant_def').value = Number( Math.abs(ant_Left - ant_Right)).toPrecision(3);
 
     var pos1_Left = Number(( (((pos1_leftSL1Value + pos1_leftSL2Value + pos1_leftSL3Value) / 3) / limbValue) * 100 ));
     var pos1_Right = Number(( (((pos1_rightX1Value + pos1_rightX2Value + pos1_rightX3Value) / 3) / limbValue) * 100 ));
 
-    document.getElementById('pos1_def').value = Math.abs(pos1_Left - pos1_Right).toPrecision(3);
+    document.getElementById('pos1_def').value = Number(Math.abs(pos1_Left - pos1_Right)).toPrecision(3);
 
     var pos2_Left = Number(( (((pos2_leftSL1Value + pos2_leftSL2Value + pos2_leftSL3Value) / 3) / limbValue) * 100 ));
     var pos2_Right = Number(( (((pos2_rightX1Value + pos2_rightX2Value + pos2_rightX3Value) / 3) / limbValue) * 100 ));
 
-    document.getElementById('pos2_def').value = Math.abs(pos2_Left - pos2_Right).toPrecision(3);
+    document.getElementById('pos2_def').value = Number(Math.abs(pos2_Left - pos2_Right)).toPrecision(3);
 
     document.getElementById('totalLeft').value = Number( (ant_Left + pos1_Left + pos2_Left) / 3 ).toPrecision(3);
     document.getElementById('totalRight').value = Number( (ant_Right + pos1_Right + pos2_Right) / 3 ).toPrecision(3);

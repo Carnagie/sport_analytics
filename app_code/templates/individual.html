@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
+
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/styles_individual.css')}}">
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 <title>WHERE2LIVE</title>
 
 
-	
+
 </head>
 <body  onload="setDefaultSelected();">
 <form action="/individual" method="post" autocomplete="off">
@@ -96,25 +96,23 @@
     <div class="sidebar">
         <h2>MAP</h2>
         <ul>
-            <li><a href="http://localhost:8000"><i class="fas fa-home"></i>ANASAYFA</a></li>
-            <li><a href="http://localhost:8000/profiller"><i class="fas fa-user"></i>PROFILLER</a></li>
-            <li><a href="http://localhost:8000/bulk"><i class="fas fa-project-diagram"></i>EXCEL YUKLE</a></li>
-            <li><a href="http://localhost:8000/individual"><i class="fas fa-address-card"></i>ŞABLON YONET</a></li>
-            <li><a href="http://localhost:8000/sporcu"><i class="fas fa-address-card"></i>SPORCU EKLE</a></li>
-            <li><a href="http://localhost:8000/olcum"><i class="fas fa-blog"></i>ÖLÇÜM EKLE</a></li>
-            <li><a href="http://localhost:8000/gecmis"><i class="fa fa-history" aria-hidden="true"></i>   ÖLÇÜM GEÇMİŞİ</a></li>
-            <li><a href="#"><i class="fas fa-address-book"></i>CONTACT</a></li>
-            <li><a href="#"><i class="fas fa-map-pin"></i>MAP</a></li>
-        </ul> 
-        <div class="social_media">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-      </div>
+            <li><a href="http://carnagie.pythonanywhere.com"><i class="fas fa-home"></i>ANASAYFA</a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/profiller"><i class="fas fa-user"></i>PROFILLER</a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/individual"><i class="fas fa-address-card"></i>ŞABLON YONET</a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/sporcu"><i class="fas fa-address-card"></i>SPORCU EKLE</a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/olcum"><i class="fas fa-blog"></i>ÖLÇÜM EKLE</a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/gecmis"><i class="fa fa-history" aria-hidden="true"></i>   ÖLÇÜM GEÇMİŞİ</a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/vert"><i class="fas fa-volleyball-ball"></i>VERT SONUÇLARI </a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/rm"><i class="fas fa-chart-pie"></i> ROW MAX </a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/cikti"><i class="fas fa-print"></i> ANTRENMAN </a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/program"><i class="fas fa-copy"></i>  AJANDA </a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/saha"><i class="fas fa-braille"></i> SAHA </a></li>
+            <li><a href="http://carnagie.pythonanywhere.com/verttakim"><i class="fas fa-chalkboard-teacher"></i> VERT TAKIM </a></li>
+        </ul>
     </div>
     <div style="width: 2px;"></div>
     <div class="main_content">
-        <div class="header">Yönetmek istediğiniz tabloyu seçin..</div>  
+        <div class="header">Yönetmek istediğiniz tabloyu seçin..</div>
         <div class="info">
 
 		<div class="body_container">
@@ -169,7 +167,7 @@
 						  {% endfor %}
 
 
-						</table>	
+						</table>
 
 			</div>
 
@@ -182,7 +180,7 @@
 
 
 
-        	
+
         </div>
     </div>
 </div>

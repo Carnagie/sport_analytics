@@ -18,28 +18,44 @@ function() {
 
 $(document).on('click','.maximal',
 function() {
-    localStorage.setItem("height", "800px");
-    localStorage.setItem("width", "650px");
+    localStorage.setItem("height", "80vh");
+    localStorage.setItem("width", "70%");
 });
 
 $(document).on('click','.fms',
 function() {
     console.log("fms")
-    localStorage.setItem("height", "1000px");
-    localStorage.setItem("width", "750px");
+    localStorage.setItem("height", "80vh");
+    localStorage.setItem("width", "50%");
 });
 
 
 $(document).on('click','.ybalance',
 function() {
-    localStorage.setItem("height", "800px");
-    localStorage.setItem("width", "800px");
+    localStorage.setItem("height", "80vh");
+    localStorage.setItem("width", "70%");
 });
 
 $(document).on('click','.jump',
 function() {
-    localStorage.setItem("height", "700px");
-    localStorage.setItem("width", "550px");
+    localStorage.setItem("height", "75vh");
+    localStorage.setItem("width", "60%");
+});
+
+$(document).on('click','.vert',
+function() {
+    localStorage.setItem("height", "65vh");
+    localStorage.setItem("width", "60%");
+});
+$(document).on('click','.polar',
+function() {
+    localStorage.setItem("height", "65vh");
+    localStorage.setItem("width", "60%");
+});
+$(document).on('click','.servis',
+function() {
+    localStorage.setItem("height", "65vh");
+    localStorage.setItem("width", "60%");
 });
 
 

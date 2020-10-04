@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/cikti.css')}}">
+{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="main_content">
+        <div class="header">Çıktı Almak İçin Ayarlayınız..</div>
+
+        <div class="info">
+
+        <div class="body_container">
+
+            <form action="/cikti" method="post" autocomplete="off" enctype="multipart/form-data">
+            <div class="inputContainer">
+
+
+                <ul class="input_list">
+
+                    <li><h3 style="color: black;">PROFİLLER ARASINDAN SEÇİM YAPINIZ:</h3></li>
+
+                    <li style="display: flex;">
+                        <select class="tableToChose" name="tableChosen">
+                            {% for k in jsonProfilDict %}
+                                <option>
+                                    {{k}}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </li>
+                    <li>
+                    <button class="submitButton" type="submit" name="submitButton">Profili Getir</button>
+                    <button class="submitButton" type="button" name="changeImg" id="changeImg">Resim Değiştir</button>
+                    </li>
+
+                </ul>
+
+            </div>
+            </form>
+
+
+            <div class="content_pdf" id="topdf">
+
+                <div class="row0">
+
+                    <div class="img_div">
+                    <img id="img_div2" src="static/athlete_images/mahiremrecan.png">
+                    </div>
+
+                    <input type="text" class="row0_h" placeholder="BAŞLIK">
+
+                </div>
+
+                <div class="row1">
+
+                    <img class="athlete_photo" src="{{def_img}}">
+
+                    <div class="notes">
+                        <ul class="notes_list">
+                            <li>
+                                <input type="text" name="baslik" placeholder="Antrenman Başlık">
+                            </li>
+
+                            <li>
+                                <input type="text" name="baslik" placeholder="Antrenman İçerik">
+                            </li>
+
+                            <li>
+                                <table class="customers2">
+                                  <tr>
+                                    <th> X </th>
+                                    <th id="c100">%100</th>
+                                    <th id="c90">%90</th>
+                                    <th id="c85">%85</th>
+                                    <th id="c80">%80</th>
+                                    <th id="c75">%75</th>
+                                    <th id="c70">%70</th>
+                                    <th id="c65">%65</th>
+                                    <th id="c60">%60</th>
+                                    <th id="c55">%55</th>
+                                    <th id="c50">%50</th>
+                                  </tr>
+                                  <tr>
+                                    <td> Squat </td>
+                                    {% for i in squatList %}
+                                    <td id="s{{loop.index}}"> {{i}} </td>
+                                    {% endfor %}
+                                  </tr>
+                                  <tr>
+                                    <td> B. Press </td>
+                                    {% for i in benchList %}
+                                    <td id="b{{loop.index}}"> {{i}} </td>
+                                    {% endfor %}
+                                  </tr>
+                                  <tr>
+                                    <td> Row </td>
+                                    {% for i in rowList %}
+                                    <td id="r{{loop.index}}"> {{i}} </td>
+                                    {% endfor %}
+                                  </tr>
+                                  <tr>
+                                    <td> Shoulder </td>
+                                    {% for i in shoulderList %}
+                                    <td id="sh{{loop.index}}"> {{i}} </td>
+                                    {% endfor %}
+                                  </tr>
+                                  <tr>
+                                    <td> Deadlift </td>
+                                    {% for i in deadliftList %}
+                                    <td id="d{{loop.index}}"> {{i}} </td>
+                                    {% endfor %}
+                                  </tr>
+                                  <tr>
+                                    <td> H. Trust </td>
+                                    {% for i in hiptrustList %}
+                                    <td id="h{{loop.index}}"> {{i}} </td>
+                                    {% endfor %}
+                                  </tr>
+                                </table>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="notes2">
+                        <ul class="notes_list2">
+                            <li>
+                                <input type="text" name="baslik" placeholder="Önemli Noktalar">
+                            </li>
+
+                            <li>
+                                <input type="text" name="baslik" placeholder="Önemli Noktalar">
+                            </li>
+
+                            <li>
+                                <input type="text" name="baslik" placeholder="Önemli Noktalar">
+                            </li>
+
+                            <li>
+                                <input type="text" name="baslik" placeholder="Önemli Noktalar">
+                            </li>                            <li>
+                                <input type="text" name="baslik" placeholder="Önemli Noktalar">
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="sectionAdder">
+
+                <div class="addedSections">
+                    <h2 style="color:black;border-bottom: solid 4px orange;text-align: center;">Eklenen Antremanlar</h2>
+                    <ul id="antrenmanlar">
+
+                    </ul>
+                </div>
+
+                <div class="userGui">
+                    <h2 style="color:black;border-bottom: solid 2px red;text-align: center;">Antrenman Ekle</h2>
+
+                    <div class="newAntrenman">
+
+                    <div class="container">
+                        <h1>Antrenman Fotoğrafı Seçin
+                        </h1>
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                <label style="background-color: darkgrey" for="imageUpload"><i  style="color:white" class="fas fa-pen"></i></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" style="background-image: url(static/athlete_images/default.png);">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <table id="myTable" class="customers">
+                          <tr>
+                            <th>Set (adet)</th>
+                            <th>Tekrar (adet)</th>
+                            <th>Ağırlık (kg)</th>
+                            <th>Zaman (sn)</th>
+                          </tr>
+                          <tr>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                          </tr>
+                          <tr>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                          </tr>
+                          <tr>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                            <td> <input type="text" name="tableInput" class="tableInput"> </td>
+                          </tr>
+                        </table>
+
+                    </div>
+
+                        <ul style="display: flex;margin-left: 18%;">
+                            <li>
+                                <button type="button" class="tableButton" onclick="myFunction()">Tekrar Sil</button>
+                            </li>
+
+                            <li>
+                                <button type="button" class="tableButton2" onclick="myFunction2()">Tekrar Ekle</button>
+                            </li>
+
+                            <li>
+                                <button type="button" class="tableButton3" onclick="myFunction3()">Ant. Ekle</button>
+                            </li>
+                        </ul>
+
+                        <script>
+                        var count = 0;
+                        function myFunction() {
+                          var table = document.getElementById("myTable");
+                          table.deleteRow(-1);
+
+                        }
+                        function myFunction2() {
+                          var table = document.getElementById("myTable");
+                          var row = table.insertRow(1);
+                          var cell1 = row.insertCell(0);
+                          var cell2 = row.insertCell(1);
+                          var cell3 = row.insertCell(2);
+                          var cell4 = row.insertCell(3);
+                          cell1.innerHTML = "<td> <input type='text' name='tableInput' class='tableInput'> </td>";
+                          cell2.innerHTML = "<td> <input type='text' name='tableInput' class='tableInput'> </td>";
+                          cell3.innerHTML = "<td> <input type='text' name='tableInput' class='tableInput'> </td>";
+                          cell4.innerHTML = "<td> <input type='text' name='tableInput' class='tableInput'> </td>";
+                        }
+                        function myFunction3() {
+                            console.log(count)
+                            count = count + 1;
+                            var div = document.createElement("div");
+                            var img = document.createElement("img");
+                            var elementImage  = document.getElementById("imagePreview").style.backgroundImage;
+                            img.src = elementImage.toString().substring(5,elementImage.toString().length-2)
+
+
+                            div.style.width = "15vw"
+                            div.appendChild(img)
+
+                            //img.src = "static/athlete_images/default.png";
+
+
+                            var tableElement = document.getElementById("myTable").cloneNode(true);
+                            tableElement.class = "customers";
+                            tableElement.id = ""
+                            var li = document.createElement("li");
+                            li.id="div" + count.toString();
+                            li.appendChild(div);
+                            li.appendChild(tableElement);
+                            document.getElementById("antrenmanlar").appendChild(li);
+                        }
+                        </script>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+        <button type="button" class="add" >SAVE PDF</button>
+
+        </div>
+
+        </div>
+
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+
+<script src="{{ url_for('static', filename='js/html2canvas.js')}}"></script>
+
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+
+<script type="module" src="{{ url_for('static', filename='js/cikti.js')}}"></script>
+
+
+{% endblock %}

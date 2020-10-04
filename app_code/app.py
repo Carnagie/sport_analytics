@@ -30,7 +30,7 @@ def allowed_image(filename):
 		return False
 
 #connecting to database
-con = psycopg2.connect( host="localhost", database="mahirdb",user="postgres",password="facethest0rm")
+con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
 
 fileName =""
 tableName =""
@@ -65,7 +65,7 @@ def index2():
 
 		fileName = str(request.form["file1"])
 		tableName = str(request.form["table1"])
-			
+
 		columns = list()
 
 		if tableName == "disease":
@@ -121,11 +121,11 @@ def index2():
 					sql_insert = "INSERT INTO " + tableName + "("+ columns[0] +","+columns[1]+")"+" VALUES (" +"\'"+row[0]+"\'"+ ","+ "\'" +row[1]+ "\'"+ ")"+";"
 
 				cur.execute(sql_insert)
-					
+
 		con.commit()
 		cur.close()
 
-		
+
 		cur = con.cursor()
 
 		tableName = str(request.form["table1"])
@@ -141,7 +141,7 @@ def index2():
 		cur.close()
 
 
-		
+
 	return render_template('bulk.html',table=tableData,tableHeader=tableHeader,donatData=donatData,donatDataVal=donatDataVal,colors=colors)
 
 
@@ -188,7 +188,7 @@ def index11():
 
 		key = str(row[0]) + "_" + str(row[1]) + "_" + str(row[2]) + ".json"
 
-		print(key) 
+		print(key)
 
 		data = {}
 		data['specs'] = [{},{},{},{},{}]
@@ -196,7 +196,7 @@ def index11():
 		with open('static/athlete_jsons/'+ key, 'w') as outfile:
 			json.dump(data, outfile)
 
-		
+
 	return render_template('sporcu.html')
 
 @app.route('/individual', methods=["GET","POST"])
@@ -259,9 +259,9 @@ def index3():
 			row = request.form.getlist("datas2")
 
 
-			if tableName == "sporcular": 
+			if tableName == "sporcular":
 				sql_insert = "DELETE FROM " + tableName + " WHERE (" + columns[0] + " = " + "'" +row[0]+ "' AND " + columns[1] + " = " + "'" +row[1]+ "' AND " + columns[2] + " = " + "'" +row[2]+ "\'" + ");"
-				
+
 				deletekey = str(row[0]) + "_" + str(row[1]) + "_" + str(row[2]) + ".json"
 				try:
 					os.remove("static/athlete_jsons/"+deletekey)
@@ -273,16 +273,16 @@ def index3():
 
 			row = request.form.getlist("datas3")
 
-			if tableName == "disease" or tableName == "disease_catcrit": 
+			if tableName == "disease" or tableName == "disease_catcrit":
 				sql_insert = "UPDATE " + tableName + " SET " + columns[1] + " = "  + "'" + row[1] + "'" + " WHERE " + columns[0] + " = " + "'" +row[0]+ "'" + ";"
 			else:
 				sql_insert = "UPDATE " + tableName + " SET " + columns[1] + " = "  + "'" + row[1] + "'" + " WHERE " + columns[0] + " = " + row[0] + ";"
-			#cur.execute(sql_insert)	
+			#cur.execute(sql_insert)
 
 
 		print(sql_insert)
 
-		
+
 		sql_insert = "SELECT * FROM " + tableName
 
 		cur.execute(sql_insert)
@@ -292,7 +292,7 @@ def index3():
 
 		con.commit()
 		cur.close()
-		
+
 
 
 
@@ -462,7 +462,7 @@ def index4():
 
 		elif actName == "vertTest":
 			dataList = request.form.getlist("vertTest")
-			
+
 			selectedDate = request.form.get("dateVERT")
 
 			if selectedDate != "":
@@ -483,7 +483,7 @@ def index4():
 			ortJump = ortJump / len(dataList)
 
 			sporcuData["specs"][4][olcumDate] = dict()
-			
+
 			sporcuData["specs"][4][olcumDate]["max"] = maxJump
 			sporcuData["specs"][4][olcumDate]["ort"] = ortJump
 
@@ -528,7 +528,7 @@ def index21():
 	cur.close()
 
 	if request.method == 'POST':
-		
+
 
 		dateKey = request.form.get("dateInputText")
 
@@ -558,9 +558,9 @@ def index21():
 		sporcuSirName = sporcuInfo[2][2:-1]
 
 		cur = con.cursor()
-		
+
 		sql_insert = "SELECT * FROM sporcular WHERE  ( id = '"+ sporcuID +"' AND sname = '"+ sporcuName +"' AND sirname = '"+  sporcuSirName  +"');";
-		
+
 		cur.execute(sql_insert)
 
 		sporcuIndData = cur.fetchall()
@@ -586,7 +586,7 @@ def index21():
 
 
 		elif dateKey == "SON":
-			dateKey = list(sporcuData["specs"][testType].keys())[-1] 
+			dateKey = list(sporcuData["specs"][testType].keys())[-1]
 			dataDict = sporcuData["specs"][testType][dateKey]
 
 		result=list(reversed(dateKey.split("/")))
@@ -755,7 +755,7 @@ def index69():
 
 		yTestsLimbLength = sporcuData["specs"][2][yTestsWeekLab[-1]]["limb_length"]
 
-		for i in yTestsWeekLab: 
+		for i in yTestsWeekLab:
 			yTestsWeekLeftVal.append(sporcuData["specs"][2][i]["total"][0])
 			yTestsWeekRightVal.append(sporcuData["specs"][2][i]["total"][1])
 			yTestsAnteriorDef.append(sporcuData["specs"][2][i]["anterior"][-1])
@@ -784,6 +784,8 @@ def index69():
 	 fmsTestInjuryPercent=fmsTestInjuryPercent)
 
 
-
+"""
 if __name__ == "__main__":
 	app.run(debug=True,port=8000)
+"""
+

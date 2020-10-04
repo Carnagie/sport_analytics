@@ -21,6 +21,11 @@
             <img style="padding: 20px;" src="{{imageSource}}">
 
             <h3 style="color: orange">{{sporcuFullName}}</h3>
+
+              <ul class="infoHeader2">
+                <li><h2>Son Ölçümler:</h2></li>
+              </ul>
+
               <table class="infoTable0">
               <tr>
                 <th> Squat </th>
@@ -31,13 +36,314 @@
                 <th> Hip Trust </th>
               </tr>
               <tr>
-                
+
                 <td>{{ dataDict["squat"] }}</td>
                 <td>{{ dataDict["bench_press"] }}</td>
                 <td>{{ dataDict["row"] }}</td>
                 <td>{{ dataDict["shoulder_press"] }}</td>
                 <td>{{ dataDict["dead_lift"] }}</td>
                 <td>{{ dataDict["hip_trust"] }}</td>
+
+              </tr>
+            </table>
+
+              <ul class="infoHeader2">
+                <li><h2>Squat:</h2></li>
+              </ul>
+
+              <table class="infoTable0">
+              <tr>
+                <th> F. </th>
+                <th> 100% </th>
+                <th> 95% </th>
+                <th> 90% </th>
+                <th> 85% </th>
+                <th> 80% </th>
+                <th> 75% </th>
+                <th> 70% </th>
+                <th> 65% </th>
+                <th> 60% </th>
+                <th> 55% </th>
+                <th> 50% </th>
+                <th> 45% </th>
+              </tr>
+              <tr>
+                <td>Epley Formula</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+
+              </tr>
+            </table>
+
+
+              <ul class="infoHeader2">
+                <li><h2>Bench Press:</h2></li>
+              </ul>
+
+              <table class="infoTable0">
+              <tr>
+                <th> F. </th>
+                <th> 100% </th>
+                <th> 95% </th>
+                <th> 90% </th>
+                <th> 85% </th>
+                <th> 80% </th>
+                <th> 75% </th>
+                <th> 70% </th>
+                <th> 65% </th>
+                <th> 60% </th>
+                <th> 55% </th>
+                <th> 50% </th>
+                <th> 45% </th>
+              </tr>
+              <tr>
+                <td>Epley Formula</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+
+              </tr>
+            </table>
+
+              <ul class="infoHeader2">
+                <li><h2>Row:</h2></li>
+              </ul>
+
+              <table class="infoTable0">
+              <tr>
+                <th> F. </th>
+                <th> 100% </th>
+                <th> 95% </th>
+                <th> 90% </th>
+                <th> 85% </th>
+                <th> 80% </th>
+                <th> 75% </th>
+                <th> 70% </th>
+                <th> 65% </th>
+                <th> 60% </th>
+                <th> 55% </th>
+                <th> 50% </th>
+                <th> 45% </th>
+              </tr>
+              <tr>
+                <td>Epley Formula</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+
+              </tr>
+            </table>
+
+              <ul class="infoHeader2">
+                <li><h2>Shoulder:</h2></li>
+              </ul>
+
+              <table class="infoTable0">
+              <tr>
+                <th> F. </th>
+                <th> 100% </th>
+                <th> 95% </th>
+                <th> 90% </th>
+                <th> 85% </th>
+                <th> 80% </th>
+                <th> 75% </th>
+                <th> 70% </th>
+                <th> 65% </th>
+                <th> 60% </th>
+                <th> 55% </th>
+                <th> 50% </th>
+                <th> 45% </th>
+              </tr>
+              <tr>
+                <td>Epley Formula</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+
+              </tr>
+            </table>
+
+              <ul class="infoHeader2">
+                <li><h2>Dead Lift:</h2></li>
+              </ul>
+
+              <table class="infoTable0">
+              <tr>
+                <th> F. </th>
+                <th> 100% </th>
+                <th> 95% </th>
+                <th> 90% </th>
+                <th> 85% </th>
+                <th> 80% </th>
+                <th> 75% </th>
+                <th> 70% </th>
+                <th> 65% </th>
+                <th> 60% </th>
+                <th> 55% </th>
+                <th> 50% </th>
+                <th> 45% </th>
+              </tr>
+              <tr>
+                <td>Epley Formula</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+
+              </tr>
+            </table>
+
+              <ul class="infoHeader2">
+                <li><h2>Hip Trust:</h2></li>
+              </ul>
+
+              <table class="infoTable0">
+              <tr>
+                <th> F. </th>
+                <th> 100% </th>
+                <th> 95% </th>
+                <th> 90% </th>
+                <th> 85% </th>
+                <th> 80% </th>
+                <th> 75% </th>
+                <th> 70% </th>
+                <th> 65% </th>
+                <th> 60% </th>
+                <th> 55% </th>
+                <th> 50% </th>
+                <th> 45% </th>
+              </tr>
+              <tr>
+                <td>Epley Formula</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
+                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                <td>{{'%0.2f' % proc_err|float}}</td>
 
               </tr>
             </table>
@@ -49,7 +355,7 @@
         {% if 1 == testType %}
 
           <div class="tableIn">
-            
+
             <h3>{{dateKey}}</h3>
 
             <img style="padding: 20px;" src="{{imageSource}}">
@@ -148,7 +454,7 @@
         {% if 2 == testType %}
 
           <div class="tableIn">
-    
+
             <h3>{{dateKey}}</h3>
 
             <img  style="padding: 20px;" src="{{imageSource}}">
@@ -257,6 +563,127 @@
         {% endif %}
 
 
+        {% if 4 == testType %}
+
+          <div class="tableIn" style="margin-top: 10px;">
+
+            <h3>{{dateKey}}</h3>
+
+
+            <img style="padding: 20px;" src="{{imageSource}}">
+
+
+            <h3 style="color: orange">{{sporcuFullName}}</h3>
+
+
+            <ul class="infoHeader2">
+              <li><h2>Vert Test Sonuçları:</h2></li>
+            </ul>
+              <table class="infoTable0">
+              <tr>
+                <th> Max Jump </th>
+                <th> Avg Jump </th>
+                <th> Jump Count </th>
+              </tr>
+              <tr>
+
+                <td>{{ dataDict["max"] }}</td>
+
+                <td>{{ dataDict["ort"] }}</td>
+
+                <td>{{ dataDict["total"] }}</td>
+
+              </tr>
+
+            </table>
+
+
+
+          </div>
+
+        {% endif %}
+
+        {% if 5 == testType %}
+
+          <div class="tableIn" style="margin-top: 10px;">
+
+            <h3>{{dateKey}}</h3>
+
+
+            <img style="padding: 20px;" src="{{imageSource}}">
+
+
+            <h3 style="color: orange">{{sporcuFullName}}</h3>
+
+
+            <ul class="infoHeader2">
+              <li><h2>Vert Test Sonuçları:</h2></li>
+            </ul>
+              <table class="infoTable0">
+              <tr>
+                <th> Max Beat </th>
+                <th> Avg Beat </th>
+                <th> Total Beat </th>
+              </tr>
+              <tr>
+
+                <td>{{ dataDict["max"] }}</td>
+
+                <td>{{ dataDict["ort"] }}</td>
+
+                <td>{{ dataDict["total"] }}</td>
+
+              </tr>
+
+            </table>
+
+
+
+          </div>
+
+        {% endif %}
+
+        {% if 6 == testType %}
+
+          <div class="tableIn" style="margin-top: 10px;">
+
+            <h3>{{dateKey}}</h3>
+
+
+            <img style="padding: 20px;" src="{{imageSource}}">
+
+
+            <h3 style="color: orange">{{sporcuFullName}}</h3>
+
+
+            <ul class="infoHeader2">
+              <li><h2>Vert Test Sonuçları:</h2></li>
+            </ul>
+              <table class="infoTable0">
+              <tr>
+                <th> Max Hız </th>
+                <th> Avg Hız </th>
+                <th> Total Ölçüm </th>
+              </tr>
+              <tr>
+
+                <td>{{ dataDict["max"] }}</td>
+
+                <td>{{ dataDict["ort"] }}</td>
+
+                <td>{{ dataDict["total"] }}</td>
+
+              </tr>
+
+            </table>
+
+
+
+          </div>
+
+        {% endif %}
+
+
       </div>
 
     </div>
@@ -282,6 +709,15 @@
           <li>
             <input type="radio" class="jump" name="testType" value="3"> <h2>Sıçrama Test Sonuçları</h2>
           </li>
+          <li>
+            <input type="radio" class="vert" name="testType" value="4"> <h2>Vert Test Sonuçları</h2>
+          </li>
+          <li>
+            <input type="radio" class="polar" name="testType" value="5"> <h2>Polar Test Sonuçları</h2>
+          </li>
+          <li>
+            <input type="radio" class="servis" name="testType" value="6"> <h2>Servis Hızı Test Sonuçları</h2>
+          </li>
         </ul>
         <input type="text" name="dateInputText" placeholder="DD/MM/YYYY veya SON">
         <input type="submit" class="dateButton" name="dateButton" value="GETİR" onclick="getDefaultSelected2();">
@@ -292,7 +728,7 @@
     </div>
 
     <div class="main_content">
-        <div class="header">Ölçüm eklemek istediğiniz kişiyi seçip devam edin..</div>  
+        <div class="header">Ölçüm eklemek istediğiniz kişiyi seçip devam edin..</div>
 
 
 
@@ -331,9 +767,9 @@
                   {% endfor %}
 
 
-                </table>  
+                </table>
 
-              
+
             </div>
 
           </div>
@@ -344,7 +780,7 @@
 
 
 
-          
+
         </div>
 
     </div>

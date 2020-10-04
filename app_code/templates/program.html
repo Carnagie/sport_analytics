@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block links %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/program.css')}}">
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="main_content">
+        <div class="header">Çıktı Almak İçin Ayarlayınız..</div>
+
+        <div class="info">
+
+        <div class="body_container">
+
+            <div class="header_bar" id="topdf1">
+                <input type="text" placeholder="Başlık">
+            </div>
+
+            <ul class="element_bar" id="topdf2">
+                <li id="baseElement">
+                    <div class="elementsIn" id="baseDiv">
+                        <div style="display: flex">
+                            <h3 style="color:black">Tarih:</h3> <input style="margin-left: 5px;" type="text" placeholder="26/11/1999">
+                        </div>
+
+                        <div class="agendaIn">
+                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 2px solid red;">
+                        </div>
+
+                        <div class="agendaIn">
+                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 2px solid red;">
+                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 2px solid red;">
+                        </div>
+
+                        <div class="agendaIn">
+                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 2px solid red;">
+                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 2px solid red;">
+                        </div>
+
+                        <div class="agendaIn">
+
+                            <img class="myImg" style="max-height: 7.5vh;max-width: 12.5vw" src="static/ball.png">
+
+                        </div>
+
+                    </div>
+
+
+
+                </li>
+
+            </ul>
+
+            <ul class="control_bar">
+                <li>
+                    <button class="button_control" id="addRow">ADD ROW</button>
+                </li>
+                <li>
+                    <button class="button_control2" id="delRow">DELETE ROW</button>
+                </li>
+                <li>
+                    <button class="button_control" id="addRow2">ADD ELEMENT</button>
+                </li>
+                <li>
+                    <button class="button_control2" id="delRow2">DELETE ELEMENT</button>
+                </li>
+                <li>
+                    <button class="button_control3" id="addImg">CHANGE IMG</button>
+                </li>
+                <li>
+                    <button class="button_control4" id="pdf">SAVE PDF</button>
+                </li>
+            </ul>
+
+
+        </div>
+
+        </div>
+
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+
+<script src="{{ url_for('static', filename='js/html2canvas.js')}}"></script>
+
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+
+<script type="module" src="{{ url_for('static', filename='js/program.js')}}"></script>
+
+
+{% endblock %}

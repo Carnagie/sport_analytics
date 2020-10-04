@@ -1,5 +1,5 @@
 li, a, button{
-	font-family: "Montserrat",sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 	font-weight: 500;
 	font-size: 16px;
 	color: #edf0f1;
@@ -92,7 +92,7 @@ header {
 }
 .fileContainer  .nav_list li .submitButton:hover {
 	background-color: #fff;
-	color: #000;	
+	color: #000;
 }
 
 .body_container .inputContainer {
@@ -130,7 +130,7 @@ header {
 }
 .body_container .inputContainer  .input_list li .submitButton:hover {
 	background-color: #fff;
-	color: #000;	
+	color: #000;
 }
 
 
@@ -170,7 +170,7 @@ header {
 }
 .body_container .tableContainer  .table_list li .submitButton:hover {
 	background-color: #fff;
-	color: #000;	
+	color: #000;
 }
 
 
