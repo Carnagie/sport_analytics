@@ -38,6 +38,18 @@ $(document).on('click','#pdf',
 
     console.log("entered")
     window.scrollTo(0, 0);
+
+
+
+    html2canvas(document.getElementById("startPage")).then(function (canvas) {
+
+        console.log("canvas start page");
+        var imgData = canvas.toDataURL("image/jpeg",0.9);
+        doc.addImage(imgData, 'JPEG', 15, 50, 180, 100);
+        doc.addPage();
+    });
+
+
     html2canvas(document.getElementById("topdf")).then(function (canvas) {
 
         console.log("entered html2canvas");
@@ -80,24 +92,3 @@ function listImagePaste(index, maxindex, rowindex) {
 
     });
 }
-
-
-
-/*
-var doc = new jsPDF('p', 'mm', "a4");
-$(document).on('click','#pdf',
-    function() {
-
-    console.log("entered")
-    window.scrollTo(0, 0);
-
-    html2canvas(document.getElementById("topdf2")).then(function (canvas) {
-
-        console.log("entered html2canvas");
-        var imgData = canvas.toDataURL("image/jpeg",0.9);
-        console.log(imgData)
-        doc.addImage(imgData, 'JPEG', 0, 15, 180, 120);
-        doc.save('sample-file.pdf');
-    });
-});
-*/
