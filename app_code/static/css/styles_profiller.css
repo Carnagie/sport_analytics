@@ -210,8 +210,8 @@ body{
 }
 .defaultPhoto {
     margin-top:15%;
-    max-width: 450px;
-    max-height: 450px;
+    max-width: 20vw;
+    max-height: 50vh;
     border-right: 4px solid #6DBAE0;
 }
 
@@ -303,184 +303,184 @@ body{
 .buttonVert {
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .buttonVert:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 
 .buttonVert2 {
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .buttonVert2:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 
 .button1 {
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .button1:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 .button2 {
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .button2:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 .button3 {
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .button3:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 .button4{
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .button4:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 .button5 {
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .button5:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 .button6{
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .button6:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 .button7 {
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .button7:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 .button8 {
   margin-left: 0;
   margin-top: 18px;
-  background-color: #6DBAE0;
+  background-color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-color: #6DBAE0;
-  border: 2px solid #6DBAE0;
+  border-color: white;
   transition-duration: 0.4s;
   padding: 4px;
-  color: #fff;
+  color: white;
+  border: 2px solid white;
 }
 .button8:hover {
-  background-color: #fff;
-  color: #000;
+  border: 2px solid #6DBAE0;
+  color: #6DBAE0;
 }
 
 .bg-modalVert2 {

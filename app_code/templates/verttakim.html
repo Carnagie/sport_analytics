@@ -63,6 +63,9 @@
                 <li>
                      <button type="button" id="pdf" class="downloadButton">KAYDET</button>
                 </li>
+                <li>
+                        <input class="uploadButton" type='file' id="imgInp" />
+                </li>
             </ul>
         </div>
 
@@ -121,7 +124,14 @@
             <ul style="justify-content:center;text-align:center;width: 100%;" >
             <li style="padding: 2%;"><input class="baslikText" type="text"  placeholder="Başlık"></li>
             <li style="padding: 2%;"><input class="baslikText" type="text"  placeholder="Başlık"></li>
-            <li style="padding: 2%;"><img src="static/images/halkbank.jpg"style="max-width: 40vw;"></li>
+            <li style="padding: 2%;">   <!--<img src="static/images/halkbank.jpg"style="max-width: 40vw;">-->
+
+                <form id="form1" runat="server">
+                    <img id="blah" src="#" alt="your image" />
+                </form>
+
+
+            </li>
             </ul>
         </div>
 
@@ -136,7 +146,7 @@
 
             <div id="div{{loop.index}}">
 
-            <h3 style="color:black;margin-left: 50%"> {{ outputJson[ath]['name'] }}</h3>
+            <h3 style="color:black;margin-left: 43%"> {{ outputJson[ath]['name'] }}</h3>
 
             <ul class="graphs"0>
 

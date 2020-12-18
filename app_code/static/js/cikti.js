@@ -14,22 +14,34 @@ $(document).on('click','.add',
         var items = ul.getElementsByTagName("li");
         var rowNum = 1
         var columnNum = 0
+        var totalElements = 0
         for (var i = 0; i < items.length; i++) {
             console.log(i)
             console.log(items.length)
             console.log(items[i]);
-            listImagePaste(i+1,items.length,rowNum,columnNum);
+            listImagePaste(i+1,items.length,rowNum,columnNum,totalElements);
             columnNum++;
-            if ( (i + 1) % 3 == 0){
+            totalElements++;
+            if ( totalElements % 8 == 0){
+                //doc.addPage();
+                //console.log("NEW PAGE HERE");
+                totalElements = 0;
+            }
+            if ( (i + 1) % 2 == 0){
                 rowNum++;
                 columnNum = 0;
             }
         }
+    /*
+    if ( totalElements % 8 == 0){
+        doc.addPage();
+        console.log("NEW PAGE HERE");
+    }*/
         //doc.save('sample-file.pdf');
     });
 });
 
-function listImagePaste(index, maxindex, rowindex, columnindex) {
+function listImagePaste(index, maxindex, rowindex, columnindex, totalElements) {
 
     console.log("entered li ")
     html2canvas(document.getElementById("div" + index)).then(function (canvas2) {
@@ -37,10 +49,10 @@ function listImagePaste(index, maxindex, rowindex, columnindex) {
         console.log("entered html2canvas li");
         var imgData2 = canvas2.toDataURL("image/jpeg",0.9);
         if (rowindex == 1) {
-            doc.addImage(imgData2, 'JPEG', 10 + columnindex*62, 70*rowindex, 60, 40);
+            doc.addImage(imgData2, 'JPEG', 10 + columnindex*70, 80*rowindex, 58, 40);
         }
         else {
-            doc.addImage(imgData2, 'JPEG', 10 + columnindex*62, 65 + (50 * (rowindex-1)), 60, 40);
+            doc.addImage(imgData2, 'JPEG', 10 + columnindex*70, 75 + (50 * (rowindex-1)), 58, 40);
         }
         //doc.save("sample-pdf-2");
         if (index == maxindex) {
@@ -246,3 +258,18 @@ $(document).on('click','#changeImg',
     }
     document.querySelector("#img_div2").src = array[index];
 });
+    function readURL3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function(){
+        readURL3(this);
+    });

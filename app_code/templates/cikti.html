@@ -33,8 +33,8 @@
                         </select>
                     </li>
                     <li>
-                    <button class="submitButton" type="submit" name="submitButton">Profili Getir</button>
-                    <button class="submitButton" type="button" name="changeImg" id="changeImg">Resim Değiştir</button>
+                    <button class="submitButton" type="submit" name="submitButton" style="padding: 7px 12px;">Profili Getir</button>
+                    <input class="submitButton" type='file' id="imgInp" />
                     </li>
 
                 </ul>
@@ -48,7 +48,12 @@
                 <div class="row0">
 
                     <div class="img_div">
-                    <img id="img_div2" src="static/athlete_images/mahiremrecan.png">
+                    <!--<img id="img_div2" src="static/athlete_images/mahiremrecan.png">-->
+
+                    <form id="form1" runat="server">
+                        <img id="blah" src="#" alt="your image" />
+                    </form>
+
                     </div>
 
                     <input type="text" class="row0_h" placeholder="BAŞLIK">
@@ -164,6 +169,7 @@
                     <div class="container">
                         <h1>Antrenman Fotoğrafı Seçin
                         </h1>
+                        <input id="antNum" type='text' placeholder="1A" style="font-size: 30px; background-color:#C93737;border: none;text-align:center;color:white;font-weight:300;"/>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
@@ -206,13 +212,17 @@
 
                     </div>
 
-                        <ul style="display: flex;margin-left: 18%;">
+                        <ul style="display: flex;margin-left: 10%;">
                             <li>
                                 <button type="button" class="tableButton" onclick="myFunction()">Tekrar Sil</button>
                             </li>
 
                             <li>
                                 <button type="button" class="tableButton2" onclick="myFunction2()">Tekrar Ekle</button>
+                            </li>
+
+                            <li>
+                                <button type="button" class="tableButton4" onclick="myFunction4()">Ant. Sil</button>
                             </li>
 
                             <li>
@@ -229,7 +239,7 @@
                         }
                         function myFunction2() {
                           var table = document.getElementById("myTable");
-                          var row = table.insertRow(1);
+                          var row = table.insertRow(-1);
                           var cell1 = row.insertCell(0);
                           var cell2 = row.insertCell(1);
                           var cell3 = row.insertCell(2);
@@ -251,35 +261,34 @@
                             div.style.width = "15vw"
                             div.appendChild(img)
 
-                            //img.src = "static/athlete_images/default.png";
+                            var antNum = document.getElementById("antNum").cloneNode(true);
+                            antNum.id="";
 
 
                             var tableElement = document.getElementById("myTable").cloneNode(true);
                             tableElement.class = "customers";
-                            tableElement.id = ""
+                            tableElement.id = "";
                             var li = document.createElement("li");
                             li.id="div" + count.toString();
+                            li.appendChild(antNum);
                             li.appendChild(div);
                             li.appendChild(tableElement);
                             document.getElementById("antrenmanlar").appendChild(li);
+                        }
+                        function myFunction4() {
+                          var table = document.getElementById("antrenmanlar");
+                          table.removeChild(table.lastChild);
                         }
                         </script>
 
                     </div>
 
 
-
-
-
-
-
-
-
                 </div>
 
             </div>
 
-        <button type="button" class="add" >SAVE PDF</button>
+        <button type="button" class="add" style="margin-top:10%">SAVE PDF</button>
 
         </div>
 

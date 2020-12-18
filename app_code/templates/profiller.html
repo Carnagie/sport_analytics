@@ -18,7 +18,8 @@
                                 <script>
 
                                     var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
+                                      red: 'rgba(237, 18, 18, 0.42)',
+                                      solidred: 'rgba(237, 18, 18)',
                                       orange: 'rgb(255, 159, 64)',
                                       yellow: 'rgb(255, 205, 86)',
                                       green: 'rgb(75, 192, 192)',
@@ -42,7 +43,7 @@
                                         datasets: [{
                                           label: "Maximum",
                                           backgroundColor: chartColors.green,
-                                          borderColor: chartColors.red,
+                                          borderColor: chartColors.green,
                                           data: [
                                             {% for k in vertTestMax[-4:] %}
                                                 "{{k}}",
@@ -71,9 +72,9 @@
                                           ],
                                         },{
                                           label: "Takim Ortalamasi",
-                                          fill: false,
+                                          fill: true,
                                           backgroundColor: chartColors.red,
-                                          borderColor: chartColors.red,
+                                          borderColor: chartColors.solidred,
                                           data: [
                                             {% for k in vertTestTakimOrt[-4:] %}
                                                 "{{k}}",
@@ -137,7 +138,8 @@
                                 <script>
 
                                     var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
+                                      red: 'rgba(237, 18, 18, 0.42)',
+                                      solidred: 'rgba(237, 18, 18)',
                                       orange: 'rgb(255, 159, 64)',
                                       yellow: 'rgb(255, 205, 86)',
                                       green: 'rgb(75, 192, 192)',
@@ -190,9 +192,9 @@
                                           ],
                                         },{
                                           label: "Takim Ortalamasi",
-                                          fill: false,
+                                          fill: true,
                                           backgroundColor: chartColors.red,
-                                          borderColor: chartColors.red,
+                                          borderColor: chartColors.solidred,
                                           data: [
                                             {% for k in vertTestTakimOrt %}
                                                 "{{k}}",
@@ -1495,10 +1497,10 @@
                                             <h2 style="color: black;">Beden:</h2><h2 class="clasVal">{{tempProfileDict['beden']}}</h2>
                                         </li>
                                         <li>
-                                            <h2 style="color: black;">Üst Sağlık:</h2><h2 class="clasVal">{{tempProfileDict['ust_saglik']}}</h2>
+                                            <h2 style="color: black;">Sağlık:</h2><h2 class="clasVal">{{tempProfileDict['ust_saglik']}}</h2>
                                         </li>
                                         <li>
-                                            <h2 style="color: black;">Alt Sağlık:</h2><h2 class="clasVal">{{tempProfileDict['alt_saglik']}}</h2>
+                                            <h2 style="color: black;">Kan:</h2><h2 class="clasVal">{{tempProfileDict['alt_saglik']}}</h2>
                                         </li>
                                         <li>
                                             <h2 style="color: black;">İletişim:</h2> <h2 class="clasVal">{{tempProfileDict['phone']}}</h2>
@@ -1507,7 +1509,8 @@
                                             <h2 style="color: black;">Notlar:</h2>
                                         </li>
                                         <li style="color: black;">
-                                            <h2 class="clasVal" style="padding-bottom:57px;">{{tempProfileDict['notes']}}</h2>
+                                            <!--<p class="clasVal" style="padding-bottom:57px;">{{tempProfileDict['notes']}}</p>-->
+                                            <textarea class="clasVal" style="padding-bottom:57px;border:none" rows="5" cols="40">{{tempProfileDict['notes']}}</textarea>
                                         </li>
                                     </ul>
 
@@ -1531,7 +1534,8 @@
                                 <script>
 
                                     var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
+                                      red: 'rgba(237, 18, 18, 0.42)',
+                                      solidred: 'rgba(237, 18, 18)',
                                       orange: 'rgb(255, 159, 64)',
                                       yellow: 'rgb(255, 205, 86)',
                                       green: 'rgb(75, 192, 192)',
@@ -1584,9 +1588,9 @@
                                           ],
                                         },{
                                           label: "Takim Ortalamasi",
-                                          fill: false,
+                                          fill: true,
                                           backgroundColor: chartColors.red,
-                                          borderColor: chartColors.red,
+                                          borderColor: chartColors.solidred,
                                           data: [
                                             {% for k in vertTestTakimOrt[-4:] %}
                                                 "{{k}}",
@@ -1644,7 +1648,8 @@
                                 <script>
 
                                     var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
+                                      red: 'rgba(237, 18, 18, 0.42)',
+                                      solidred: 'rgba(237, 18, 18)',
                                       orange: 'rgb(255, 159, 64)',
                                       yellow: 'rgb(255, 205, 86)',
                                       green: 'rgb(75, 192, 192)',
@@ -1697,9 +1702,9 @@
                                           ],
                                         },{
                                           label: "Takim Ortalamasi",
-                                          fill: false,
+                                          fill: true,
                                           backgroundColor: chartColors.red,
-                                          borderColor: chartColors.red,
+                                          borderColor: chartColors.solidred,
                                           data: [
                                             {% for k in vertTestTakimOrt %}
                                                 "{{k}}",

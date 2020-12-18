@@ -180,14 +180,22 @@ def index3():
             image.save(os.path.join( app.config["IMAGE_UPLOADS"], image.filename))
             print("image saved")
 
+        row[1] = row[1].strip()
 
-        sql_insert = "INSERT INTO sporcular " + "("+ columns[0] +","+columns[1] +","+columns[2] +","+columns[3] +","+columns[4] +","+columns[5] +","+columns[6] +","+columns[7] +","+columns[8] +","+columns[9] +","+columns[10] +","+columns[11]+","+columns[12] +","+columns[13] +")"+" VALUES (" +"\'"+row[0]+"\'"+ ","+ "\'" +row[1]+ "\'"+ ","+ "\'" +row[2]+ "\'"+","+ "\'" +row[3]+ "\'"+ "," +"\'" +row[4]+ "\'"+ "," + "\'" +row[5]+ "\'" + ","+ "\'" +row[6]+ "\'" + ","+ "\'" +row[7]+ "\'" + ","+ "\'" +row[8]+ "\'" + ","+ "\'" +row[9]+ "\'" + ","+ "\'" +row[10]+ "\'" + ","+ "\'" +row[11]+ "\'" + ","+ "\'" +row[12]+ "\'" + ","+ "\'" +row[13]+ "\'" + ")"+";"
+        row[2] = row[2].strip()
+
+
+        sql_insert = "INSERT INTO sporcular " + "("+ columns[0] +","+columns[1] +","+columns[2] +","+columns[3] +","+columns[4] +","+columns[5] +","+columns[6] +","+columns[7] +","+columns[8] +","+columns[9] +","+columns[10] +","+columns[11]+","+columns[12] +","+columns[13] +")"+" VALUES (" +"\'"+row[0]+"\'"+ ","+ "\'" +row[1]+ "\'"+ ","+ "\'" +row[2]+ "\'"+","+ "\'" +row[3]+ "\'"+ "," +"\'" +row[4]+ "\'"+ "," + "\'" +row[5]+ "\'" + ","+ "\'" +row[6]+ "\'" + ","+ "\'" +row[7]+ "\'" + ","+ "\'" +row[8]+ "\'" + ","+ "\'" +row[9]+ "\'" + ","+ "\'" +row[10]+ "\'" + ","+ "\'" +row[13]+ "\'" + ","+ "\'" +row[11]+ "\'" + ","+ "\'" +row[12]+ "\'" + ")"+";"
 
         print(sql_insert)
         cur.execute(sql_insert)
         con.commit()
         cur.close()
         con.close()
+
+        row[1] = row[1].strip().replace(" ","_")
+
+        row[2] = row[2].strip().replace(" ","_")
 
         key = str(row[0]) + "_" + str(row[1]) + "_" + str(row[2]) + ".json"
 
@@ -263,11 +271,16 @@ def index4():
 
 			row = request.form.getlist("datas2")
 
+			row[0] = row[0].strip()
+
+			row[1] = row[1].strip()
+
+			row[2] = row[2].strip()
 
 			if tableName == "sporcular":
 				sql_insert = "DELETE FROM " + tableName + " WHERE (" + columns[0] + " = " + "'" +row[0]+ "' AND " + columns[1] + " = " + "'" +row[1]+ "' AND " + columns[2] + " = " + "'" +row[2]+ "\'" + ");"
 
-				deletekey = str(row[0]) + "_" + str(row[1]) + "_" + str(row[2]) + ".json"
+				deletekey = str(row[0]) + "_" + str(row[1]).strip().replace(" ","_") + "_" + str(row[2]).strip().replace(" ","_") + ".json"
 				try:
 					os.remove("static/athlete_jsons/"+deletekey)
 				except:
@@ -346,7 +359,7 @@ def index5():
 
         print(sporcuSirName)
 
-        sporcuInfo = sporcuID + "_" + sporcuName + "_" + sporcuSirName + ".json"
+        sporcuInfo = sporcuID + "_" + sporcuName.strip().replace(" ","_") + "_" + sporcuSirName.strip().replace(" ","_") + ".json"
 
         with open("static/athlete_jsons/"+sporcuInfo) as json_file:
             sporcuData = json.load(json_file)
@@ -643,7 +656,7 @@ def index6():
         cur.close()
         con.close()
 
-        sporcuInfo = sporcuID + "_" + sporcuName + "_" + sporcuSirName + ".json"
+        sporcuInfo = sporcuID + "_" + sporcuName.strip().replace(" ","_") + "_" + sporcuSirName.strip().replace(" ","_") + ".json"
 
         sporcuFullName = sporcuName + " " + sporcuSirName
 
@@ -738,6 +751,7 @@ def index7():
     jsonProfilDict = {}
 
     tempProfileDict = {}
+    tempProfileDict["photo"] = "static/athlete_images/default.png"
 
     con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
     cur = con.cursor()
@@ -751,7 +765,13 @@ def index7():
 
     for i in tableData:
         print( i[0] ,i[1], i[2])
-        jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = str(i[0]) + "_" + i[1]+ "_" + i[2] +".json"
+        jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = {}
+        jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1].replace(" ","_") + "_" + i[2].replace(" ","_") +".json"
+        jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["id"] = str(i[0])
+        jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sname"] = str(i[1])
+        jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sirname"] = str(i[2])
+
+
 
     print(jsonProfilDict)
 
@@ -763,19 +783,23 @@ def index7():
         con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
         cur = con.cursor()
 
-        jsonName = jsonProfilDict[request.form.get("tableChosen")]
+        jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
 
-        tempId = jsonName.split("_")[0]
+        tempId = jsonProfilDict[request.form.get("tableChosen")]["id"]
 
-        tempName = jsonName.split("_")[1]
+        tempName = jsonProfilDict[request.form.get("tableChosen")]["sname"]
 
-        tempSir = jsonName.split("_")[2][:jsonName.split("_")[2].find(".")]
+        tempSir = jsonProfilDict[request.form.get("tableChosen")]["sirname"]
 
         sql_insert = "SELECT * FROM " + tableName + " WHERE (" + "id" + " = " + "'" +tempId+ "' AND " + "sname" + " = " + "'" +tempName+ "' AND " + "sirname" + " = " + "'" +tempSir+ "\'" + ");"
+
+        print(sql_insert)
 
         cur.execute(sql_insert)
 
         dataInn = cur.fetchall()
+
+        print(dataInn)
 
         tempProfileDict["id"] = dataInn[0][0]#
 
@@ -948,7 +972,7 @@ def index9():
 
 	for i in tableData:
 		print( i[0] ,i[1], i[2])
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = str(i[0]) + "_" + i[1]+ "_" + i[2] +".json"
+		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
 
 	print(jsonProfilDict)
 
@@ -1043,7 +1067,11 @@ def index10():
 
 	for i in tableData:
 		print( i[0] ,i[1], i[2])
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = str(i[0]) + "_" + i[1]+ "_" + i[2] +".json"
+		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = {}
+		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
+		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["id"] = str(i[0])
+		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sname"] =  i[1]
+		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sirname"] =  i[2]
 
 	print(jsonProfilDict)
 
@@ -1051,19 +1079,19 @@ def index10():
 
 	if request.method == 'POST':
 
-		jsonName = jsonProfilDict[request.form.get("tableChosen")]
+		jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
 
 		nameChosen = request.form.get("tableChosen")[2:]
 
 		cur = con.cursor()
 
-		jsonName = jsonProfilDict[request.form.get("tableChosen")]
+		jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
 
-		tempId = jsonName.split("_")[0]
+		tempId = jsonProfilDict[request.form.get("tableChosen")]["id"]
 
-		tempName = jsonName.split("_")[1]
+		tempName = jsonProfilDict[request.form.get("tableChosen")]["sname"]
 
-		tempSir = jsonName.split("_")[2][:jsonName.split("_")[2].find(".")]
+		tempSir = jsonProfilDict[request.form.get("tableChosen")]["sirname"]
 
 		sql_insert = "SELECT * FROM " + tableName + " WHERE (" + "id" + " = " + "'" +tempId+ "' AND " + "sname" + " = " + "'" +tempName+ "' AND " + "sirname" + " = " + "'" +tempSir+ "\'" + ");"
 
@@ -1176,18 +1204,18 @@ def index13():
 	for i in tableData:
 		print( i[0] ,i[1], i[2])
 		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = {}
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1]+ "_" + i[2] +".json"
+		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
 
 		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
 		cur = con.cursor()
 
-		jsonName = str(i[0]) + "_" + i[1]+ "_" + i[2] +".json"
+		jsonName = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
 
-		tempId = jsonName.split("_")[0]
+		tempId = str(i[0])
 
-		tempName = jsonName.split("_")[1]
+		tempName = i[1]
 
-		tempSir = jsonName.split("_")[2][:jsonName.split("_")[2].find(".")]
+		tempSir = i[2]
 
 		sql_insert = "SELECT * FROM " + tableName + " WHERE (" + "id" + " = " + "'" +tempId+ "' AND " + "sname" + " = " + "'" +tempName+ "' AND " + "sirname" + " = " + "'" +tempSir+ "\'" + ");"
 

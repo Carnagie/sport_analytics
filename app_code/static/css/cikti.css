@@ -203,7 +203,7 @@ body{
 }
 .img_div img{
         max-width: 100%;
-        max-height: 100%;
+        max-height: 12vh;
         display: block; /* remove extra space below image */
 }
 
@@ -223,6 +223,7 @@ body{
 /*        row 1       */
 .row1 {
     display: flex;
+    height: 45vh;
 }
 
 .notes_list {
@@ -269,7 +270,7 @@ body{
 /* section adder */
 
 .sectionAdder {
-  margin-top: 5%;
+  margin-top: 10%;
   width: 85%;
   display: flex;
 }
@@ -476,15 +477,33 @@ h1 {
   background-color: #fff;
   color: #000;
 }
-
+.tableButton4{
+  margin-left: 36%;
+  margin-top: 18px;
+  background-color: #D10000;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-color: #D10000;
+  border: 2px solid #D10000;
+  transition-duration: 0.4s;
+  padding: 4px;
+  color: #fff;
+}
+.tableButton4:hover {
+  background-color: #fff;
+  color: #000;
+}
 
 
 
 .customers2 {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  color: black;
   border-collapse: collapse;
   width: 50vw;
-  height: 20vh;
+  height: 18vh;
   z-index: 999;
   position: absolute;
 }
