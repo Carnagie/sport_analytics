@@ -38,6 +38,7 @@
 
                     <li>
                     <button class="submitButton" type="submit" name="submitButton">Profili Getir</button>
+                    <button class="submitButton" type="button" id="pdf">Yazdır</button>
                     </li>
 
                 </ul>
@@ -45,16 +46,20 @@
             </div>
             </form>
 
-                <h2 class="nameTag">{{nameChosen}}</h2>
 
 
-            <div class="vert_container">
+
+            <div class="vert_container" id="topdf">
+
+
+            <h2 class="nameTag" style="padding-top:10%;text-align:center;margin-left:5%;">{{nameChosen}}</h2>
+            <h2 class="nameTag" style="padding-top:2%;text-align:center;margin-left:3.3%;">{{dateChosen}} Ölçüm Sonuçları</h2>
 
 
             <ul class="graphs_1">
 
                 <li>
-                                <div style="height: 300px;width: 600px;"><canvas id="canvasVert"></canvas></div>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVert"></canvas></div>
 
                                 <script>
 
@@ -160,7 +165,7 @@
                 </li>
 
                 <li>
-                                <div style="height: 300px;width: 600px;"><canvas id="canvasVert2"></canvas></div>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVert2"></canvas></div>
 
                                 <script>
 
@@ -271,7 +276,7 @@
             <ul class="graphs_2">
 
                 <li>
-                                <div style="height: 300px;width: 600px;"><canvas id="canvasVertMax"></canvas></div>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertMax"></canvas></div>
 
                                 <script>
 
@@ -356,7 +361,7 @@
                 </li>
 
                 <li>
-                                <div style="height: 300px;width: 600px;"><canvas id="canvasVertMax2"></canvas></div>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertMax2"></canvas></div>
 
                                 <script>
 
@@ -439,7 +444,7 @@
             <ul class="graphs_3">
 
                 <li>
-                                <div style="height: 300px;width: 600px;"><canvas id="canvasVertOrt"></canvas></div>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertOrt"></canvas></div>
 
                                 <script>
 
@@ -524,7 +529,7 @@
                 </li>
 
                 <li>
-                                <div style="height: 300px;width: 600px;"><canvas id="canvasVertOrt2"></canvas></div>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertOrt2"></canvas></div>
 
                                 <script>
 
@@ -613,7 +618,7 @@
             <ul class="graphs_4">
 
                 <li>
-                                <div style="height: 300px;width: 600px;"><canvas id="canvasVertTotal"></canvas></div>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertTotal"></canvas></div>
 
                                 <script>
 
@@ -634,7 +639,7 @@
                                       type: 'bar',
                                       data: {
                                         labels: [
-                                        {% for k in vertTestTotalLab %}
+                                        {% for k in vertTestTotalLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -643,7 +648,7 @@
                                           backgroundColor: chartColors.blue,
                                           borderColor: chartColors.blue,
                                           data: [
-                                            {% for k in vertTestTotalValue %}
+                                            {% for k in vertTestTotalValue|sort %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
@@ -698,7 +703,7 @@
                 </li>
 
                 <li>
-                                <div style="height: 300px;width: 600px;"><canvas id="canvasVertTotal2"></canvas></div>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertTotal2"></canvas></div>
 
                                 <script>
 
@@ -796,5 +801,14 @@
     </div>
 
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+
+<script src="{{ url_for('static', filename='js/html2canvas.js')}}"></script>
+
+<script src="{{ url_for('static', filename='js/vert.js')}}"></script>
+
+
+
 
 {% endblock %}

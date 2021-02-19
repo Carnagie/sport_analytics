@@ -14,7 +14,7 @@
 
         {% if 0 == testType %}
 
-          <div class="tableIn">
+          <div class="tableIn" id="toPDF">
 
             <h3>{{dateKey}}</h3>
 
@@ -350,11 +350,13 @@
 
           </div>
 
+          <button class="buttonGecmisCikti" > SAVE PDF </button>
+
         {% endif %}
 
         {% if 1 == testType %}
 
-          <div class="tableIn">
+          <div class="tableIn" id="toPDF">
 
             <h3>{{dateKey}}</h3>
 
@@ -446,14 +448,15 @@
               </table>
 
 
-
           </div>
+
+            <button class="buttonGecmisCikti" > SAVE PDF </button>
 
         {% endif %}
 
         {% if 2 == testType %}
 
-          <div class="tableIn">
+          <div class="tableIn" id="toPDF">
 
             <h3>{{dateKey}}</h3>
 
@@ -514,12 +517,14 @@
 
           </div>
 
+            <button class="buttonGecmisCikti" > SAVE PDF </button>
+
         {% endif %}
 
 
         {% if 3 == testType %}
 
-          <div class="tableIn" style="margin-top: 10px;">
+          <div class="tableIn" style="margin-top: 10px;" id="toPDF">
 
             <h3>{{dateKey}}</h3>
 
@@ -557,6 +562,7 @@
             </table>
 
 
+            <button class="buttonGecmisCikti" > SAVE PDF </button>
 
           </div>
 
@@ -565,7 +571,7 @@
 
         {% if 4 == testType %}
 
-          <div class="tableIn" style="margin-top: 10px;">
+          <div class="tableIn" style="margin-top: 10px;" id="toPDF">
 
             <h3>{{dateKey}}</h3>
 
@@ -597,15 +603,15 @@
 
             </table>
 
-
-
           </div>
+
+            <button class="buttonGecmisCikti" > SAVE PDF </button>
 
         {% endif %}
 
         {% if 5 == testType %}
 
-          <div class="tableIn" style="margin-top: 10px;">
+          <div class="tableIn" style="margin-top: 10px;" id="toPDF">
 
             <h3>{{dateKey}}</h3>
 
@@ -641,11 +647,13 @@
 
           </div>
 
+        <button class="buttonGecmisCikti" > SAVE PDF </button>
+
         {% endif %}
 
         {% if 6 == testType %}
 
-          <div class="tableIn" style="margin-top: 10px;">
+          <div class="tableIn" style="margin-top: 10px;" id="toPDF">
 
             <h3>{{dateKey}}</h3>
 
@@ -654,6 +662,49 @@
 
 
             <h3 style="color: orange">{{sporcuFullName}}</h3>
+
+
+            <ul class="infoHeader2">
+              <li><h2>Ace Hızı Test Sonuçları:</h2></li>
+            </ul>
+              <table class="infoTable0">
+              <tr>
+                <th> Max Hız </th>
+                <th> Avg Hız </th>
+                <th> Total Ölçüm </th>
+              </tr>
+              <tr>
+
+                <td>{{ dataDict["ace"]["max"] }}</td>
+
+                <td>{{ dataDict["ace"]["avg"] }}</td>
+
+                <td>{{ dataDict["ace"]["total"] }}</td>
+
+              </tr>
+
+              </table>
+
+            <ul class="infoHeader2">
+              <li><h2>Hit Hızı Test Sonuçları:</h2></li>
+            </ul>
+              <table class="infoTable0">
+              <tr>
+                <th> Max Hız </th>
+                <th> Avg Hız </th>
+                <th> Total Ölçüm </th>
+              </tr>
+              <tr>
+
+                <td>{{ dataDict["hit"]["max"] }}</td>
+
+                <td>{{ dataDict["hit"]["avg"] }}</td>
+
+                <td>{{ dataDict["hit"]["total"] }}</td>
+
+              </tr>
+
+              </table>
 
 
             <ul class="infoHeader2">
@@ -667,19 +718,41 @@
               </tr>
               <tr>
 
-                <td>{{ dataDict["max"] }}</td>
+                <td>{{ dataDict["servis"]["max"] }}</td>
 
-                <td>{{ dataDict["ort"] }}</td>
+                <td>{{ dataDict["servis"]["avg"] }}</td>
 
-                <td>{{ dataDict["total"] }}</td>
+                <td>{{ dataDict["servis"]["total"] }}</td>
 
               </tr>
 
-            </table>
+              </table>
 
+            <ul class="infoHeader2">
+              <li><h2>Hata Hızı Test Sonuçları:</h2></li>
+            </ul>
+              <table class="infoTable0">
+              <tr>
+                <th> Max Hız </th>
+                <th> Avg Hız </th>
+                <th> Total Ölçüm </th>
+              </tr>
+              <tr>
+
+                <td>{{ dataDict["hata"]["max"] }}</td>
+
+                <td>{{ dataDict["hata"]["avg"] }}</td>
+
+                <td>{{ dataDict["hata"]["total"] }}</td>
+
+              </tr>
+
+              </table>
 
 
           </div>
+
+            <button class="buttonGecmisCikti" > SAVE PDF </button>
 
         {% endif %}
 
@@ -784,7 +857,9 @@
         </div>
 
     </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 
+<script src="{{ url_for('static', filename='js/html2canvas.js')}}"></script>
 
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
 

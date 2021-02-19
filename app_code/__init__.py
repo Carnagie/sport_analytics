@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, url_for, request, session, redirect
 import requests, json, os, re
 import csv, json, sys
 import pandas as pd
@@ -9,7 +9,8 @@ import psycopg2
 from flask_bootstrap import Bootstrap
 import random
 import math
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
+import collections
 
 
 app = Flask(__name__)
@@ -45,10 +46,29 @@ connectionList = list()
 @app.route('/', methods=["GET","POST"])
 def index():
 
-     return render_template('main_page.html')
+    if request.method == 'POST':
+
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if "admin" in session or "user" in session:
+
+            return render_template('main_page.html')
+        else:
+            if username == "mahiremrecan" and password == "859118":
+                session["admin"] = "admin"
+                return render_template('sporcu.html')
+
+        return render_template('main_page.html')
+
+    return render_template('main_page.html')
 
 @app.route('/bulk', methods=["GET","POST"])
 def index2():
+
+    if "admin" not in session:
+
+        return render_template('main_page.html')
 
     tableData = list()
     tableHeader = list()
@@ -149,6 +169,10 @@ def index2():
 @app.route('/sporcu', methods=["GET","POST"])
 def index3():
 
+    if "admin" not in session:
+
+        return render_template('main_page.html')
+
     if request.method == 'POST':
 
         infoList = request.form.getlist("SporcuInf")
@@ -163,7 +187,7 @@ def index3():
         con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
         cur = con.cursor()
 
-        columns = ["id", "sname", "sirname", "mass", "height","mevki", "health_up_body", "health_down_body", "body_size", "phone", "sporcu_foto", "notes","sex","age"]
+        columns = ["sname", "sirname", "mass", "height","mevki", "health_up_body", "health_down_body", "body_size", "phone", "sporcu_foto", "notes","sex","age"]
 
         print(len(columns), columns)
         print(len(row), row)
@@ -180,18 +204,26 @@ def index3():
             image.save(os.path.join( app.config["IMAGE_UPLOADS"], image.filename))
             print("image saved")
 
+        row[0] = row[0].strip()
+
         row[1] = row[1].strip()
 
         row[2] = row[2].strip()
 
 
-        sql_insert = "INSERT INTO sporcular " + "("+ columns[0] +","+columns[1] +","+columns[2] +","+columns[3] +","+columns[4] +","+columns[5] +","+columns[6] +","+columns[7] +","+columns[8] +","+columns[9] +","+columns[10] +","+columns[11]+","+columns[12] +","+columns[13] +")"+" VALUES (" +"\'"+row[0]+"\'"+ ","+ "\'" +row[1]+ "\'"+ ","+ "\'" +row[2]+ "\'"+","+ "\'" +row[3]+ "\'"+ "," +"\'" +row[4]+ "\'"+ "," + "\'" +row[5]+ "\'" + ","+ "\'" +row[6]+ "\'" + ","+ "\'" +row[7]+ "\'" + ","+ "\'" +row[8]+ "\'" + ","+ "\'" +row[9]+ "\'" + ","+ "\'" +row[10]+ "\'" + ","+ "\'" +row[13]+ "\'" + ","+ "\'" +row[11]+ "\'" + ","+ "\'" +row[12]+ "\'" + ")"+";"
+        sql_insert = "INSERT INTO sporcular " + "("+columns[0] +","+columns[1] +","+columns[2] +","+columns[3] +","+columns[4] +","+columns[5] +","+columns[6] +","+columns[7] +","+columns[8] +","+columns[9] +","+columns[10]+","+columns[11] +","+columns[12] +")"+" VALUES ("+ "\'" +row[0]+ "\'"+ ","+ "\'" +row[1]+ "\'"+","+ "\'" +row[2]+ "\'"+ "," +"\'" +row[3]+ "\'"+ "," + "\'" +row[4].replace(" ","-")+ "\'" + ","+ "\'" +row[5]+ "\'" + ","+ "\'" +row[6]+ "\'" + ","+ "\'" +row[7]+ "\'" + ","+ "\'" +row[8]+ "\'" + ","+ "\'" +row[9]+ "\'" + ","+ "\'" +row[12]+ "\'" + ","+ "\'" +row[10]+ "\'" + ","+ "\'" +row[11]+ "\'" + ")"+" RETURNING id;"
 
         print(sql_insert)
         cur.execute(sql_insert)
+        tempId = cur.fetchall()[0][0]
         con.commit()
         cur.close()
         con.close()
+
+        row[2] = row[1]
+        row[1] = row[0]
+        row[0] = tempId
+
 
         row[1] = row[1].strip().replace(" ","_")
 
@@ -208,115 +240,126 @@ def index3():
             json.dump(data, outfile)
 
 
+
     return render_template('sporcu.html')
 
 @app.route('/individual', methods=["GET","POST"])
 def index4():
 
-	tableData = list()
-	tableHeader = list()
-	donatData = list()
-	donatDataVal = list()
-	colors = list()
-	actName = False
+
+    if "admin" not in session:
+
+        return render_template('main_page.html')
+
+    else:
+    	tableData = list()
+    	tableHeader = list()
+    	donatData = list()
+    	donatDataVal = list()
+    	colors = list()
+    	actName = False
 
 
-	if request.method == 'POST':
+    	if request.method == 'POST':
 
-		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
-		cur = con.cursor()
+    		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    		cur = con.cursor()
 
-		tableName = str(request.form["table1"])
+    		tableName = str(request.form["table1"])
 
-		if request.form.get("submits", False) != "ADD ITEM":
-			session["table"] = tableName
-
-
-		sql_insert = "SELECT * FROM " + tableName
-
-		cur.execute(sql_insert)
-		tableData = cur.fetchall()
-		tableData.sort()
-
-		for i in cur.description:
-			tableHeader.append(i[0])
-
-		for i in cur.description:
-			donatData.append(i[0])
+    		if request.form.get("submits", False) != "ADD ITEM":
+    			session["table"] = tableName
 
 
-		cur.close()
-		con.close()
+    		sql_insert = "SELECT * FROM " + tableName
 
-		columns = donatData
-		row = "not assigned"
+    		cur.execute(sql_insert)
+    		tableData = cur.fetchall()
+    		tableData.sort()
 
-		actName = request.form.get("submits", False)
-		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
-		cur = con.cursor()
+    		for i in cur.description:
+    			tableHeader.append(i[0])
 
-		print(tableName)
-		print(columns)
-
-		if actName == "ADD ITEM":
-
-			row = request.form.getlist("datas")
-
-			if tableName == "sporcular":
-				sql_insert = "INSERT INTO sporcular " + "("+ columns[0] +","+columns[1] +","+columns[2] +","+columns[3] +","+columns[4] +","+columns[5] +","+columns[6] +","+columns[7] +","+columns[8] +","+columns[9] +","+columns[10] +","+columns[11]+","+columns[12] +","+columns[13] +")"+" VALUES (" +"\'"+row[0]+"\'"+ ","+ "\'" +row[1]+ "\'"+ ","+ "\'" +row[2]+ "\'"+","+ "\'" +row[3]+ "\'"+ "," +"\'" +row[4]+ "\'"+ "," + "\'" +row[5]+ "\'" + ","+ "\'" +row[6]+ "\'" + ","+ "\'" +row[7]+ "\'" + ","+ "\'" +row[8]+ "\'" + ","+ "\'" +row[9]+ "\'" + ","+ "\'" +row[10]+ "\'" + ","+ "\'" +row[11]+ "\'" + ","+ "\'" +row[12]+ "\'" + ","+ "\'" +row[13]+ "\'" + ")"+";"
+    		for i in cur.description:
+    			donatData.append(i[0])
 
 
-			cur.execute(sql_insert)
-		elif actName == "DELETE ITEM":
+    		cur.close()
+    		con.close()
 
-			row = request.form.getlist("datas2")
+    		columns = donatData
+    		row = "not assigned"
 
-			row[0] = row[0].strip()
+    		actName = request.form.get("submits", False)
+    		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    		cur = con.cursor()
 
-			row[1] = row[1].strip()
+    		print(tableName)
+    		print(columns)
 
-			row[2] = row[2].strip()
+    		if actName == "ADD ITEM":
 
-			if tableName == "sporcular":
-				sql_insert = "DELETE FROM " + tableName + " WHERE (" + columns[0] + " = " + "'" +row[0]+ "' AND " + columns[1] + " = " + "'" +row[1]+ "' AND " + columns[2] + " = " + "'" +row[2]+ "\'" + ");"
+    			row = request.form.getlist("datas")
 
-				deletekey = str(row[0]) + "_" + str(row[1]).strip().replace(" ","_") + "_" + str(row[2]).strip().replace(" ","_") + ".json"
-				try:
-					os.remove("static/athlete_jsons/"+deletekey)
-				except:
-					print("no json file")
-			cur.execute(sql_insert)
-
-		elif actName == "UPDATE ITEM":
-
-			row = request.form.getlist("datas3")
-
-			if tableName == "sporcular":
-				print(columns)
-				print(row)
-				sql_insert = "UPDATE " + tableName + " SET " + columns[1] + " = "  + "'" + row[1] + "'" + "," + columns[2] + " = "  + "'" + row[2] + "'" + "," + columns[3] + " = "  + "'" + row[3] + "'" + "," + columns[4] + " = "  + "'" + row[4] + "'" + "," + columns[5] + " = "  + "'" + row[5] + "'" + "," + columns[6] + " = "  + "'" + row[6] + "'" + "," + columns[7] + " = "  + "'" + row[7] + "'" + "," + columns[8] + " = "  + "'" + row[8] + "'" + "," + columns[9] + " = "  + "'" + row[9] + "'" + "," + columns[10] + " = "  + "'" + row[10] + "'" + "," + columns[11] + " = "  + "'" + row[11] + "'" + "," + columns[12] + " = "  + "'" + row[12] + "'" + "," + columns[13] + " = "  + "'" + row[13] + "'" + " WHERE " + columns[0] + " = " + "'" +row[0]+ "'" + ";"
-
-			cur.execute(sql_insert)
+    			if tableName == "sporcular":
+    				sql_insert = "INSERT INTO sporcular " + "("+ columns[0] +","+columns[1] +","+columns[2] +","+columns[3] +","+columns[4] +","+columns[5] +","+columns[6] +","+columns[7] +","+columns[8] +","+columns[9] +","+columns[10] +","+columns[11]+","+columns[12] +","+columns[13] +")"+" VALUES (" +"\'"+row[0]+"\'"+ ","+ "\'" +row[1]+ "\'"+ ","+ "\'" +row[2]+ "\'"+","+ "\'" +row[3]+ "\'"+ "," +"\'" +row[4]+ "\'"+ "," + "\'" +row[5]+ "\'" + ","+ "\'" +row[6]+ "\'" + ","+ "\'" +row[7]+ "\'" + ","+ "\'" +row[8]+ "\'" + ","+ "\'" +row[9]+ "\'" + ","+ "\'" +row[10]+ "\'" + ","+ "\'" +row[11]+ "\'" + ","+ "\'" +row[12]+ "\'" + ","+ "\'" +row[13]+ "\'" + ")"+";"
 
 
-		print(sql_insert)
+    			cur.execute(sql_insert)
+    		elif actName == "DELETE ITEM":
+
+    			row = request.form.getlist("datas2")
+
+    			row[0] = row[0].strip()
+
+    			row[1] = row[1].strip()
+
+    			row[2] = row[2].strip()
+
+    			if tableName == "sporcular":
+    				sql_insert = "DELETE FROM " + tableName + " WHERE (" + columns[0] + " = " + "'" +row[0]+ "' AND " + columns[1] + " = " + "'" +row[1]+ "' AND " + columns[2] + " = " + "'" +row[2]+ "\'" + ");"
+
+    				deletekey = str(row[0]) + "_" + str(row[1]).strip().replace(" ","_") + "_" + str(row[2]).strip().replace(" ","_") + ".json"
+    				try:
+    					os.remove("static/athlete_jsons/"+deletekey)
+    				except:
+    					print("no json file")
+    			cur.execute(sql_insert)
+
+    		elif actName == "UPDATE ITEM":
+
+    			row = request.form.getlist("datas3")
+
+    			if tableName == "sporcular":
+    				print(columns)
+    				print(row)
+    				sql_insert = "UPDATE " + tableName + " SET " + columns[1] + " = "  + "'" + row[1] + "'" + "," + columns[2] + " = "  + "'" + row[2] + "'" + "," + columns[3] + " = "  + "'" + row[3] + "'" + "," + columns[4] + " = "  + "'" + row[4] + "'" + "," + columns[5] + " = "  + "'" + row[5] + "'" + "," + columns[6] + " = "  + "'" + row[6] + "'" + "," + columns[7] + " = "  + "'" + row[7] + "'" + "," + columns[8] + " = "  + "'" + row[8] + "'" + "," + columns[9] + " = "  + "'" + row[9] + "'" + "," + columns[10] + " = "  + "'" + row[10] + "'" + "," + columns[11] + " = "  + "'" + row[11] + "'" + "," + columns[12] + " = "  + "'" + row[12] + "'" + "," + columns[13] + " = "  + "'" + row[13] + "'" + " WHERE " + columns[0] + " = " + "'" +row[0]+ "'" + ";"
+
+    			cur.execute(sql_insert)
 
 
-		sql_insert = "SELECT * FROM " + tableName
+    		print(sql_insert)
 
-		cur.execute(sql_insert)
-		tableData = cur.fetchall()
-		tableData.sort()
 
-		con.commit()
-		cur.close()
-		con.close()
+    		sql_insert = "SELECT * FROM " + tableName
 
-	return render_template('individual.html',table=tableData,tableHeader=tableHeader,donatData=donatData)
+    		cur.execute(sql_insert)
+    		tableData = cur.fetchall()
+    		tableData.sort()
+
+    		con.commit()
+    		cur.close()
+    		con.close()
+
+    	return render_template('individual.html',table=tableData,tableHeader=tableHeader,donatData=donatData)
 
 
 @app.route('/olcum', methods=["GET","POST"])
 def index5():
+
+    if "admin" not in session:
+
+        return render_template('main_page.html')
 
     tableHeader = list()
     tableData = None
@@ -391,7 +434,7 @@ def index5():
             sporcuData["specs"][0][olcumDate]["dead_lift"] = str(dataList[4])
             sporcuData["specs"][0][olcumDate]["hip_trust"] = str(dataList[5])
 
-            sorted(sporcuData["specs"][0].items(),reverse=False)
+            sporcuData["specs"][0] = collections.OrderedDict(sorted(sporcuData["specs"][0].items(),reverse=False,key = lambda date: datetime.strptime(date[0], '%Y/%m/%d')))
 
             with open("static/athlete_jsons/"+sporcuInfo, 'w') as outfile:
                 json.dump(sporcuData, outfile)
@@ -420,7 +463,7 @@ def index5():
             sporcuData["specs"][1][olcumDate]["posterior_rocking_clearing"] = [str(dataList[33]),str(dataList[34]),str(dataList[35])]
             sporcuData["specs"][1][olcumDate]["total"] = str(dataList[36])
 
-            sorted(sporcuData["specs"][1].items(),reverse=False)
+            sporcuData["specs"][1] = collections.OrderedDict(sorted(sporcuData["specs"][1].items(),reverse=False,key = lambda date: datetime.strptime(date[0], '%Y/%m/%d')))
 
             with open("static/athlete_jsons/"+sporcuInfo, 'w') as outfile:
                 json.dump(sporcuData, outfile)
@@ -445,7 +488,7 @@ def index5():
             sporcuData["specs"][2][olcumDate]["posterolateral"] = [str(dataList[16]),str(dataList[17]),str(dataList[18]),str(dataList[19]),str(dataList[20]),str(dataList[21]),str(dataList[22])]
             sporcuData["specs"][2][olcumDate]["total"] = [str(dataList[23]),str(dataList[24])]
 
-            sorted(sporcuData["specs"][2].items(),reverse=False)
+            sporcuData["specs"][2] = collections.OrderedDict(sorted(sporcuData["specs"][2].items(),reverse=False,key = lambda date: datetime.strptime(date[0], '%Y/%m/%d')))
 
             with open("static/athlete_jsons/"+sporcuInfo, 'w') as outfile:
                 json.dump(sporcuData, outfile)
@@ -468,7 +511,7 @@ def index5():
             sporcuData["specs"][3][olcumDate]["jumps"] = [str(dataList[3]),str(dataList[4]),str(dataList[5])]
 
 
-            sorted(sporcuData["specs"][3].items(),reverse=False)
+            sporcuData["specs"][3] = collections.OrderedDict(sorted(sporcuData["specs"][3].items(),reverse=False,key = lambda date: datetime.strptime(date[0], '%Y/%m/%d')))
 
             with open("static/athlete_jsons/"+sporcuInfo, 'w') as outfile:
                 json.dump(sporcuData, outfile)
@@ -502,8 +545,7 @@ def index5():
             sporcuData["specs"][4][olcumDate]["ort"] = ortJump
             sporcuData["specs"][4][olcumDate]["total"] = totalJump
 
-
-            sorted(sporcuData["specs"][4].items(),reverse=False)
+            sporcuData["specs"][4] = collections.OrderedDict(sorted(sporcuData["specs"][4].items(),reverse=False,key = lambda date: datetime.strptime(date[0], '%Y/%m/%d')))
 
             with open("static/athlete_jsons/"+sporcuInfo, 'w') as outfile:
                 json.dump(sporcuData, outfile)
@@ -535,14 +577,16 @@ def index5():
             sporcuData["specs"][5][olcumDate]["ort"] = ortJump
             sporcuData["specs"][5][olcumDate]["total"] = totalJump
 
-            sorted(sporcuData["specs"][5].items(),reverse=False)
+            sporcuData["specs"][5] = collections.OrderedDict(sorted(sporcuData["specs"][5].items(),reverse=False,key = lambda date: datetime.strptime(date[0], '%Y/%m/%d')))
 
             with open("static/athlete_jsons/"+sporcuInfo, 'w') as outfile:
                 json.dump(sporcuData, outfile)
 
 
         elif actName == "servisTest":
-            dataList = request.form.getlist("servisTest")
+
+            dataListLabel = request.form.getlist("aceHitTableLabels")
+            dataList = request.form.getlist("aceHitTableValues")
 
             selectedDate = request.form.get("dateServis")
 
@@ -550,25 +594,66 @@ def index5():
                 olcumDate = selectedDate.replace("-","/")
 
             print("tarih:",olcumDate)
+            print(dataList)
+            print(dataListLabel)
 
-            maxJump = 0
-            totalJump = 0
-            ortJump = 0
+            aceHitDataDict = {}
+            aceHitDataDict["ace"] = {}
+            aceHitDataDict["hit"] = {}
+            aceHitDataDict["servis"] = {}
+            aceHitDataDict["hata"] = {}
 
-            try:
-                maxJump = dataList[0]
-                ortJump = dataList[1]
-                totalJump = dataList[2]
-            except:
-                maxJump = 0
-                ortJump = 0
-                totalJump = 0
+            aceList = []
+            hitList = []
+            servisList = []
+            hataList = []
+
+            for i in range(0,len(dataList)):
+                if dataListLabel[i] == "Ace":
+                    aceList.append(float(dataList[i]))
+                elif dataListLabel[i] == "Hit":
+                    hitList.append(float(dataList[i]))
+                elif dataListLabel[i] == "Servis":
+                    servisList.append(float(dataList[i]))
+                elif dataListLabel[i] == "Hata":
+                    hataList.append(float(dataList[i]))
+
+            if len(aceList) == 0:
+                aceList.append(0)
+            if len(hitList) == 0:
+                hitList.append(0)
+            if len(servisList) == 0:
+                servisList.append(0)
+            if len(hataList) == 0:
+                hataList.append(0)
+
+            aceHitDataDict["ace"]["total"] = len(aceList)
+            aceHitDataDict["hit"]["total"] = len(hitList)
+            aceHitDataDict["servis"]["total"] = len(servisList)
+            aceHitDataDict["hata"]["total"] = len(hataList)
+
+            aceHitDataDict["ace"]["max"] = max(aceList)
+            aceHitDataDict["hit"]["max"] = max(hitList)
+            aceHitDataDict["servis"]["max"] = max(servisList)
+            aceHitDataDict["hata"]["max"] = max(hataList)
+
+            aceHitDataDict["ace"]["avg"] = round(sum(aceList) / len(aceList), 2)
+            aceHitDataDict["hit"]["avg"] = round(sum(hitList) / len(hitList), 2)
+            aceHitDataDict["servis"]["avg"] = round(sum(servisList) / len(servisList), 2)
+            aceHitDataDict["hata"]["avg"] = round(sum(hataList) / len(hataList), 2)
+
+
+            print(aceHitDataDict)
+            print(sporcuData)
+
             sporcuData["specs"][6][olcumDate] = dict()
-            sporcuData["specs"][6][olcumDate]["max"] = maxJump
-            sporcuData["specs"][6][olcumDate]["ort"] = ortJump
-            sporcuData["specs"][6][olcumDate]["total"] = totalJump
+            sporcuData["specs"][6][olcumDate] = aceHitDataDict
 
-            sorted(sporcuData["specs"][6].items(),reverse=False)
+            print(sporcuInfo)
+            print(sporcuData)
+
+
+            sporcuData["specs"][6] = collections.OrderedDict(sorted(sporcuData["specs"][6].items(),reverse=False,key = lambda date: datetime.strptime(date[0], '%Y/%m/%d')))
 
             with open("static/athlete_jsons/"+sporcuInfo, 'w') as outfile:
                 json.dump(sporcuData, outfile)
@@ -580,6 +665,10 @@ def index5():
 
 @app.route('/gecmis', methods=["GET","POST"])
 def index6():
+
+    if "admin" not in session:
+
+        return render_template('main_page.html')
 
     tupleList = list()
     dateKey = ""
@@ -663,22 +752,24 @@ def index6():
         with open("static/athlete_jsons/"+sporcuInfo) as json_file:
             sporcuData = json.load(json_file)
 
+        try:
+            if dateKey in sporcuData["specs"][testType]:
+                print(dateKey)
+                dataDict = sporcuData["specs"][testType][dateKey]
 
-        if dateKey in sporcuData["specs"][testType]:
-            print(dateKey)
-            dataDict = sporcuData["specs"][testType][dateKey]
 
 
+            elif dateKey == "SON":
+                dateKey = list(sporcuData["specs"][testType].keys())[-1]
+                dataDict = sporcuData["specs"][testType][dateKey]
 
-        elif dateKey == "SON":
-            dateKey = list(sporcuData["specs"][testType].keys())[-1]
-            dataDict = sporcuData["specs"][testType][dateKey]
-
-        result=list(reversed(dateKey.split("/")))
-        dateKey = ""
-        for i in result:
-            dateKey = dateKey + i + "/"
-        dateKey = dateKey[:-1]
+            result=list(reversed(dateKey.split("/")))
+            dateKey = ""
+            for i in result:
+                dateKey = dateKey + i + "/"
+            dateKey = dateKey[:-1]
+        except:
+            return render_template('gecmis.html',table=tableData2,dateKey=dateKey,sporcuFullName=sporcuFullName,tableHeader=tableHeader,imageSource=imageSource)
 
 
 
@@ -687,6 +778,10 @@ def index6():
 
 @app.route('/profiller', methods=["GET","POST"])
 def index7():
+
+    if "admin" not in session:
+
+        return render_template('main_page.html')
 
     sporcuData = {}
 
@@ -729,6 +824,8 @@ def index7():
     yTestsPosterolateralDef = []
     yTestsLimbLength = 0
 
+    """
+
     #jump test section
 
     jumpTestsWeekLab = []
@@ -737,6 +834,27 @@ def index7():
     jumpTestsJ2 = []
     jumpTestsJ3 = []
     jumpTestsOrt = []
+
+    """
+
+    #ace hit servis test section
+
+    acehitTestWeekLab = []
+
+    acehitTestAceMax = []
+    acehitTestHitMax = []
+    acehitTestServisMax = []
+    acehitTestHataMax = []
+
+    acehitTestAceAvg = []
+    acehitTestHitAvg = []
+    acehitTestServisAvg = []
+    acehitTestHataAvg = []
+
+    acehitTestAceTotal = []
+    acehitTestHitTotal = []
+    acehitTestServisTotal = []
+    acehitTestHataTotal = []
 
 	#vert test section
 
@@ -880,13 +998,23 @@ def index7():
         print(yTestsWeekLeftVal)
         print(yTestsWeekRightVal)
 
-        jumpTestsWeekLab = list(sporcuData["specs"][3].keys())[-52:]
+        acehitTestWeekLab = list(sporcuData["specs"][6].keys())[-52:]
 
-        for i in jumpTestsWeekLab:
-            jumpTestsJ1.append(sporcuData["specs"][3][i]["jumps"][0])
-            jumpTestsJ2.append(sporcuData["specs"][3][i]["jumps"][1])
-            jumpTestsJ3.append(sporcuData["specs"][3][i]["jumps"][2])
-            jumpTestsOrt.append(  (  float(sporcuData["specs"][3][i]["jumps"][0]) + float(sporcuData["specs"][3][i]["jumps"][1]) + float(sporcuData["specs"][3][i]["jumps"][2])  ) / 3 )
+        for i in acehitTestWeekLab:
+            acehitTestAceMax.append(sporcuData["specs"][6][i]["ace"]["max"])
+            acehitTestHitMax.append(sporcuData["specs"][6][i]["hit"]["max"])
+            acehitTestServisMax.append(sporcuData["specs"][6][i]["servis"]["max"])
+            acehitTestHataMax.append(sporcuData["specs"][6][i]["hata"]["max"])
+
+            acehitTestAceAvg.append(sporcuData["specs"][6][i]["ace"]["avg"])
+            acehitTestHitAvg.append(sporcuData["specs"][6][i]["hit"]["avg"])
+            acehitTestServisAvg.append(sporcuData["specs"][6][i]["servis"]["avg"])
+            acehitTestHataAvg.append(sporcuData["specs"][6][i]["hata"]["avg"])
+
+            acehitTestAceTotal.append(sporcuData["specs"][6][i]["ace"]["total"])
+            acehitTestHitTotal.append(sporcuData["specs"][6][i]["hit"]["total"])
+            acehitTestServisTotal.append(sporcuData["specs"][6][i]["servis"]["total"])
+            acehitTestHataTotal.append(sporcuData["specs"][6][i]["hata"]["total"])
 
 
         vertTestsWeekLab = list(sporcuData["specs"][4].keys())[-52:]
@@ -923,417 +1051,527 @@ def index7():
 	 fmsTestsWeekActiveStrVal=fmsTestsWeekActiveStrVal,fmsTestsWeekTrunkVal=fmsTestsWeekTrunkVal,fmsTestsWeekPressVal=fmsTestsWeekPressVal,fmsTestsWeekRotaryVal=fmsTestsWeekRotaryVal,
 	 fmsTestsWeekPosteriVal=fmsTestsWeekPosteriVal,fmsTestsWeekTotalVal=fmsTestsWeekTotalVal,yTestsWeekLab=yTestsWeekLab,yTestsWeekLeftVal=yTestsWeekLeftVal,
 	 yTestsWeekRightVal=yTestsWeekRightVal,yTestsAnteriorDef=yTestsAnteriorDef,yTestsPosteromedialDef=yTestsPosteromedialDef,yTestsPosterolateralDef=yTestsPosterolateralDef
-	 ,yTestsLimbLength=yTestsLimbLength,jumpTestsWeekLab=jumpTestsWeekLab,jumpTestsJ1=jumpTestsJ1,jumpTestsJ2=jumpTestsJ2,jumpTestsJ3=jumpTestsJ3,jumpTestsOrt=jumpTestsOrt,
-	 fmsTestInjuryPercent=fmsTestInjuryPercent,vertTestsWeekLab = vertTestsWeekLab, vertTestMax=vertTestMax, vertTestOrt=vertTestOrt, vertTestTotal=vertTestTotal, vertTestTakimOrt=vertTestTakimOrt)
+	 ,yTestsLimbLength=yTestsLimbLength,fmsTestInjuryPercent=fmsTestInjuryPercent,vertTestsWeekLab = vertTestsWeekLab, vertTestMax=vertTestMax, vertTestOrt=vertTestOrt,
+	 vertTestTotal=vertTestTotal, vertTestTakimOrt=vertTestTakimOrt, acehitTestWeekLab=acehitTestWeekLab, acehitTestAceMax=acehitTestAceMax, acehitTestHitMax=acehitTestHitMax,
+	 acehitTestServisMax=acehitTestServisMax,acehitTestHataMax=acehitTestHataMax, acehitTestAceAvg=acehitTestAceAvg, acehitTestHitAvg=acehitTestHitAvg, acehitTestServisAvg=acehitTestServisAvg,acehitTestHataAvg=acehitTestHataAvg,
+	 acehitTestAceTotal=acehitTestAceTotal, acehitTestHitTotal=acehitTestHitTotal, acehitTestServisTotal=acehitTestServisTotal,acehitTestHataTotal=acehitTestHataTotal)
 
 @app.route('/rm', methods=["GET","POST"])
 def index8():
 
-	return render_template('rm.html')
+    if "admin" not in session:
+
+        return render_template('main_page.html')
+    else:
+
+	    return render_template('rm.html')
 
 @app.route('/vert', methods=["GET","POST"])
 def index9():
 
-	nameChosen = ""
+    if "admin" not in session:
 
-	dateChosen = ""
+        return render_template('main_page.html')
 
-	#vert tests by team
+    else:
+    	nameChosen = ""
 
-	vertTestMaxLab = []
-	vertTestMaxValue = []
+    	dateChosen = ""
 
-	vertTestOrtLab = []
-	vertTestOrtValue = []
+    	#vert tests by team
 
-	vertTestTotalLab = []
-	vertTestTotalValue = []
+    	vertTestMaxLab = []
+    	vertTestMaxValue = []
 
-	#vert test section
+    	vertTestOrtLab = []
+    	vertTestOrtValue = []
 
-	vertTestsWeekLab = []
+    	vertTestTotalLab = []
+    	vertTestTotalValue = []
 
-	vertTestMax = []
-	vertTestOrt = []
-	vertTestTotal = []
+    	#vert test section
 
-	jsonProfilDict = {}
+    	vertTestsWeekLab = []
 
+    	vertTestMax = []
+    	vertTestOrt = []
+    	vertTestTotal = []
 
-	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
-	cur = con.cursor()
-
-	tableName = "sporcular"
-
-	sql_insert = "SELECT * FROM " + tableName
-
-	cur.execute(sql_insert)
-	tableData = cur.fetchall()
-
-	for i in tableData:
-		print( i[0] ,i[1], i[2])
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
-
-	print(jsonProfilDict)
-
-	cur.close()
-	con.close()
+    	jsonProfilDict = {}
 
 
-	if request.method == 'POST':
+    	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    	cur = con.cursor()
 
-		dateChosen = request.form.get("dateChosen").replace("-","/")
+    	tableName = "sporcular"
 
-		print(dateChosen)
+    	sql_insert = "SELECT * FROM " + tableName
 
-		jsonName = jsonProfilDict[request.form.get("tableChosen")]
+    	cur.execute(sql_insert)
+    	tableData = cur.fetchall()
 
-		nameChosen = request.form.get("tableChosen")[2:]
+    	for i in tableData:
+    		print( i[0] ,i[1], i[2])
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
 
-		with open("static/athlete_jsons/"+jsonName) as json_file:
-			sporcuData = json.load(json_file)
+    	print(jsonProfilDict)
 
-
-		vertTestsWeekLab = list(sporcuData["specs"][4].keys())[-52:]
-
-		for i in vertTestsWeekLab:
-			vertTestMax.append(sporcuData["specs"][4][i]["max"])
-			vertTestOrt.append(sporcuData["specs"][4][i]["ort"])
-			vertTestTotal.append(sporcuData["specs"][4][i]["total"])
-
-		for filename in os.listdir(os.getcwd() + "/static/athlete_jsons"):
-
-			with open("static/athlete_jsons/"+filename) as json_file:
-				sporcuDataTemp = json.load(json_file)
-
-				vertTestMaxLab.append(filename.replace("_"," ")[2:-5])
-				vertTestOrtLab.append(filename.replace("_"," ")[2:-5])
-				vertTestTotalLab.append(filename.replace("_"," ")[2:-5])
-				try:
-					vertTestMaxValue.append(sporcuDataTemp["specs"][4][dateChosen]["max"])
-					vertTestOrtValue.append(sporcuDataTemp["specs"][4][dateChosen]["ort"])
-					vertTestTotalValue.append(sporcuDataTemp["specs"][4][dateChosen]["total"])
-				except:
-					vertTestMaxValue.append("-1")
-					vertTestOrtValue.append(-1)
-					vertTestTotalValue.append("-1")
-
-		print(vertTestMaxLab)
-		print(vertTestMaxValue)
-		print(vertTestOrtValue)
-		print(vertTestTotalValue)
+    	cur.close()
+    	con.close()
 
 
-	return render_template('vert.html',nameChosen=nameChosen,jsonProfilDict=jsonProfilDict,vertTestsWeekLab=vertTestsWeekLab,vertTestMax=vertTestMax,vertTestOrt=vertTestOrt,vertTestTotal=vertTestTotal,
-		vertTestMaxLab=vertTestMaxLab,vertTestOrtLab=vertTestOrtLab,vertTestTotalLab=vertTestTotalLab,vertTestMaxValue=vertTestMaxValue,
-		vertTestOrtValue=vertTestOrtValue,vertTestTotalValue=vertTestTotalValue)
+    	if request.method == 'POST':
+
+    		dateChosen = request.form.get("dateChosen").replace("-","/")
+
+    		print(dateChosen)
+
+    		jsonName = jsonProfilDict[request.form.get("tableChosen")]
+
+    		nameChosen = request.form.get("tableChosen")[2:]
+
+    		with open("static/athlete_jsons/"+jsonName) as json_file:
+    			sporcuData = json.load(json_file)
+
+
+    		vertTestsWeekLab = list(sporcuData["specs"][4].keys())[-52:]
+
+    		for i in vertTestsWeekLab:
+    			vertTestMax.append(sporcuData["specs"][4][i]["max"])
+    			vertTestOrt.append(sporcuData["specs"][4][i]["ort"])
+    			vertTestTotal.append(sporcuData["specs"][4][i]["total"])
+
+    		for filename in os.listdir(os.getcwd() + "/static/athlete_jsons"):
+
+    			with open("static/athlete_jsons/"+filename) as json_file:
+    				sporcuDataTemp = json.load(json_file)
+
+    				vertTestMaxLab.append(filename.replace("_"," ")[2:-5])
+    				vertTestOrtLab.append(filename.replace("_"," ")[2:-5])
+    				vertTestTotalLab.append(filename.replace("_"," ")[2:-5])
+    				try:
+    					vertTestMaxValue.append(sporcuDataTemp["specs"][4][dateChosen]["max"])
+    					vertTestOrtValue.append(sporcuDataTemp["specs"][4][dateChosen]["ort"])
+    					vertTestTotalValue.append(sporcuDataTemp["specs"][4][dateChosen]["total"])
+    				except:
+    					vertTestMaxValue.append("-1")
+    					vertTestOrtValue.append(-1)
+    					vertTestTotalValue.append("-1")
+
+    		print(vertTestMaxLab)
+    		print(vertTestMaxValue)
+    		print(vertTestOrtValue)
+    		print(vertTestTotalValue)
+
+
+    	return render_template('vert.html',nameChosen=nameChosen,jsonProfilDict=jsonProfilDict,vertTestsWeekLab=vertTestsWeekLab,vertTestMax=vertTestMax,vertTestOrt=vertTestOrt,vertTestTotal=vertTestTotal,
+    		vertTestMaxLab=vertTestMaxLab,vertTestOrtLab=vertTestOrtLab,vertTestTotalLab=vertTestTotalLab,vertTestMaxValue=vertTestMaxValue,
+    		vertTestOrtValue=vertTestOrtValue,vertTestTotalValue=vertTestTotalValue,dateChosen=dateChosen)
 
 
 @app.route('/cikti', methods=["GET","POST"])
 def index10():
 
-	sporcuData = {}
-	#--------------------------
-	squatList = []
+    if "admin" not in session:
+        return render_template('main_page.html')
+    else:
+    	sporcuData = {}
+    	#--------------------------
+    	squatList = []
 
-	benchList = []
+    	benchList = []
 
-	rowList = []
+    	rowList = []
 
-	shoulderList = []
+    	shoulderList = []
 
-	deadliftList = []
+    	deadliftList = []
 
-	hiptrustList = []
-	#--------------------------
+    	hiptrustList = []
+    	#--------------------------
 
-	jsonProfilDict = {}
+    	jsonProfilDict = {}
 
-	tempProfileDict = {}
+    	tempProfileDict = {}
 
-	def_img = "static/athlete_images/default.png"
+    	def_img = "static/athlete_images/default.png"
 
-	nameChosen = ""
+    	nameChosen = ""
 
-	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
-	cur = con.cursor()
+    	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    	cur = con.cursor()
 
-	tableName = "sporcular"
+    	tableName = "sporcular"
 
-	sql_insert = "SELECT * FROM " + tableName
+    	sql_insert = "SELECT * FROM " + tableName
 
-	cur.execute(sql_insert)
-	tableData = cur.fetchall()
+    	cur.execute(sql_insert)
+    	tableData = cur.fetchall()
 
-	for i in tableData:
-		print( i[0] ,i[1], i[2])
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = {}
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["id"] = str(i[0])
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sname"] =  i[1]
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sirname"] =  i[2]
+    	for i in tableData:
+    		print( i[0] ,i[1], i[2])
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = {}
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["id"] = str(i[0])
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sname"] =  i[1]
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sirname"] =  i[2]
 
-	print(jsonProfilDict)
+    	print(jsonProfilDict)
 
-	cur.close()
+    	cur.close()
 
-	if request.method == 'POST':
+    	if request.method == 'POST':
 
-		jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
+    		jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
 
-		nameChosen = request.form.get("tableChosen")[2:]
+    		nameChosen = request.form.get("tableChosen")[2:]
 
-		cur = con.cursor()
+    		cur = con.cursor()
 
-		jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
+    		jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
 
-		tempId = jsonProfilDict[request.form.get("tableChosen")]["id"]
+    		tempId = jsonProfilDict[request.form.get("tableChosen")]["id"]
 
-		tempName = jsonProfilDict[request.form.get("tableChosen")]["sname"]
+    		tempName = jsonProfilDict[request.form.get("tableChosen")]["sname"]
 
-		tempSir = jsonProfilDict[request.form.get("tableChosen")]["sirname"]
+    		tempSir = jsonProfilDict[request.form.get("tableChosen")]["sirname"]
 
-		sql_insert = "SELECT * FROM " + tableName + " WHERE (" + "id" + " = " + "'" +tempId+ "' AND " + "sname" + " = " + "'" +tempName+ "' AND " + "sirname" + " = " + "'" +tempSir+ "\'" + ");"
+    		sql_insert = "SELECT * FROM " + tableName + " WHERE (" + "id" + " = " + "'" +tempId+ "' AND " + "sname" + " = " + "'" +tempName+ "' AND " + "sirname" + " = " + "'" +tempSir+ "\'" + ");"
 
-		cur.execute(sql_insert)
+    		cur.execute(sql_insert)
 
-		dataInn = cur.fetchall()
+    		dataInn = cur.fetchall()
 
-		tempProfileDict["id"] = dataInn[0][0]#
+    		tempProfileDict["id"] = dataInn[0][0]#
 
-		tempProfileDict["name"] = dataInn[0][1]#
+    		tempProfileDict["name"] = dataInn[0][1]#
 
-		tempProfileDict["sirname"] = dataInn[0][2]#
+    		tempProfileDict["sirname"] = dataInn[0][2]#
 
-		tempProfileDict["mass"] = dataInn[0][3]#
+    		tempProfileDict["mass"] = dataInn[0][3]#
 
-		tempProfileDict["height"] = dataInn[0][4]#
+    		tempProfileDict["height"] = dataInn[0][4]#
 
-		tempProfileDict["mevki"] = dataInn[0][5]
+    		tempProfileDict["mevki"] = dataInn[0][5]
 
-		tempProfileDict["ust_saglik"] = dataInn[0][6]
+    		tempProfileDict["ust_saglik"] = dataInn[0][6]
 
-		tempProfileDict["alt_saglik"] = dataInn[0][7]
+    		tempProfileDict["alt_saglik"] = dataInn[0][7]
 
-		tempProfileDict["beden"] = dataInn[0][8]
+    		tempProfileDict["beden"] = dataInn[0][8]
 
-		tempProfileDict["phone"] = dataInn[0][9]
+    		tempProfileDict["phone"] = dataInn[0][9]
 
-		tempProfileDict["photo"] = "static/athlete_images/" + dataInn[0][10]
+    		tempProfileDict["photo"] = "static/athlete_images/" + dataInn[0][10]
 
-		tempProfileDict["notes"] = dataInn[0][11]
+    		tempProfileDict["notes"] = dataInn[0][11]
 
-		tempProfileDict["sex"] = dataInn[0][12]#
+    		tempProfileDict["sex"] = dataInn[0][12]#
 
-		tempProfileDict["age"] = dataInn[0][13]#
+    		tempProfileDict["age"] = dataInn[0][13]#
 
-		cur.close()
+    		cur.close()
 
-		def_img = tempProfileDict["photo"]
+    		def_img = tempProfileDict["photo"]
 
-		with open("static/athlete_jsons/"+jsonName) as json_file:
-			sporcuData = json.load(json_file)
+    		with open("static/athlete_jsons/"+jsonName) as json_file:
+    			sporcuData = json.load(json_file)
 
-		powerTestsWeekLab =  list(sporcuData["specs"][0].keys())[-52:]
+    		powerTestsWeekLab =  list(sporcuData["specs"][0].keys())[-52:]
 
-		if len(powerTestsWeekLab) > 0:
+    		if len(powerTestsWeekLab) > 0:
 
-			dataPercent = sporcuData["specs"][0][powerTestsWeekLab[-1]]
+    			dataPercent = sporcuData["specs"][0][powerTestsWeekLab[-1]]
 
-			print(dataPercent)
+    			for i in dataPercent:
+    			    dataPercent[i] = float(dataPercent[i])
 
-			squatList = [ int(dataPercent["squat"]) , int(dataPercent["squat"])*9/10, int(dataPercent["squat"])*85/100, int(dataPercent["squat"])* 80/100, int(dataPercent["squat"])*75/100, int(dataPercent["squat"])*70/100,int(dataPercent["squat"])*65/100,int(dataPercent["squat"])*6/10,int(dataPercent["squat"])*55/100, int(dataPercent["squat"])*5/10 ]
 
-			benchList = [ int(dataPercent["bench_press"]) , int(dataPercent["bench_press"])*9/10, int(dataPercent["bench_press"])*85/100, int(dataPercent["bench_press"])* 80/100, int(dataPercent["bench_press"])*75/100, int(dataPercent["bench_press"])*70/100,int(dataPercent["bench_press"])*65/100,int(dataPercent["bench_press"])*6/10,int(dataPercent["bench_press"])*55/100, int(dataPercent["bench_press"])*5/10 ]
+    			print(dataPercent)
 
-			rowList = [ int(dataPercent["row"]) , int(dataPercent["row"])*9/10, int(dataPercent["row"])*85/100, int(dataPercent["row"])* 80/100, int(dataPercent["row"])*75/100, int(dataPercent["row"])*70/100,int(dataPercent["row"])*65/100,int(dataPercent["row"])*6/10,int(dataPercent["row"])*55/100, int(dataPercent["row"])*5/10 ]
+    			squatList = [ int(dataPercent["squat"]) , int(dataPercent["squat"])*9/10, int(dataPercent["squat"])*85/100, int(dataPercent["squat"])* 80/100, int(dataPercent["squat"])*75/100, int(dataPercent["squat"])*70/100,int(dataPercent["squat"])*65/100,int(dataPercent["squat"])*6/10,int(dataPercent["squat"])*55/100, int(dataPercent["squat"])*5/10 ]
 
-			shoulderList = [ int(dataPercent["shoulder_press"]) , int(dataPercent["shoulder_press"])*9/10, int(dataPercent["shoulder_press"])*85/100, int(dataPercent["shoulder_press"])* 80/100, int(dataPercent["shoulder_press"])*75/100, int(dataPercent["shoulder_press"])*70/100,int(dataPercent["shoulder_press"])*65/100,int(dataPercent["shoulder_press"])*6/10,int(dataPercent["shoulder_press"])*55/100, int(dataPercent["shoulder_press"])*5/10 ]
+    			benchList = [ int(dataPercent["bench_press"]) , int(dataPercent["bench_press"])*9/10, int(dataPercent["bench_press"])*85/100, int(dataPercent["bench_press"])* 80/100, int(dataPercent["bench_press"])*75/100, int(dataPercent["bench_press"])*70/100,int(dataPercent["bench_press"])*65/100,int(dataPercent["bench_press"])*6/10,int(dataPercent["bench_press"])*55/100, int(dataPercent["bench_press"])*5/10 ]
 
-			deadliftList = [ int(dataPercent["dead_lift"]) , int(dataPercent["dead_lift"])*9/10, int(dataPercent["dead_lift"])*85/100, int(dataPercent["dead_lift"])* 80/100, int(dataPercent["dead_lift"])*75/100, int(dataPercent["dead_lift"])*70/100,int(dataPercent["dead_lift"])*65/100,int(dataPercent["dead_lift"])*6/10,int(dataPercent["dead_lift"])*55/100, int(dataPercent["dead_lift"])*5/10 ]
+    			rowList = [ int(dataPercent["row"]) , int(dataPercent["row"])*9/10, int(dataPercent["row"])*85/100, int(dataPercent["row"])* 80/100, int(dataPercent["row"])*75/100, int(dataPercent["row"])*70/100,int(dataPercent["row"])*65/100,int(dataPercent["row"])*6/10,int(dataPercent["row"])*55/100, int(dataPercent["row"])*5/10 ]
 
-			hiptrustList = [ int(dataPercent["hip_trust"]) , int(dataPercent["hip_trust"])*9/10, int(dataPercent["hip_trust"])*85/100, int(dataPercent["hip_trust"])* 80/100, int(dataPercent["hip_trust"])*75/100, int(dataPercent["hip_trust"])*70/100,int(dataPercent["hip_trust"])*65/100,int(dataPercent["hip_trust"])*6/10,int(dataPercent["hip_trust"])*55/100, int(dataPercent["hip_trust"])*5/10 ]
+    			shoulderList = [ int(dataPercent["shoulder_press"]) , int(dataPercent["shoulder_press"])*9/10, int(dataPercent["shoulder_press"])*85/100, int(dataPercent["shoulder_press"])* 80/100, int(dataPercent["shoulder_press"])*75/100, int(dataPercent["shoulder_press"])*70/100,int(dataPercent["shoulder_press"])*65/100,int(dataPercent["shoulder_press"])*6/10,int(dataPercent["shoulder_press"])*55/100, int(dataPercent["shoulder_press"])*5/10 ]
 
-	return render_template('cikti.html',nameChosen=nameChosen,jsonProfilDict=jsonProfilDict,def_img=def_img,tempProfileDict=tempProfileDict,squatList=squatList,
-		benchList=benchList,rowList=rowList,shoulderList=shoulderList,deadliftList=deadliftList,hiptrustList=hiptrustList)
+    			deadliftList = [ int(dataPercent["dead_lift"]) , int(dataPercent["dead_lift"])*9/10, int(dataPercent["dead_lift"])*85/100, int(dataPercent["dead_lift"])* 80/100, int(dataPercent["dead_lift"])*75/100, int(dataPercent["dead_lift"])*70/100,int(dataPercent["dead_lift"])*65/100,int(dataPercent["dead_lift"])*6/10,int(dataPercent["dead_lift"])*55/100, int(dataPercent["dead_lift"])*5/10 ]
+
+    			hiptrustList = [ int(dataPercent["hip_trust"]) , int(dataPercent["hip_trust"])*9/10, int(dataPercent["hip_trust"])*85/100, int(dataPercent["hip_trust"])* 80/100, int(dataPercent["hip_trust"])*75/100, int(dataPercent["hip_trust"])*70/100,int(dataPercent["hip_trust"])*65/100,int(dataPercent["hip_trust"])*6/10,int(dataPercent["hip_trust"])*55/100, int(dataPercent["hip_trust"])*5/10 ]
+
+    	return render_template('cikti.html',nameChosen=nameChosen,jsonProfilDict=jsonProfilDict,def_img=def_img,tempProfileDict=tempProfileDict,squatList=squatList,
+    		benchList=benchList,rowList=rowList,shoulderList=shoulderList,deadliftList=deadliftList,hiptrustList=hiptrustList)
 
 @app.route('/program', methods=["GET","POST"])
 def index11():
 
+    if "admin" not in session:
 
-	return render_template('program.html')
+        return render_template('main_page.html')
+    else:
+	    return render_template('program.html')
 
 @app.route('/saha', methods=["GET","POST"])
 def index12():
 
+    if "admin" not in session:
 
-	return render_template('saha.html')
+        return render_template('main_page.html')
+    else:
+
+    	return render_template('saha.html')
 
 @app.route('/verttakim', methods=["GET","POST"])
 def index13():
 
-	outputJson = {}
+    if "admin" not in session:
 
-	athletes = {}
-	athleteNames = []
-	jsonProfilDict = {}
-	filterNames = []
+        return render_template('main_page.html')
+    else:
+    	outputJson = {}
 
-	testType = ""
-	sdate = ""
-	edate = ""
+    	athletes = {}
+    	athleteNames = []
+    	jsonProfilDict = {}
+    	filterNames = []
 
-	sdateHTML = ""
-	edateHTML = ""
+    	testType = ""
+    	sdate = ""
+    	edate = ""
 
-	pdfList = ""
+    	sdateHTML = ""
+    	edateHTML = ""
 
-	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
-	cur = con.cursor()
+    	pdfList = ""
 
-	tableName = "sporcular"
+    	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    	cur = con.cursor()
 
-	sql_insert = "SELECT * FROM " + tableName
+    	tableName = "sporcular"
 
-	cur.execute(sql_insert)
-	tableData = cur.fetchall()
+    	sql_insert = "SELECT * FROM " + tableName
 
-	cur.close()
-	con.close()
+    	cur.execute(sql_insert)
+    	tableData = cur.fetchall()
 
-	for i in tableData:
-		print( i[0] ,i[1], i[2])
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = {}
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
+    	cur.close()
+    	con.close()
 
-		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
-		cur = con.cursor()
+    	for i in tableData:
+    		print( i[0] ,i[1], i[2])
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = {}
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
 
-		jsonName = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
+    		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    		cur = con.cursor()
 
-		tempId = str(i[0])
+    		jsonName = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
 
-		tempName = i[1]
+    		tempId = str(i[0])
 
-		tempSir = i[2]
+    		tempName = i[1]
 
-		sql_insert = "SELECT * FROM " + tableName + " WHERE (" + "id" + " = " + "'" +tempId+ "' AND " + "sname" + " = " + "'" +tempName+ "' AND " + "sirname" + " = " + "'" +tempSir+ "\'" + ");"
+    		tempSir = i[2]
 
-		cur.execute(sql_insert)
+    		sql_insert = "SELECT * FROM " + tableName + " WHERE (" + "id" + " = " + "'" +tempId+ "' AND " + "sname" + " = " + "'" +tempName+ "' AND " + "sirname" + " = " + "'" +tempSir+ "\'" + ");"
 
-		dataInn = cur.fetchall()
+    		cur.execute(sql_insert)
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["id"] = dataInn[0][0]#
+    		dataInn = cur.fetchall()
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["name"] = dataInn[0][1]#
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["id"] = dataInn[0][0]#
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sirname"] = dataInn[0][2]#
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["name"] = dataInn[0][1]#
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["mass"] = dataInn[0][3]#
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sirname"] = dataInn[0][2]#
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["height"] = dataInn[0][4]#
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["mass"] = dataInn[0][3]#
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["mevki"] = dataInn[0][5]
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["height"] = dataInn[0][4]#
 
-		if dataInn[0][5] not in filterNames:
-			filterNames.append(dataInn[0][5])
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["mevki"] = dataInn[0][5]
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["ust_saglik"] = dataInn[0][6]
+    		if dataInn[0][5] not in filterNames:
+    			filterNames.append(dataInn[0][5])
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["alt_saglik"] = dataInn[0][7]
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["ust_saglik"] = dataInn[0][6]
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["beden"] = dataInn[0][8]
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["alt_saglik"] = dataInn[0][7]
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["phone"] = dataInn[0][9]
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["beden"] = dataInn[0][8]
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["photo"] = "static/athlete_images/" + dataInn[0][10]
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["phone"] = dataInn[0][9]
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["notes"] = dataInn[0][11]
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["photo"] = "static/athlete_images/" + dataInn[0][10]
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sex"] = dataInn[0][12]#
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["notes"] = dataInn[0][11]
 
-		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["age"] = dataInn[0][13]#
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["sex"] = dataInn[0][12]#
 
-		cur.close()
-		con.close()
+    		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["age"] = dataInn[0][13]#
 
-
-	print("all",jsonProfilDict)
-
-	if request.method == 'POST':
-
-		testType = request.form.get("testType")
-		if testType == None:
-			return render_template('verttakim.html',jsonProfilDict=jsonProfilDict,filterNames=filterNames)
-
-		testType = int(testType)
-
-		sdate = request.form.get("startDate")
-		edate = request.form.get("endDate")
-		sdateHTML = sdate
-		edateHTML = edate
-
-		pdfList = request.form.getlist("pdfTo")
-		print("len",len(pdfList))
-		if len(pdfList) == 0:
-			return render_template('verttakim.html',jsonProfilDict=jsonProfilDict,filterNames=filterNames)
+    		cur.close()
+    		con.close()
 
 
-		sdate = date(int(sdate.split("-")[0]), int(sdate.split("-")[1]), int(sdate.split("-")[2]))
-		edate = date(int(edate.split("-")[0]), int(edate.split("-")[1]), int(edate.split("-")[2]))
+    	print("all",jsonProfilDict)
 
-		delta = edate - sdate
+    	if request.method == 'POST':
 
+    		testType = request.form.get("testType")
+    		if testType == None:
+    			return render_template('verttakim.html',jsonProfilDict=jsonProfilDict,filterNames=filterNames)
 
-		for i in pdfList:
+    		testType = int(testType)
 
-			tempName = i[:-5]
+    		sdate = request.form.get("startDate")
+    		edate = request.form.get("endDate")
+    		sdateHTML = sdate
+    		edateHTML = edate
 
-			outputJson[tempName] = {}
-
-			outputJson[tempName]["name"] = tempName.replace("_"," ")
-
-			outputJson[tempName]["max"] = {}
-			outputJson[tempName]["max"]["label"] = []
-			outputJson[tempName]["max"]["value"] = []
-
-			outputJson[tempName]["ort"] = {}
-			outputJson[tempName]["ort"]["label"] = []
-			outputJson[tempName]["ort"]["value"] = []
-
-			outputJson[tempName]["total"] = {}
-			outputJson[tempName]["total"]["label"] = []
-			outputJson[tempName]["total"]["value"] = []
-
-			sporcuData = {}
-
-			with open("static/athlete_jsons/"+i) as json_file:
-				sporcuData = json.load(json_file)
+    		pdfList = request.form.getlist("pdfTo")
+    		print("len",len(pdfList))
+    		if len(pdfList) == 0:
+    			return render_template('verttakim.html',jsonProfilDict=jsonProfilDict,filterNames=filterNames)
 
 
-			for j in range(delta.days + 1):
-			    day = sdate + timedelta(days=j)
-			    currentDate = str(day).replace("-","/")
+    		sdate = date(int(sdate.split("-")[0]), int(sdate.split("-")[1]), int(sdate.split("-")[2]))
+    		edate = date(int(edate.split("-")[0]), int(edate.split("-")[1]), int(edate.split("-")[2]))
 
-			    vertTestsWeekLab = list(sporcuData["specs"][testType].keys())
-
-			    if currentDate in vertTestsWeekLab:
-			    	print(currentDate)
-			    	outputJson[tempName]["max"]["label"].append(currentDate)
-			    	outputJson[tempName]["ort"]["label"].append(currentDate)
-			    	outputJson[tempName]["total"]["label"].append(currentDate)
-			    	outputJson[tempName]["max"]["value"].append(sporcuData["specs"][testType][currentDate]["max"])
-			    	outputJson[tempName]["ort"]["value"].append(sporcuData["specs"][testType][currentDate]["ort"])
-			    	outputJson[tempName]["total"]["value"].append(sporcuData["specs"][testType][currentDate]["total"])
-
-		print(outputJson)
+    		delta = edate - sdate
 
 
-	return render_template('verttakim.html',jsonProfilDict=jsonProfilDict,filterNames=filterNames,outputJson=outputJson, sdateHTML=sdateHTML, edateHTML=edateHTML)
+    		for i in pdfList:
+
+    			tempName = i[:-5]
+
+    			outputJson[tempName] = {}
+
+    			outputJson[tempName]["name"] = tempName.replace("_"," ")
+
+    			if testType != 6:
+        			outputJson[tempName]["max"] = {}
+        			outputJson[tempName]["max"]["label"] = []
+        			outputJson[tempName]["max"]["value"] = []
+
+        			outputJson[tempName]["ort"] = {}
+        			outputJson[tempName]["ort"]["label"] = []
+        			outputJson[tempName]["ort"]["value"] = []
+
+        			outputJson[tempName]["total"] = {}
+        			outputJson[tempName]["total"]["label"] = []
+        			outputJson[tempName]["total"]["value"] = []
+    			else:
+    			    outputJson[tempName]["ace"] = {}
+    			    outputJson[tempName]["ace"]["max"] = {}
+    			    outputJson[tempName]["ace"]["max"]["label"] = []
+    			    outputJson[tempName]["ace"]["max"]["value"] = []
+    			    outputJson[tempName]["ace"]["ort"] = {}
+    			    outputJson[tempName]["ace"]["ort"]["label"] = []
+    			    outputJson[tempName]["ace"]["ort"]["value"] = []
+    			    outputJson[tempName]["ace"]["total"] = {}
+    			    outputJson[tempName]["ace"]["total"]["label"] = []
+    			    outputJson[tempName]["ace"]["total"]["value"] = []
+
+    			    outputJson[tempName]["hit"] = {}
+    			    outputJson[tempName]["hit"]["max"] = {}
+    			    outputJson[tempName]["hit"]["max"]["label"] = []
+    			    outputJson[tempName]["hit"]["max"]["value"] = []
+    			    outputJson[tempName]["hit"]["ort"] = {}
+    			    outputJson[tempName]["hit"]["ort"]["label"] = []
+    			    outputJson[tempName]["hit"]["ort"]["value"] = []
+    			    outputJson[tempName]["hit"]["total"] = {}
+    			    outputJson[tempName]["hit"]["total"]["label"] = []
+    			    outputJson[tempName]["hit"]["total"]["value"] = []
+
+    			    outputJson[tempName]["servis"] = {}
+    			    outputJson[tempName]["servis"]["max"] = {}
+    			    outputJson[tempName]["servis"]["max"]["label"] = []
+    			    outputJson[tempName]["servis"]["max"]["value"] = []
+    			    outputJson[tempName]["servis"]["ort"] = {}
+    			    outputJson[tempName]["servis"]["ort"]["label"] = []
+    			    outputJson[tempName]["servis"]["ort"]["value"] = []
+    			    outputJson[tempName]["servis"]["total"] = {}
+    			    outputJson[tempName]["servis"]["total"]["label"] = []
+    			    outputJson[tempName]["servis"]["total"]["value"] = []
+
+    			    outputJson[tempName]["hata"] = {}
+    			    outputJson[tempName]["hata"]["max"] = {}
+    			    outputJson[tempName]["hata"]["max"]["label"] = []
+    			    outputJson[tempName]["hata"]["max"]["value"] = []
+    			    outputJson[tempName]["hata"]["ort"] = {}
+    			    outputJson[tempName]["hata"]["ort"]["label"] = []
+    			    outputJson[tempName]["hata"]["ort"]["value"] = []
+    			    outputJson[tempName]["hata"]["total"] = {}
+    			    outputJson[tempName]["hata"]["total"]["label"] = []
+    			    outputJson[tempName]["hata"]["total"]["value"] = []
+
+
+    			sporcuData = {}
+
+    			with open("static/athlete_jsons/"+i) as json_file:
+    				sporcuData = json.load(json_file)
+
+
+    			for j in range(delta.days + 1):
+    			    day = sdate + timedelta(days=j)
+    			    currentDate = str(day).replace("-","/")
+
+    			    vertTestsWeekLab = list(sporcuData["specs"][testType].keys())
+
+    			    if currentDate in vertTestsWeekLab:
+    			    	print(currentDate)
+    			    	if testType != 6:
+        			    	outputJson[tempName]["max"]["label"].append(currentDate)
+        			    	outputJson[tempName]["ort"]["label"].append(currentDate)
+        			    	outputJson[tempName]["total"]["label"].append(currentDate)
+        			    	outputJson[tempName]["max"]["value"].append(sporcuData["specs"][testType][currentDate]["max"])
+        			    	outputJson[tempName]["ort"]["value"].append(sporcuData["specs"][testType][currentDate]["ort"])
+        			    	outputJson[tempName]["total"]["value"].append(sporcuData["specs"][testType][currentDate]["total"])
+    			    	else:
+        			    	outputJson[tempName]["ace"]["max"]["label"].append(currentDate)
+        			    	outputJson[tempName]["ace"]["ort"]["label"].append(currentDate)
+        			    	outputJson[tempName]["ace"]["total"]["label"].append(currentDate)
+        			    	outputJson[tempName]["ace"]["max"]["value"].append(sporcuData["specs"][testType][currentDate]["ace"]["max"])
+        			    	outputJson[tempName]["ace"]["ort"]["value"].append(sporcuData["specs"][testType][currentDate]["ace"]["avg"])
+        			    	outputJson[tempName]["ace"]["total"]["value"].append(sporcuData["specs"][testType][currentDate]["ace"]["total"])
+
+        			    	outputJson[tempName]["hit"]["max"]["label"].append(currentDate)
+        			    	outputJson[tempName]["hit"]["ort"]["label"].append(currentDate)
+        			    	outputJson[tempName]["hit"]["total"]["label"].append(currentDate)
+        			    	outputJson[tempName]["hit"]["max"]["value"].append(sporcuData["specs"][testType][currentDate]["hit"]["max"])
+        			    	outputJson[tempName]["hit"]["ort"]["value"].append(sporcuData["specs"][testType][currentDate]["hit"]["avg"])
+        			    	outputJson[tempName]["hit"]["total"]["value"].append(sporcuData["specs"][testType][currentDate]["hit"]["total"])
+
+        			    	outputJson[tempName]["servis"]["max"]["label"].append(currentDate)
+        			    	outputJson[tempName]["servis"]["ort"]["label"].append(currentDate)
+        			    	outputJson[tempName]["servis"]["total"]["label"].append(currentDate)
+        			    	outputJson[tempName]["servis"]["max"]["value"].append(sporcuData["specs"][testType][currentDate]["servis"]["max"])
+        			    	outputJson[tempName]["servis"]["ort"]["value"].append(sporcuData["specs"][testType][currentDate]["servis"]["avg"])
+        			    	outputJson[tempName]["servis"]["total"]["value"].append(sporcuData["specs"][testType][currentDate]["servis"]["total"])
+
+        			    	outputJson[tempName]["hata"]["max"]["label"].append(currentDate)
+        			    	outputJson[tempName]["hata"]["ort"]["label"].append(currentDate)
+        			    	outputJson[tempName]["hata"]["total"]["label"].append(currentDate)
+        			    	outputJson[tempName]["hata"]["max"]["value"].append(sporcuData["specs"][testType][currentDate]["hata"]["max"])
+        			    	outputJson[tempName]["hata"]["ort"]["value"].append(sporcuData["specs"][testType][currentDate]["hata"]["avg"])
+        			    	outputJson[tempName]["hata"]["total"]["value"].append(sporcuData["specs"][testType][currentDate]["hata"]["total"])
+
+
+    		print(outputJson)
+
+
+    	return render_template('verttakim.html',jsonProfilDict=jsonProfilDict,filterNames=filterNames,outputJson=outputJson, sdateHTML=sdateHTML, edateHTML=edateHTML,testType=testType)
 @app.route('/takimprogram', methods=["GET","POST"])
 def index14():
 
-	return render_template('takimprogram.html')
+    if "admin" not in session:
+        print("log in")
+        return render_template('main_page.html')
+    else:
+	    return render_template('takimprogram.html')
 
 if __name__ == "__main__":
     app.run(debug=True,port=8000)

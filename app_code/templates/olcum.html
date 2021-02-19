@@ -37,32 +37,32 @@
 
             <li>
               <h2>Squat:</h2>
-              <input  type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+              <input  type="number" name="maximalTest" placeholder="sayi giriniz (kg)" value="0" step="0.01">
             </li>
 
             <li>
               <h2>Bench Press:</h2>
-              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" value="0" step="0.01">
             </li>
 
             <li>
               <h2>Row:</h2>
-              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)"value="0" step="0.01">
             </li>
 
             <li>
               <h2>Shoulder Press:</h2>
-              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" value="0" step="0.01">
             </li>
 
             <li>
               <h2>Dead Lift:</h2>
-              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" value="0" step="0.01">
             </li>
 
             <li>
               <h2>Hip Trust:</h2>
-              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" step="0.01">
+              <input type="number" name="maximalTest" placeholder="sayi giriniz (kg)" value="0" step="0.01">
             </li>
 
             <li>
@@ -523,11 +523,27 @@
               <h2>Servis Hızı Test Verileri:</h2>
               <ul class="dynamicInputs" id="dynamicInputs">
                 <li id="base">
-                <input  type="number" name="servisTest" placeholder="Ace (km)">
 
-                <input  type="number" name="servisTest" placeholder="Hata (km)">
+                <div class="scrollAceHit">
+                <table class="aceHitTable" id="aceHitTable" name="aceHitTable">
+                  <tr>
+                    <th>Tür</th>
+                    <th>Hız</th>
+                  </tr>
+                </table>
+                </div>
 
-                <input  type="number" name="servisTest" placeholder="Total Ölçüm (adet)">
+
+                <input  type="number" name="servisTest" placeholder="(km/h)" id="aceHitVal" step="0.01">
+
+
+                <div class="innerButtons">
+                    <button type="button" class="aceButton" id="aceAdd" onclick="addNewAce();">Ace Hız Ekle</button>
+                    <button type="button" class="hitButton" id="hitAdd" onclick="addNewHit();">Hit Hız Ekle</button>
+                    <button type="button" class="servisHitButton" id="servisAdd" onclick="addNewServis();">Servis Hız Ekle</button>
+                    <button type="button" class="hataHitButton" id="hataAdd" onclick="addNewHata();">Hata Hız Ekle</button>
+                    <button type="button" class="removeAceHitButton" id="remAceHit" onclick="deleteNewFromTable();">Hız Sil</button>
+                </div>
 
                 </li>
               </ul>
@@ -540,11 +556,6 @@
           </ul>
 
         </div>
-
-
-
-
-
 
       </div>
 

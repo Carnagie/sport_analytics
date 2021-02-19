@@ -1,5 +1,4 @@
 var defaultSelected;
-
 $(document).on('click','.button',
 function() {
     document.querySelector('.bg-modal').style.display = 'flex';
@@ -91,3 +90,32 @@ function setDefaultSelectedBody() {
     e.style.height = localStorage.getItem("height");
     e.style.width = localStorage.getItem("width");
 }
+
+
+var doc = new jsPDF('p', 'mm', "a4");
+$(document).on('click','.buttonGecmisCikti',
+    function() {
+
+    console.log("entered")
+    window.scrollTo(0, 0);
+
+
+
+    html2canvas(document.getElementById("toPDF")).then(function (canvas) {
+
+        console.log("canvas start page");
+        var imgData = canvas.toDataURL("image/jpeg",0.9);
+        doc.addImage(imgData, 'JPEG', 15, 15, 180, 280);
+        doc.save("sample-pdf");
+    });
+
+});
+
+
+
+
+
+
+
+
+

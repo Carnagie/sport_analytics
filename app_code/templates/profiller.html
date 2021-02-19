@@ -36,7 +36,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in vertTestsWeekLab[-4:] %}
+                                        {% for k in vertTestsWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -156,7 +156,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in vertTestsWeekLab %}
+                                        {% for k in vertTestsWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -275,7 +275,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in powerTestsWeekLab[-4:] %}
+                                        {% for k in powerTestsWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -413,7 +413,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in powerTestsWeekLab %}
+                                        {% for k in powerTestsWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -553,7 +553,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in fmsTestsWeekLab[-4:] %}
+                                        {% for k in fmsTestsWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -743,7 +743,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in fmsTestsWeekLab %}
+                                        {% for k in fmsTestsWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -933,7 +933,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in yTestsWeekLab[-4:]%}
+                                        {% for k in yTestsWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -1063,7 +1063,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in yTestsWeekLab %}
+                                        {% for k in yTestsWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -1172,16 +1172,23 @@
                                 <script>
 
                                     var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
+                                      red: 'rgba(255, 10, 63, 1)',
+                                      lightred: 'rgba(255, 122, 151, 1)',
+                                      lightblue: 'rgba(148, 206, 244, 1)',
                                       orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
+                                      darkyellow: 'rgba(209, 202, 0, 1)',
+                                      yellow: 'rgba(250, 242, 0, 1)',
+                                      lightyellow: 'rgba(255, 250, 112, 1)',
                                       green: 'rgb(75, 192, 192)',
                                       blue: 'rgb(54, 162, 235)',
                                       purple: 'rgb(153, 102, 255)',
                                       grey: 'rgba(87, 87, 87, 1)',
-                                      lightgreen: 'rgba(101, 245, 81, 1)',
+                                      lightgreen: 'rgba(251, 193, 235, 1)',
+                                      lightpink: 'rgba(247, 120, 215, 1)',
                                       pink: 'rgba(245, 81, 204, 1)',
-                                      darkred: 'rgba(245, 0, 0, 1)',
+                                      darkblue: 'rgba(16, 104, 162, 1)',
+                                      darkpink: 'rgba(198, 12, 151, 1)',
+                                      darkred: 'rgba(168, 0, 36, 1)',
                                       brown: 'rgba(173, 99, 56, 1)'
                                     };
 
@@ -1193,47 +1200,127 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in jumpTestsWeekLab[-4:] %}
+                                        {% for k in acehitTestWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
                                         datasets: [{
-                                          label: "Sıçrama 1 (cm)",
+                                          label: "Ace Max",
                                           backgroundColor: chartColors.red,
                                           borderColor: chartColors.red,
                                           data: [
-                                            {% for k in jumpTestsJ1[-4:] %}
+                                            {% for k in acehitTestAceMax[-4:] %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
                                           fill: false,
                                         }, {
-                                          label: "Sıçrama 2 (cm)",
+                                          label: "Flash Max",
                                           fill: false,
                                           backgroundColor: chartColors.blue,
                                           borderColor: chartColors.blue,
                                           data: [
-                                            {% for k in jumpTestsJ2[-4:] %}
+                                            {% for k in acehitTestHitMax[-4:] %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
                                         },{
-                                          label: "Sıçrama 3 (cm)",
+                                          label: "Servis Max",
+                                          fill: false,
+                                          backgroundColor: chartColors.pink,
+                                          borderColor: chartColors.pink,
+                                          data: [
+                                            {% for k in acehitTestServisMax[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Max",
                                           fill: false,
                                           backgroundColor: chartColors.yellow,
                                           borderColor: chartColors.yellow,
                                           data: [
-                                            {% for k in jumpTestsJ3[-4:] %}
+                                            {% for k in acehitTestHataMax[-4:] %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
                                         },{
-                                          label: "Sıçrama Ort (cm)",
+                                          label: "Ace Ortalama",
                                           fill: false,
-                                          backgroundColor: chartColors.green,
-                                          borderColor: chartColors.green,
+                                          backgroundColor: chartColors.lightred,
+                                          borderColor: chartColors.lightred,
                                           data: [
-                                            {% for k in jumpTestsOrt[-4:] %}
+                                            {% for k in acehitTestAceAvg[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Flash Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightblue,
+                                          borderColor: chartColors.lightblue,
+                                          data: [
+                                            {% for k in acehitTestHitAvg[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightpink,
+                                          borderColor: chartColors.lightpink,
+                                          data: [
+                                            {% for k in acehitTestServisAvg[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightyellow,
+                                          borderColor: chartColors.lightyellow,
+                                          data: [
+                                            {% for k in acehitTestHataAvg[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Ace Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkred,
+                                          borderColor: chartColors.darkred,
+                                          data: [
+                                            {% for k in acehitTestAceTotal[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Flash Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkblue,
+                                          borderColor: chartColors.darkblue,
+                                          data: [
+                                            {% for k in acehitTestHitTotal[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkpink,
+                                          borderColor: chartColors.darkpink,
+                                          data: [
+                                            {% for k in acehitTestServisTotal[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkyellow,
+                                          borderColor: chartColors.darkyellow,
+                                          data: [
+                                            {% for k in acehitTestHataTotal[-4:] %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
@@ -1243,7 +1330,7 @@
                                         responsive: true,
                                         title: {
                                           display: true,
-                                          text: 'Sıçrama Test Sonuçları Son 4 Ölçüm'
+                                          text: 'Ace, Hit, Servis, Hata Test Sonuçları Son 4 Ölçüm'
                                         },
                                         ticks: {
                                           min: 0,
@@ -1268,7 +1355,7 @@
                                             display: true,
                                             scaleLabel: {
                                               display: true,
-                                              labelString: 'Değerler (%)'
+                                              labelString: 'Değerler (km/s)'
                                             }
                                           }]
                                         }
@@ -1294,16 +1381,23 @@
                                 <script>
 
                                     var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
+                                      red: 'rgba(255, 10, 63, 1)',
+                                      lightred: 'rgba(255, 122, 151, 1)',
+                                      lightblue: 'rgba(148, 206, 244, 1)',
                                       orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
+                                      darkyellow: 'rgba(209, 202, 0, 1)',
+                                      yellow: 'rgba(250, 242, 0, 1)',
+                                      lightyellow: 'rgba(255, 250, 112, 1)',
                                       green: 'rgb(75, 192, 192)',
                                       blue: 'rgb(54, 162, 235)',
                                       purple: 'rgb(153, 102, 255)',
                                       grey: 'rgba(87, 87, 87, 1)',
-                                      lightgreen: 'rgba(101, 245, 81, 1)',
+                                      lightgreen: 'rgba(251, 193, 235, 1)',
+                                      lightpink: 'rgba(247, 120, 215, 1)',
                                       pink: 'rgba(245, 81, 204, 1)',
-                                      darkred: 'rgba(245, 0, 0, 1)',
+                                      darkblue: 'rgba(16, 104, 162, 1)',
+                                      darkpink: 'rgba(198, 12, 151, 1)',
+                                      darkred: 'rgba(168, 0, 36, 1)',
                                       brown: 'rgba(173, 99, 56, 1)'
                                     };
 
@@ -1315,47 +1409,127 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in jumpTestsWeekLab %}
+                                        {% for k in acehitTestWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
                                         datasets: [{
-                                          label: "Sıçrama 1 (cm)",
+                                          label: "Ace Max",
                                           backgroundColor: chartColors.red,
                                           borderColor: chartColors.red,
                                           data: [
-                                            {% for k in jumpTestsJ1 %}
+                                            {% for k in acehitTestAceMax %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
                                           fill: false,
                                         }, {
-                                          label: "Sıçrama 2 (cm)",
+                                          label: "Flash Max",
                                           fill: false,
                                           backgroundColor: chartColors.blue,
                                           borderColor: chartColors.blue,
                                           data: [
-                                            {% for k in jumpTestsJ2 %}
+                                            {% for k in acehitTestHitMax %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
                                         },{
-                                          label: "Sıçrama 3 (cm)",
+                                          label: "Servis Max",
+                                          fill: false,
+                                          backgroundColor: chartColors.pink,
+                                          borderColor: chartColors.pink,
+                                          data: [
+                                            {% for k in acehitTestServisMax %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Max",
                                           fill: false,
                                           backgroundColor: chartColors.yellow,
                                           borderColor: chartColors.yellow,
                                           data: [
-                                            {% for k in jumpTestsJ3 %}
+                                            {% for k in acehitTestHataMax %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
                                         },{
-                                          label: "Sıçrama Ort (cm)",
+                                          label: "Ace Ortalama",
                                           fill: false,
-                                          backgroundColor: chartColors.green,
-                                          borderColor: chartColors.green,
+                                          backgroundColor: chartColors.lightred,
+                                          borderColor: chartColors.lightred,
                                           data: [
-                                            {% for k in jumpTestsOrt %}
+                                            {% for k in acehitTestAceAvg %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Flash Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightblue,
+                                          borderColor: chartColors.lightblue,
+                                          data: [
+                                            {% for k in acehitTestHitAvg %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightpink,
+                                          borderColor: chartColors.lightpink,
+                                          data: [
+                                            {% for k in acehitTestServisAvg %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightyellow,
+                                          borderColor: chartColors.lightyellow,
+                                          data: [
+                                            {% for k in acehitTestHataAvg %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Ace Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkred,
+                                          borderColor: chartColors.darkred,
+                                          data: [
+                                            {% for k in acehitTestAceTotal %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Flash Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkblue,
+                                          borderColor: chartColors.darkblue,
+                                          data: [
+                                            {% for k in acehitTestHitTotal %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkpink,
+                                          borderColor: chartColors.darkpink,
+                                          data: [
+                                            {% for k in acehitTestServisTotal %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkyellow,
+                                          borderColor: chartColors.darkyellow,
+                                          data: [
+                                            {% for k in acehitTestHataTotal %}
                                                 "{{k}}",
                                             {% endfor %}
                                           ],
@@ -1365,7 +1539,7 @@
                                         responsive: true,
                                         title: {
                                           display: true,
-                                          text: 'Sıçrama Test Sonuçları Son 52 Ölçüm'
+                                          text: 'Ace, Flash, Servis, Hata Test Sonuçları Son 52 Ölçüm'
                                         },
                                         ticks: {
                                           min: 0,
@@ -1390,7 +1564,7 @@
                                             display: true,
                                             scaleLabel: {
                                               display: true,
-                                              labelString: 'Değerler (%)'
+                                              labelString: 'Değerler (km/s)'
                                             }
                                           }]
                                         }
@@ -1552,7 +1726,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in vertTestsWeekLab[-4:] %}
+                                        {% for k in vertTestsWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -1666,7 +1840,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in vertTestsWeekLab %}
+                                        {% for k in vertTestsWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -1758,6 +1932,421 @@
                         </ul>
 
 
+                        <ul class="graphs_4">
+                            <li>
+                                <button type="button" class="button7">İncele</button>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvas7"></canvas></div>
+
+                                <script>
+
+                                    var chartColors = {
+                                      red: 'rgba(255, 10, 63, 1)',
+                                      lightred: 'rgba(255, 122, 151, 1)',
+                                      lightblue: 'rgba(148, 206, 244, 1)',
+                                      orange: 'rgb(255, 159, 64)',
+                                      darkyellow: 'rgba(209, 202, 0, 1)',
+                                      yellow: 'rgba(250, 242, 0, 1)',
+                                      lightyellow: 'rgba(255, 250, 112, 1)',
+                                      green: 'rgb(75, 192, 192)',
+                                      blue: 'rgb(54, 162, 235)',
+                                      purple: 'rgb(153, 102, 255)',
+                                      grey: 'rgba(87, 87, 87, 1)',
+                                      lightgreen: 'rgba(251, 193, 235, 1)',
+                                      lightpink: 'rgba(247, 120, 215, 1)',
+                                      pink: 'rgba(245, 81, 204, 1)',
+                                      darkblue: 'rgba(16, 104, 162, 1)',
+                                      darkpink: 'rgba(198, 12, 151, 1)',
+                                      darkred: 'rgba(168, 0, 36, 1)',
+                                      brown: 'rgba(173, 99, 56, 1)'
+                                    };
+
+                                    var randomScalingFactor = function() {
+                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                    }
+                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                                    var config = {
+                                      type: 'line',
+                                      data: {
+                                        labels: [
+                                        {% for k in acehitTestWeekLab[-4:]|sort %}
+                                            "{{k}}",
+                                        {% endfor %}
+                                        ],
+                                        datasets: [{
+                                          label: "Ace Max",
+                                          backgroundColor: chartColors.red,
+                                          borderColor: chartColors.red,
+                                          data: [
+                                            {% for k in acehitTestAceMax[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                          fill: false,
+                                        }, {
+                                          label: "Flash Max",
+                                          fill: false,
+                                          backgroundColor: chartColors.blue,
+                                          borderColor: chartColors.blue,
+                                          data: [
+                                            {% for k in acehitTestHitMax[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Max",
+                                          fill: false,
+                                          backgroundColor: chartColors.pink,
+                                          borderColor: chartColors.pink,
+                                          data: [
+                                            {% for k in acehitTestServisMax[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Max",
+                                          fill: false,
+                                          backgroundColor: chartColors.yellow,
+                                          borderColor: chartColors.yellow,
+                                          data: [
+                                            {% for k in acehitTestHataMax[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Ace Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightred,
+                                          borderColor: chartColors.lightred,
+                                          data: [
+                                            {% for k in acehitTestAceAvg[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Flash Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightblue,
+                                          borderColor: chartColors.lightblue,
+                                          data: [
+                                            {% for k in acehitTestHitAvg[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightpink,
+                                          borderColor: chartColors.lightpink,
+                                          data: [
+                                            {% for k in acehitTestServisAvg[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightyellow,
+                                          borderColor: chartColors.lightyellow,
+                                          data: [
+                                            {% for k in acehitTestHataAvg[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Ace Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkred,
+                                          borderColor: chartColors.darkred,
+                                          data: [
+                                            {% for k in acehitTestAceTotal[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Flash Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkblue,
+                                          borderColor: chartColors.darkblue,
+                                          data: [
+                                            {% for k in acehitTestHitTotal[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkpink,
+                                          borderColor: chartColors.darkpink,
+                                          data: [
+                                            {% for k in acehitTestServisTotal[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkyellow,
+                                          borderColor: chartColors.darkyellow,
+                                          data: [
+                                            {% for k in acehitTestHataTotal[-4:] %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        }]
+                                      },
+                                      options: {
+                                        responsive: true,
+                                        title: {
+                                          display: true,
+                                          text: 'Ace, Flash, Servis, Hata Test Son 4 Ölçüm'
+                                        },
+                                        ticks: {
+                                          min: 0,
+                                          max: 30
+                                        },
+                                        tooltips: {
+                                          mode: 'label',
+                                        },
+                                        hover: {
+                                          mode: 'nearest',
+                                          intersect: true
+                                        },
+                                        scales: {
+                                          xAxes: [{
+                                            display: true,
+                                            scaleLabel: {
+                                              display: true,
+                                              labelString: 'Tarihler'
+                                            }
+                                          }],
+                                          yAxes: [{
+                                            display: true,
+                                            scaleLabel: {
+                                              display: true,
+                                              labelString: 'Değerler (km/s)'
+                                            }
+                                          }]
+                                        }
+                                      }
+                                    };
+
+
+                                    var ctx = document.getElementById("canvas7").getContext("2d");
+                                    window.myLine = new Chart(ctx, config);
+
+                                </script>
+
+
+                            </li>
+
+                            <li>
+                                <button type="button" class="button8">İncele</button>
+                                <div style="height: 18vh;width: 36vw;"><canvas id="canvas8"></canvas></div>
+
+                                <script>
+
+                                    var chartColors = {
+                                      red: 'rgba(255, 10, 63, 1)',
+                                      lightred: 'rgba(255, 122, 151, 1)',
+                                      lightblue: 'rgba(148, 206, 244, 1)',
+                                      orange: 'rgb(255, 159, 64)',
+                                      darkyellow: 'rgba(209, 202, 0, 1)',
+                                      yellow: 'rgba(250, 242, 0, 1)',
+                                      lightyellow: 'rgba(255, 250, 112, 1)',
+                                      green: 'rgb(75, 192, 192)',
+                                      blue: 'rgb(54, 162, 235)',
+                                      purple: 'rgb(153, 102, 255)',
+                                      grey: 'rgba(87, 87, 87, 1)',
+                                      lightgreen: 'rgba(251, 193, 235, 1)',
+                                      lightpink: 'rgba(247, 120, 215, 1)',
+                                      pink: 'rgba(245, 81, 204, 1)',
+                                      darkblue: 'rgba(16, 104, 162, 1)',
+                                      darkpink: 'rgba(198, 12, 151, 1)',
+                                      darkred: 'rgba(168, 0, 36, 1)',
+                                      brown: 'rgba(173, 99, 56, 1)'
+                                    };
+
+                                    var randomScalingFactor = function() {
+                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                    }
+                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                                    var config = {
+                                      type: 'line',
+                                      data: {
+                                        labels: [
+                                        {% for k in acehitTestWeekLab|sort %}
+                                            "{{k}}",
+                                        {% endfor %}
+                                        ],
+                                        datasets: [{
+                                          label: "Ace Max",
+                                          backgroundColor: chartColors.red,
+                                          borderColor: chartColors.red,
+                                          data: [
+                                            {% for k in acehitTestAceMax %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                          fill: false,
+                                        }, {
+                                          label: "Flash Max",
+                                          fill: false,
+                                          backgroundColor: chartColors.blue,
+                                          borderColor: chartColors.blue,
+                                          data: [
+                                            {% for k in acehitTestHitMax %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Max",
+                                          fill: false,
+                                          backgroundColor: chartColors.pink,
+                                          borderColor: chartColors.pink,
+                                          data: [
+                                            {% for k in acehitTestServisMax %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Max",
+                                          fill: false,
+                                          backgroundColor: chartColors.yellow,
+                                          borderColor: chartColors.yellow,
+                                          data: [
+                                            {% for k in acehitTestHataMax %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Ace Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightred,
+                                          borderColor: chartColors.lightred,
+                                          data: [
+                                            {% for k in acehitTestAceAvg %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Flash Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightblue,
+                                          borderColor: chartColors.lightblue,
+                                          data: [
+                                            {% for k in acehitTestHitAvg %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightpink,
+                                          borderColor: chartColors.lightpink,
+                                          data: [
+                                            {% for k in acehitTestServisAvg %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Ortalama",
+                                          fill: false,
+                                          backgroundColor: chartColors.lightyellow,
+                                          borderColor: chartColors.lightyellow,
+                                          data: [
+                                            {% for k in acehitTestHataAvg %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Ace Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkred,
+                                          borderColor: chartColors.darkred,
+                                          data: [
+                                            {% for k in acehitTestAceTotal %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Flash Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkblue,
+                                          borderColor: chartColors.darkblue,
+                                          data: [
+                                            {% for k in acehitTestHitTotal %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Servis Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkpink,
+                                          borderColor: chartColors.darkpink,
+                                          data: [
+                                            {% for k in acehitTestServisTotal %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        },{
+                                          label: "Hata Adeti",
+                                          fill: false,
+                                          backgroundColor: chartColors.darkyellow,
+                                          borderColor: chartColors.darkyellow,
+                                          data: [
+                                            {% for k in acehitTestHataTotal %}
+                                                "{{k}}",
+                                            {% endfor %}
+                                          ],
+                                        }]
+                                      },
+                                      options: {
+                                        responsive: true,
+                                        title: {
+                                          display: true,
+                                          text: 'Ace, Hit, Servis, Hata Test Sonuçları Son 52 Ölçüm'
+                                        },
+                                        ticks: {
+                                          min: 0,
+                                          max: 30
+                                        },
+                                        tooltips: {
+                                          mode: 'label',
+                                        },
+                                        hover: {
+                                          mode: 'nearest',
+                                          intersect: true
+                                        },
+                                        scales: {
+                                          xAxes: [{
+                                            display: true,
+                                            scaleLabel: {
+                                              display: true,
+                                              labelString: 'Tarihler'
+                                            }
+                                          }],
+                                          yAxes: [{
+                                            display: true,
+                                            scaleLabel: {
+                                              display: true,
+                                              labelString: 'Değerler (km/s)'
+                                            }
+                                          }]
+                                        }
+                                      }
+                                    };
+
+
+                                    var ctx = document.getElementById("canvas8").getContext("2d");
+                                    window.myLine = new Chart(ctx, config);
+
+                                </script>
+
+
+                            </li>
+
+                        </ul>
+
 
                         <ul class="graphs_1">
                             <li>
@@ -1784,7 +2373,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in powerTestsWeekLab[-4:] %}
+                                        {% for k in powerTestsWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -1917,7 +2506,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in powerTestsWeekLab %}
+                                        {% for k in powerTestsWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -2057,7 +2646,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in fmsTestsWeekLab[-4:] %}
+                                        {% for k in fmsTestsWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -2246,7 +2835,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in fmsTestsWeekLab %}
+                                        {% for k in fmsTestsWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -2439,7 +3028,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in yTestsWeekLab[-4:] %}
+                                        {% for k in yTestsWeekLab[-4:]|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -2568,7 +3157,7 @@
                                       type: 'line',
                                       data: {
                                         labels: [
-                                        {% for k in yTestsWeekLab %}
+                                        {% for k in yTestsWeekLab|sort %}
                                             "{{k}}",
                                         {% endfor %}
                                         ],
@@ -2671,246 +3260,6 @@
 
                         </ul>
 
-                        <ul class="graphs_4">
-                            <li>
-                                <button type="button" class="button7">İncele</button>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvas7"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgba(87, 87, 87, 1)',
-                                      lightgreen: 'rgba(101, 245, 81, 1)',
-                                      pink: 'rgba(245, 81, 204, 1)',
-                                      darkred: 'rgba(245, 0, 0, 1)',
-                                      brown: 'rgba(173, 99, 56, 1)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                                    var config = {
-                                      type: 'line',
-                                      data: {
-                                        labels: [
-                                        {% for k in jumpTestsWeekLab[-4:] %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Sıçrama 1 (cm)",
-                                          backgroundColor: chartColors.red,
-                                          borderColor: chartColors.red,
-                                          data: [
-                                            {% for k in jumpTestsJ1[-4:] %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }, {
-                                          label: "Sıçrama 2 (cm)",
-                                          fill: false,
-                                          backgroundColor: chartColors.blue,
-                                          borderColor: chartColors.blue,
-                                          data: [
-                                            {% for k in jumpTestsJ2[-4:] %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        },{
-                                          label: "Sıçrama 3 (cm)",
-                                          fill: false,
-                                          backgroundColor: chartColors.yellow,
-                                          borderColor: chartColors.yellow,
-                                          data: [
-                                            {% for k in jumpTestsJ3[-4:] %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        },{
-                                          label: "Sıçrama Ort (cm)",
-                                          fill: false,
-                                          backgroundColor: chartColors.green,
-                                          borderColor: chartColors.green,
-                                          data: [
-                                            {% for k in jumpTestsOrt[-4:] %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Sıçrama Test Sonuçları Son 4 Ölçüm'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 30
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Tarihler'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Değerler (%)'
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
-
-
-                                    var ctx = document.getElementById("canvas7").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
-
-                                </script>
-
-
-                            </li>
-
-                            <li>
-                                <button type="button" class="button8">İncele</button>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvas8"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgba(87, 87, 87, 1)',
-                                      lightgreen: 'rgba(101, 245, 81, 1)',
-                                      pink: 'rgba(245, 81, 204, 1)',
-                                      darkred: 'rgba(245, 0, 0, 1)',
-                                      brown: 'rgba(173, 99, 56, 1)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                                    var config = {
-                                      type: 'line',
-                                      data: {
-                                        labels: [
-                                        {% for k in jumpTestsWeekLab %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Sıçrama 1 (cm)",
-                                          backgroundColor: chartColors.red,
-                                          borderColor: chartColors.red,
-                                          data: [
-                                            {% for k in jumpTestsJ1 %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }, {
-                                          label: "Sıçrama 2 (cm)",
-                                          fill: false,
-                                          backgroundColor: chartColors.blue,
-                                          borderColor: chartColors.blue,
-                                          data: [
-                                            {% for k in jumpTestsJ2 %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        },{
-                                          label: "Sıçrama 3 (cm)",
-                                          fill: false,
-                                          backgroundColor: chartColors.yellow,
-                                          borderColor: chartColors.yellow,
-                                          data: [
-                                            {% for k in jumpTestsJ3 %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        },{
-                                          label: "Sıçrama Ort (cm)",
-                                          fill: false,
-                                          backgroundColor: chartColors.green,
-                                          borderColor: chartColors.green,
-                                          data: [
-                                            {% for k in jumpTestsOrt %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Sıçrama Test Sonuçları Son 52 Ölçüm'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 30
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Tarihler'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Değerler (%)'
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
-
-
-                                    var ctx = document.getElementById("canvas8").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
-
-                                </script>
-
-
-                            </li>
-
-                        </ul>
 
 
 

@@ -49,13 +49,30 @@
 
 			<div class="close_delete"> + </div>
 
+			<select id="selectDel" name="selectDel">
+
+				<option value="none_none_none">
+                    Select One
+				</option>
+
+			{% for key in table %}
+
+				<option value="{{key[0]}}_{{key[1]}}_{{key[2]}}">
+                    {{key[0]}} {{key[1]}} {{key[2]}}
+				</option>
+
+			{% endfor %}
+
+			</select>
+
+
 			<ul class="addListColumns" style="margin: 15%">
 
 				{% for key in donatData[:3] %}
 
 					<li style="margin:5px"> {{key}} </li>
 
-					<input type="text" name="datas2" class="popupInput_del">
+					<input id="popupdel{{loop.index}}" type="text" name="datas2" class="popupInput_del">
 
 				{% endfor %}
 
@@ -73,13 +90,32 @@
 
 			<div class="close_update"> + </div>
 
+
+			<select id="selectUpdate" name="selectUpdate">
+
+
+				<option value="none_none_none_none_none_none_none_none_none_none_none_none_none_none">
+                    Select One
+				</option>
+
+
+			{% for key in table %}
+
+				<option value="{{key[0]}}_{{key[1]}}_{{key[2]}}_{{key[3]}}_{{key[4]}}_{{key[5]}}_{{key[6]}}_{{key[7]}}_{{key[8]}}_{{key[9]}}_{{key[10]}}_{{key[11]}}_{{key[12]}}_{{key[13]}}">
+                    {{key[0]}} {{key[1]}} {{key[2]}}
+				</option>
+
+			{% endfor %}
+
+			</select>
+
 			<ul class="addListColumns" style="margin: 15%">
 
 				{% for key in donatData %}
 
 					<li style="margin:5px"> {{key}} </li>
 
-					<input type="text" name="datas3" class="popupInput_up">
+					<input id="popupUP{{loop.index}}" type="text" name="datas3" class="popupInput_up">
 
 				{% endfor %}
 
@@ -96,18 +132,18 @@
     <div class="sidebar">
         <h2>M.E.C.</h2>
         <ul>
-            <li><a href="http://carnagie.pythonanywhere.com"><i class="fas fa-home"></i>ANASAYFA</a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/profiller"><i class="fas fa-user"></i>PROFILLER</a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/individual"><i class="fas fa-address-card"></i>ŞABLON YONET</a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/sporcu"><i class="fas fa-address-card"></i>SPORCU EKLE</a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/olcum"><i class="fas fa-blog"></i>ÖLÇÜM EKLE</a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/gecmis"><i class="fa fa-history" aria-hidden="true"></i>   ÖLÇÜM GEÇMİŞİ</a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/vert"><i class="fas fa-volleyball-ball"></i>VERT SONUÇLARI </a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/rm"><i class="fas fa-chart-pie"></i> ROW MAX </a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/cikti"><i class="fas fa-print"></i> ANTRENMAN </a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/program"><i class="fas fa-copy"></i>  AJANDA </a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/saha"><i class="fas fa-braille"></i> SAHA </a></li>
-            <li><a href="http://carnagie.pythonanywhere.com/verttakim"><i class="fas fa-chalkboard-teacher"></i> VERT TAKIM </a></li>
+            <li><a href="/"><i class="fas fa-home"></i>ANASAYFA</a></li>
+            <li><a href="/profiller"><i class="fas fa-user"></i>PROFILLER</a></li>
+            <li><a href="/individual"><i class="fas fa-address-card"></i>ŞABLON YONET</a></li>
+            <li><a href="/sporcu"><i class="fas fa-address-card"></i>SPORCU EKLE</a></li>
+            <li><a href="/olcum"><i class="fas fa-blog"></i>ÖLÇÜM EKLE</a></li>
+            <li><a href="/gecmis"><i class="fa fa-history" aria-hidden="true"></i>   ÖLÇÜM GEÇMİŞİ</a></li>
+            <li><a href="/vert"><i class="fas fa-volleyball-ball"></i>VERT SONUÇLARI </a></li>
+            <li><a href="/rm"><i class="fas fa-chart-pie"></i> ROW MAX </a></li>
+            <li><a href="/cikti"><i class="fas fa-print"></i> ANTRENMAN </a></li>
+            <li><a href="/program"><i class="fas fa-copy"></i>  AJANDA </a></li>
+            <li><a href="/saha"><i class="fas fa-braille"></i> SAHA </a></li>
+            <li><a href="/verttakim"><i class="fas fa-chalkboard-teacher"></i> VERT TAKIM </a></li>
         </ul>
     </div>
     <div style="width: 2px;"></div>

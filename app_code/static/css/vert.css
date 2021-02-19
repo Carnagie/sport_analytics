@@ -34,7 +34,6 @@ body{
 }
 
 .wrapper .sidebar ul li{
-  padding: 10px;
   border-bottom: 4px solid #bdb8d7;
   border-bottom: 4px solid rgba(0,0,0,0.05);
   border-top: 4px solid rgba(255,255,255,0.05);
@@ -108,12 +107,10 @@ body{
   margin-bottom: 20px;
 }
 .body_container {
-    position: absolute;
     background-color: #d3d3d3;
     box-shadow: -10px +10px #7F7F7F;
-    height: 90vh;
-    width: 85%;
-    overflow: scroll;
+    height: 300vh;
+    width: 78vw;
 }
 
 .body_container .inputContainer .input_list{
@@ -162,6 +159,7 @@ body{
 .vert_container {
     margin-top: 2%;
     background-color: #FFFFFF;
+    height: 250vh;
 }
 
 .nameTag {
@@ -171,36 +169,30 @@ body{
 
 .graphs_1 {
   display: flex;
-}
-
-.graphs_1 li {
-    margin-left: 5%;
+  margin: 50px;
+      margin-top: 150px;
 }
 
 
 .graphs_2 {
   display: flex;
+    margin: 50px;
+        margin-top: 150px;
 }
 
-.graphs_2 li {
-    margin-left: 5%;
-}
 
 .graphs_3 {
   display: flex;
+    margin: 50px;
+        margin-top: 150px;
 }
-
-.graphs_3 li {
-    margin-left: 5%;
-}
-
 
 .graphs_4 {
   display: flex;
+    margin: 50px;
+    margin-top: 150px;
 }
 
-.graphs_4 li {
-    margin-left: 5%;
-}
+
 
 

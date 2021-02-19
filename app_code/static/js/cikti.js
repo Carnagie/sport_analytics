@@ -10,6 +10,11 @@ $(document).on('click','.add',
         var imgData = canvas.toDataURL("image/jpeg",0.9);
         doc.addImage(imgData, 'JPEG', 15, 15, 180, 50);
 
+
+        /*
+        toDataUrl('static/images/imagefitnesscrop2.jpeg', function(base64Img){doc.addImage(base64Img, 'JPEG', 150, 80, 60, 220);console.log(base64Img);});
+        */
+
         var ul = document.getElementById("antrenmanlar");
         var items = ul.getElementsByTagName("li");
         var rowNum = 1
@@ -27,7 +32,7 @@ $(document).on('click','.add',
                 //console.log("NEW PAGE HERE");
                 totalElements = 0;
             }
-            if ( (i + 1) % 2 == 0){
+            if ( (i + 1) % 4 == 0){
                 rowNum++;
                 columnNum = 0;
             }
@@ -49,10 +54,10 @@ function listImagePaste(index, maxindex, rowindex, columnindex, totalElements) {
         console.log("entered html2canvas li");
         var imgData2 = canvas2.toDataURL("image/jpeg",0.9);
         if (rowindex == 1) {
-            doc.addImage(imgData2, 'JPEG', 10 + columnindex*70, 80*rowindex, 58, 40);
+            doc.addImage(imgData2, 'JPEG', 10 + columnindex*45, 80*rowindex, 43.5, 40);
         }
         else {
-            doc.addImage(imgData2, 'JPEG', 10 + columnindex*70, 75 + (50 * (rowindex-1)), 58, 40);
+            doc.addImage(imgData2, 'JPEG', 10 + columnindex*45, 75 + (50 * (rowindex-1)), 43.5, 40);
         }
         //doc.save("sample-pdf-2");
         if (index == maxindex) {
@@ -273,3 +278,38 @@ $(document).on('click','#changeImg',
     $("#imgInp").change(function(){
         readURL3(this);
     });
+
+function toDataUrl(src, callback, outputFormat) {
+  // Create an Image object
+  var img = new Image();
+  // Add CORS approval to prevent a tainted canvas
+  img.crossOrigin = 'Anonymous';
+  img.onload = function() {
+    // Create an html canvas element
+    var canvas = document.createElement('CANVAS');
+    // Create a 2d context
+    var ctx = canvas.getContext('2d');
+    var dataURL;
+    // Resize the canavas to the original image dimensions
+    canvas.height = this.naturalHeight;
+    canvas.width = this.naturalWidth;
+    // Draw the image to a canvas
+    ctx.drawImage(this, 0, 0);
+    // Convert the canvas to a data url
+    dataURL = canvas.toDataURL(outputFormat);
+    // Return the data url via callback
+    callback(dataURL);
+    // Mark the canvas to be ready for garbage
+    // collection
+    canvas = null;
+  };
+  // Load the image
+  img.src = src;
+  // make sure the load event fires for cached images too
+  if (img.complete || img.complete === undefined) {
+    // Flush cache
+    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+    // Try again
+    img.src = src;
+  }
+}

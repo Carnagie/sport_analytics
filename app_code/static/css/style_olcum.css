@@ -34,7 +34,6 @@ body{
 }
 
 .wrapper .sidebar ul li{
-  padding: 10px;
   border-bottom: 4px solid #bdb8d7;
   border-bottom: 4px solid rgba(0,0,0,0.05);
   border-top: 4px solid rgba(255,255,255,0.05);
@@ -161,7 +160,7 @@ body{
 
 .bg-modal {
   width: 100%;
-  height: 100%;
+  height: 105%;
   background-color: rgb(0,0,0,0.7);
   position: absolute;
   top: 0;
@@ -174,7 +173,7 @@ body{
   justify-content: center;
   align-items: center;
   width: 1000px;
-  height: 720px;
+  height: 780px;
   background-color: white;
   position: relative;
 }
@@ -510,4 +509,120 @@ body{
   background-color: #fff;
   color: #000;
 }
+
+.innerButtons {
+    text-align: center;
+}
+
+.aceButton{
+  background-color: #FF0A03;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-color: #FF0A03;
+  border: 2px solid #FF0A03;
+  transition-duration: 0.4s;
+  padding: 5px;
+  color: #fff;
+}
+.aceButton:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.hitButton{
+  background-color: #3BD300;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-color: #3BD300;
+  border: 2px solid #3BD300;
+  transition-duration: 0.4s;
+  padding: 5px;
+  color: #fff;
+}
+.hitButton:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.servisHitButton{
+  background-color: #E0DC00;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-color: #E0DC00;
+  border: 2px solid #E0DC00;
+  transition-duration: 0.4s;
+  padding: 5px;
+  color: #fff;
+}
+.servisHitButton:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.hataHitButton {
+  background-color: #9700DC;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-color: #9700DC;
+  border: 2px solid #9700DC;
+  transition-duration: 0.4s;
+  padding: 5px;
+  color: #fff;
+}
+.hataHitButton:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.removeAceHitButton{
+  background-color: #E09200;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-color: #E09200;
+  border: 2px solid #E09200;
+  transition-duration: 0.4s;
+  padding: 5px;
+  color: #fff;
+}
+.removeAceHitButton:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.scrollAceHit {
+    height: 100px;
+    overflow-y: scroll;
+    margin: 10px;
+}
+
+.aceHitTable {
+    width:100%;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+.aceHitTable , th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.aceHitTable tr:nth-child(even){background-color: #f2f2f2;}
+.aceHitTable tr:hover {background-color: #ddd;}
+.aceHitTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
 
