@@ -1,478 +1,389 @@
 {% extends "base.html" %}
 
-{% block links %}
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/takimprogram.css')}}">
-{% endblock %}
-
-
 {% block content %}
 
-    <div class="main_content">
-        <div class="header">Çıktı Almak İçin Ayarlayınız..</div>
-
-        <div class="info">
-
-        <div class="body_container">
-
-            <div class="header_bar" id="topdf1">
-                <input type="text" placeholder="Başlık">
+    <!-- Sidebar Navigation end-->
+    <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Create Team Agenda</h2>
             </div>
-
-            <ul class="element_bar" id="topdf2">
-                <li id="baseElement">
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Pazartesi</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up">
-
-                            <img class="myImg" id="myImg1_up" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg">
-
-                            <img class="myImg" id="myImg1" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Salı</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up2">
-
-                            <img class="myImg" id="myImg1_up2" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg2">
-
-                            <img class="myImg" id="myImg2" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Çarşamba</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up3">
-
-                            <img class="myImg" id="myImg1_up3" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg3">
-
-                            <img class="myImg" id="myImg3" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Perşembe</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up4">
-
-                            <img class="myImg" id="myImg1_up4" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-                        <div class="agendaIn" id="addImg4">
-
-                            <img class="myImg" id="myImg4" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Cuma</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up5">
-
-                            <img class="myImg" id="myImg1_up5" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg5">
-
-                            <img class="myImg" id="myImg5" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Cumartesi</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up6">
-
-                            <img class="myImg" id="myImg1_up6" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg6">
-
-                            <img class="myImg" id="myImg6" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Pazar</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up7">
-
-                            <img class="myImg" id="myImg1_up7" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg7">
-
-                            <img class="myImg" id="myImg7" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-
-
-
-                </li>
-                <li id="baseDiv123">
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Pazartesi</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up8">
-
-                            <img class="myImg" id="myImg1_up8" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg8">
-
-                            <img class="myImg" id="myImg8" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Salı</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up9">
-
-                            <img class="myImg" id="myImg1_up9" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg9">
-
-                            <img class="myImg" id="myImg9" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Çarşamba</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up10">
-
-                            <img class="myImg" id="myImg1_up10" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg10">
-
-                            <img class="myImg" id="myImg10" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Perşembe</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up11">
-
-                            <img class="myImg" id="myImg1_up11" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg11">
-
-                            <img class="myImg" id="myImg11" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Cuma</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up12">
-
-                            <img class="myImg" id="myImg1_up12" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg12">
-
-                            <img class="myImg" id="myImg12" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Cumartesi</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up13">
-
-                            <img class="myImg" id="myImg1_up13" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg13">
-
-                            <img class="myImg" id="myImg13" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-                    <div class="elementsIn" id="baseDiv">
-                        <div style="display: flex">
-                            <h3 style="color:black;margin-left: 30%">Pazar</h3>
-                        </div>
-                        <div style="display: flex">
-                             <input style="margin-right: 0;border: none;" type="date">
-                        </div>
-
-                        <div class="agendaIn" style="text-align:center;display: flex;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg_up14">
-
-                            <img class="myImg" id="myImg1_up14" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                        <div class="agendaIn">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                            <input type="text" name="" placeholder="- - - - - - - -" style="border-bottom: 4px solid red;">
-                        </div>
-
-                        <div class="agendaIn" id="addImg14">
-
-                            <img class="myImg" id="myImg14" style="max-height: 7.5vh;max-width: 10vw" src="static/ball.png">
-
-                        </div>
-
-                    </div>
-
-
-
-                </li>
-
-
-            </ul>
-
-            <ul class="control_bar">
-                <li>
-                    <button class="button_control4" id="pdfToWeek">CHANGE WEEK NUMBER</button>
-                    <button class="button_control4" id="pdf">SAVE PDF</button>
-                </li>
-            </ul>
-
-
         </div>
-
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Agenda</li>
+            </ul>
         </div>
+        <section class="no-padding-top">
+            <div class="container-fluid">
 
+                <div class="row">
+
+
+                    <ul class="element_bar" id="topdf2">
+                        <div class="row" id="baseElement">
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label">Pazartesi</label>
+
+                                <input class="form-control" type="date">
+
+                                <input class="form-control" type="text" name="" placeholder="- - - - - - - -"
+                                       style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up">
+                                    <img class="myImg" id="myImg1_up" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                                <input class="form-control" type="text" name="" placeholder="- - - - - - - -"
+                                       style="border-bottom: 4px solid red;">
+                                <input class="form-control" type="text" name="" placeholder="- - - - - - - -"
+                                       style="border-bottom: 4px solid red;">
+
+                                <div id="addImg">
+                                    <img class="myImg" id="myImg1" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+
+                                <label class="form-control-label"> Salı </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up2">
+                                    <img class="myImg" id="myImg1_up2" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg2">
+                                    <img class="myImg" id="myImg2" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+
+                                <label class="form-control-label"> Çarşamba </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up3">
+                                    <img class="myImg" id="myImg1_up3" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg3">
+                                    <img class="myImg" id="myImg3" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label"> Perşembe </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+
+                                <div id="addImg_up4">
+                                    <img class="myImg" id="myImg1_up4" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+
+                                <div id="addImg4">
+                                    <img class="myImg" id="myImg4" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label"> Cuma </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+
+                                <div id="addImg_up5">
+                                    <img class="myImg" id="myImg1_up5" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+
+                                <div id="addImg5">
+                                    <img class="myImg" id="myImg5" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label"> Cumartesi </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+
+                                <div id="addImg_up6">
+                                    <img class="myImg" id="myImg1_up6" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+
+                                <div id="addImg6">
+                                    <img class="myImg" id="myImg6" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="row" id="baseDiv123" style="border-top: 4px solid red">
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label"> Pazartesi </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up8">
+                                    <img class="myImg" id="myImg1_up8" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg8">
+                                    <img class="myImg" id="myImg8" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label"> Salı </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up9">
+                                    <img class="myImg" id="myImg1_up9" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg9">
+                                    <img class="myImg" id="myImg9" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+
+                                <label class="form-control-label"> Çarşamba </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up10">
+                                    <img class="myImg" id="myImg1_up10" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg0">
+                                    <img class="myImg" id="myImg10" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label"> Perşembe </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up11    ">
+                                    <img class="myImg" id="myImg1_up11" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg11">
+                                    <img class="myImg" id="myImg11" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label"> Cuma </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up12">
+                                    <img class="myImg" id="myImg1_up12" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg12">
+                                    <img class="myImg" id="myImg12" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2" id="baseDiv" style="text-align: center">
+
+                                <label class="form-control-label"> Cumartesi </label>
+
+                                <input type="date" class="form-control">
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg_up13">
+                                    <img class="myImg" id="myImg1_up13" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+                                <input type="text" name="" placeholder="- - - - - - - -"
+                                       class="form-control" style="border-bottom: 4px solid red;">
+
+                                <div id="addImg13">
+                                    <img class="myImg" id="myImg13" style="max-height: 7.5vh;max-width: 10vw"
+                                         src="static/ball.png">
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </ul>
+
+                        <div class="col-lg-6">
+                            <button class="btn btn-secondary form-control" style="color: white" id="pdfToWeek">CHANGE
+                                WEEK NUMBER
+                            </button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button class="btn btn-warning form-control" style="color: white" id="pdf">SAVE PDF</button>
+                        </div>
+
+                </div>
+
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="footer__block block no-margin-bottom">
+            </div>
+        </footer>
     </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 
-<script src="{{ url_for('static', filename='js/html2canvas.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>
 
-<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
 
-<script type="module" src="{{ url_for('static', filename='js/takimprogram.js')}}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/takimprogram.js') }}"></script>
 
 
 {% endblock %}
