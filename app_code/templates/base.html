@@ -1,51 +1,96 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Conditioning</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="static/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="static/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="static/assets/css/font.css">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="static/assets/css/style.blue.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="static/assets/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="static/assets/img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body onload="setDefaultSelectedBody()">
+    <header class="header">
+      <nav class="navbar navbar-expand-lg">
+        <div class="search-panel">
+          <div class="search-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn">Close <i class="fa fa-close"></i></div>
+            <form id="searchForm" action="#">
+              <div class="form-group">
+                <input type="search" name="search" placeholder="What are you searching for...">
+                <button type="submit" class="submit">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+          <div class="navbar-header">
+            <!-- Navbar Header--><a href="index.html" class="navbar-brand">
+              <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">Data</strong><strong>Conditioning</strong></div>
+              <div class="brand-text brand-sm"><strong class="text-primary">A.</strong><strong>C.</strong></div></a>
+            <!-- Sidebar Toggle Btn-->
+            <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+          </div>
 
-{% block links %}
-{% endblock %}
-
-
-<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-<title>ANALITIK</title>
-
-
-
-</head>
-<body onload="setDefaultSelectedBody()">
-
-
-
-
-<div class="wrapper">
-    <div class="sidebar">
-        <h2>M.E.C.</h2>
-        <ul>
-            <li><a href="/"><i class="fas fa-home"></i>ANASAYFA</a></li>
-            <li><a href="/profiller"><i class="fas fa-user"></i>PROFILLER</a></li>
-            <li><a href="/individual"><i class="fas fa-address-card"></i>ŞABLON YONET</a></li>
-            <li><a href="/sporcu"><i class="fas fa-address-card"></i>SPORCU EKLE</a></li>
-            <li><a href="/olcum"><i class="fas fa-blog"></i>ÖLÇÜM EKLE</a></li>
-            <li><a href="/gecmis"><i class="fa fa-history" aria-hidden="true"></i>   ÖLÇÜM GEÇMİŞİ</a></li>
-            <li><a href="/vert"><i class="fas fa-volleyball-ball"></i>VERT SONUÇLARI </a></li>
-            <li><a href="/rm"><i class="fas fa-chart-pie"></i> ROW MAX </a></li>
-            <li><a href="/cikti"><i class="fas fa-print"></i> ANTRENMAN </a></li>
-            <li><a href="/program"><i class="fas fa-copy"></i>  AJANDA </a></li>
-            <li><a href="/saha"><i class="fas fa-braille"></i> SAHA </a></li>
-            <li><a href="/verttakim"><i class="fas fa-chalkboard-teacher"></i> TAKIM GÜNCEL </a></li>
-            <li><a href="/takimprogram"><i class="fas fa-business-time"></i> TAKIM PROGRAM </a></li>
+        </div>
+      </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+      <!-- Sidebar Navigation-->
+      <nav id="sidebar">
+        <!-- Sidebar Header-->
+        <div class="sidebar-header d-flex align-items-center">
+          <div class="avatar"><img src="static/assets/img/mahiremrecan.png" alt="..." class="img-fluid rounded-circle"></div>
+          <div class="title">
+            <h1 class="h5">Mahir Emre Can</h1>
+            <p>Conditioner</p>
+          </div>
+        </div>
+        <!-- Sidebar Navidation Menus--><span class="heading">Menu</span>
+        <ul class="list-unstyled">
+          <li><a href="/"> <i class="icon-home"></i>Home </a></li>
+          <li><a href="/profiller"> <i class="icon-grid"></i>Profile </a></li>
+          <li><a href="/individual"> <i class="fa fa-bar-chart"></i>Database </a></li>
+          <li><a href="/sporcu"> <i class="icon-padnote"></i>Add Athlete</a></li>
+        </ul><span class="heading">Analytics</span>
+        <ul class="list-unstyled">
+          <li><a href="/olcum"> <i class="icon-logout"></i>Add Test</a></li>
+          <li><a href="/gecmis"> <i class="icon-logout"></i>Past Tests</a></li>
+          <li><a href="/vert"> <i class="icon-logout"></i>Vert Results</a></li>
+          <li><a href="/rm"> <i class="icon-logout"></i>Row Max Calculator</a></li>
+          <li><a href="/cikti"> <i class="icon-logout"></i>Training Design</a></li>
+          <li><a href="/saha"> <i class="icon-logout"></i>Field Design</a></li>
+          <li><a href="/verttakim"> <i class="icon-logout"></i>Team Report</a></li>
+          <li><a href="/takimprogram"> <i class="icon-logout"></i>Team Program</a></li>
         </ul>
-
+      </nav>
+      <!-- Sidebar Navigation end-->
+      {% block content %}
+      {% endblock %}
     </div>
-    <div style="width: 2px;"></div>
-    {% block content %}
-    {% endblock %}
-</div>
-
-
-
-
-
-
-</body>
+    <!-- JavaScript files-->
+    <script src="static/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="static/assets/vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/assets/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="static/assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="static/assets/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="static/assets/js/front.js"></script>
+  </body>
 </html>

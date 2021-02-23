@@ -1,20 +1,12 @@
 from flask import Flask, render_template, url_for, request, session, redirect
-import requests, json, os, re
+import os
 import csv, json, sys
-import pandas as pd
-from pandas.io.json import json_normalize
-import simplejson as json2
-import subprocess
 import psycopg2
-from flask_bootstrap import Bootstrap
-import random
-import math
 from datetime import date, timedelta, datetime
 import collections
 
 
 app = Flask(__name__)
-Bootstrap(app)
 app.secret_key = 'super secret key'
 
 app.config["IMAGE_UPLOADS"] = os.getcwd() + "/static/athlete_images"
@@ -46,14 +38,16 @@ connectionList = list()
 @app.route('/', methods=["GET","POST"])
 def index():
 
+    if "admin" in session or "user" in session:
+        return render_template('sporcu.html')
+
     if request.method == 'POST':
 
         username = request.form["username"]
         password = request.form["password"]
 
         if "admin" in session or "user" in session:
-
-            return render_template('main_page.html')
+            return render_template('sporcu.html')
         else:
             if username == "mahiremrecan" and password == "859118":
                 session["admin"] = "admin"
@@ -79,7 +73,8 @@ def index2():
     if request.method == 'POST':
 
 
-        con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+        con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
         cur = con.cursor()
 
 
@@ -146,7 +141,8 @@ def index2():
         cur.close()
         con.close()
 
-        con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+        con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
         cur = con.cursor()
 
         tableName = str(request.form["table1"])
@@ -184,7 +180,8 @@ def index3():
         for i in range(0,len(infoList2)):
             row.append(infoList2[i])
 
-        con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+        con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
         cur = con.cursor()
 
         columns = ["sname", "sirname", "mass", "height","mevki", "health_up_body", "health_down_body", "body_size", "phone", "sporcu_foto", "notes","sex","age"]
@@ -262,7 +259,8 @@ def index4():
 
     	if request.method == 'POST':
 
-    		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    		con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     		cur = con.cursor()
 
     		tableName = str(request.form["table1"])
@@ -291,7 +289,8 @@ def index4():
     		row = "not assigned"
 
     		actName = request.form.get("submits", False)
-    		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    		con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     		cur = con.cursor()
 
     		print(tableName)
@@ -365,7 +364,8 @@ def index5():
     tableData = None
     tableData2 = list()
 
-    con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     cur = con.cursor()
 
     sql_insert = "SELECT * FROM " + "sporcular"
@@ -681,7 +681,8 @@ def index6():
     tableData = None
     tableData2 = list()
 
-    con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     cur = con.cursor()
 
     sql_insert = "SELECT * FROM " + "sporcular"
@@ -730,7 +731,8 @@ def index6():
 
         sporcuSirName = sporcuInfo[2][2:-1]
 
-        con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+        con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
         cur = con.cursor()
 
         sql_insert = "SELECT * FROM sporcular WHERE  ( id = '"+ sporcuID +"' AND sname = '"+ sporcuName +"' AND sirname = '"+  sporcuSirName  +"');";
@@ -871,7 +873,8 @@ def index7():
     tempProfileDict = {}
     tempProfileDict["photo"] = "static/athlete_images/default.png"
 
-    con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     cur = con.cursor()
 
     tableName = "sporcular"
@@ -898,7 +901,8 @@ def index7():
 
     if request.method == 'POST':
 
-        con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+        con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
         cur = con.cursor()
 
         jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
@@ -1100,7 +1104,8 @@ def index9():
     	jsonProfilDict = {}
 
 
-    	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    	con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     	cur = con.cursor()
 
     	tableName = "sporcular"
@@ -1198,7 +1203,8 @@ def index10():
 
     	nameChosen = ""
 
-    	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    	con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     	cur = con.cursor()
 
     	tableName = "sporcular"
@@ -1346,7 +1352,8 @@ def index13():
 
     	pdfList = ""
 
-    	con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    	con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     	cur = con.cursor()
 
     	tableName = "sporcular"
@@ -1364,7 +1371,8 @@ def index13():
     		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]] = {}
     		jsonProfilDict[ str(i[0]) + " " + i[1]+ " " + i[2]]["json"] = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"
 
-    		con = psycopg2.connect( host="Carnagie-1760.postgres.pythonanywhere-services.com",port="11760",database="mahirdb",user="super",password="facethest0rm")
+    		con = psycopg2.connect( host="localhost",port="9999",database="mahirdb",user="super",password="facethest0rm")
+
     		cur = con.cursor()
 
     		jsonName = str(i[0]) + "_" + i[1].strip().replace(" ","_")+ "_" + i[2].strip().replace(" ","_") +".json"

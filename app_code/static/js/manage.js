@@ -1,20 +1,20 @@
 var defaultSelected;
 
-$(document).on('click','.addInd',
+$(document).on('click','#add',
 function() {
 
 	document.querySelector('.bg_modal').style.display = 'flex';
 
 });
 
-$(document).on('click','.delInd',
+$(document).on('click','#del',
 function() {
 
 	document.querySelector('.bg_modal_delete').style.display = 'flex';
 
 });
 
-$(document).on('click','.updateInd',
+$(document).on('click','#update',
 function() {
 
 	document.querySelector('.bg_modal_update').style.display = 'flex';

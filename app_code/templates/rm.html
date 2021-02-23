@@ -1,166 +1,230 @@
 {% extends "base.html" %}
 
-{% block links %}
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/rm.css')}}">
-
-{% endblock %}
-
-
 {% block content %}
 
-    <div class="main_content">
-        <div class="header">1 RM Hesaplayıcı..</div>
-
-        <div class="info">
-
-        <div class="body_container">
-
-            <ul class="mainList">
-
-            <li>
-              <ul style="display: flex">
-                <li>
-                    <h2>Rep Sayisi:</h2>
-                </li>
-                <li>
-                    <input  type="number" name="rmTest" step="0.01" id="rowNum" onkeyup="totalCalculator()">
-                </li>
-              </ul>
-            </li>
-
-
-            <li>
-              <ul style="display: flex">
-                <li>
-                    <h2>Ağırlık ( kg ):</h2>
-                </li>
-                <li>
-                    <input  type="number" name="rmTest" placeholder="Final" step="0.01" id="kgNum" onkeyup="totalCalculator()">
-                </li>
-              </ul>
-            </li>
-
-            </ul>
-
-            <ul class="outputList">
-                <li>
-                      <table class="infoTable0">
-                      <tr>
-                        <th> X </th>
-                        <th> 100% </th>
-                        <th> 95% </th>
-                        <th> 90% </th>
-                        <th> 85% </th>
-                        <th> 80% </th>
-                        <th> 75% </th>
-                        <th> 70% </th>
-                        <th> 65% </th>
-                        <th> 60% </th>
-                        <th> 55% </th>
-                        <th> 50% </th>
-                        <th> 45% </th>
-                      </tr>
-                      <tr>
-                        <td>Ağırlık (Epley) </td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_100"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_95"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_90"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_85"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_80"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_75"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_70"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_65"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_60"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_55"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_50"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row3_45"></td>
-                      </tr>
-                      <tr>
-                        <td>Rep</td>
-                        <td><input type="number" value="1"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="2"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="4"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="6"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="8"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="10" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="12" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="14" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="16" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="18" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="20" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="22" name="tableInp" step="1" ></td>
-                      </tr>
-
-                    </table>
-
-                </li>
-
-                <li>
-                      <table class="infoTable0">
-                      <tr>
-                        <th> X </th>
-                        <th> 100% </th>
-                        <th> 95% </th>
-                        <th> 90% </th>
-                        <th> 85% </th>
-                        <th> 80% </th>
-                        <th> 75% </th>
-                        <th> 70% </th>
-                        <th> 65% </th>
-                        <th> 60% </th>
-                        <th> 55% </th>
-                        <th> 50% </th>
-                        <th> 45% </th>
-                      </tr>
-                      <tr>
-                        <td>Ağırlık (Brzycki) </td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_100"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_95"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_90"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_85"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_80"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_75"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_70"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_65"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_60"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_55"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_50"></td>
-                        <td><input type="number" name="tableInp" step="0.01" id="row4_45"></td>
-                      </tr>
-                      <tr>
-                        <td>Rep</td>
-                        <td><input type="number" value="1"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="2"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="4"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="6"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="8"  name="tableInp" step="1" ></td>
-                        <td><input type="number" value="10" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="12" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="14" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="16" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="18" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="20" name="tableInp" step="1" ></td>
-                        <td><input type="number" value="22" name="tableInp" step="1" ></td>
-                      </tr>
-
-                    </table>
-
-                </li>
-
-
-            </ul>
-
-
-
-
+    <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Row Max Calculator</h2>
+            </div>
         </div>
-
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Row Max Calculator</li>
+            </ul>
         </div>
+        <section class="no-padding-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Basic Form-->
+                    <div class="col-lg-12">
+                        <div class="block">
+                            <div class="title"><strong class="d-block">Athlete Form</strong><span class="d-block">Enter Athlete Information.</span>
+                            </div>
+                            <div class="block-body">
 
+                                <div class="row">
+
+                                    <div class="col-lg-2">
+                                        <label class="form-control-label">Rep Count</label>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <input class="form-control" type="number" name="rmTest" step="0.01" id="rowNum"
+                                               onkeyup="totalCalculator()">
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <label class="form-control-label">Weight (kg)</label>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <input class="form-control" type="number" name="rmTest" step="0.01" id="kgNum"
+                                               onkeyup="totalCalculator()">
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <tr>
+                                                <th> X</th>
+                                                <th> 100%</th>
+                                                <th> 95%</th>
+                                                <th> 90%</th>
+                                                <th> 85%</th>
+                                                <th> 80%</th>
+                                                <th> 75%</th>
+                                                <th> 70%</th>
+                                                <th> 65%</th>
+                                                <th> 60%</th>
+                                                <th> 55%</th>
+                                                <th> 50%</th>
+                                                <th> 45%</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Weight (Epley)</td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_100"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_95"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_90"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_85"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_80"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_75"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_70"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_65"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_60"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_55"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_50"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row3_45"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Rep</td>
+                                                <td><input class="form-control" type="number" value="1" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="2" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="4" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="6" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="8" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="10" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="12" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="14" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="16" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="18" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="20" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="22" name="tableInp"
+                                                           step="1"></td>
+                                            </tr>
+
+                                        </table>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <tr>
+                                                <th> X</th>
+                                                <th> 100%</th>
+                                                <th> 95%</th>
+                                                <th> 90%</th>
+                                                <th> 85%</th>
+                                                <th> 80%</th>
+                                                <th> 75%</th>
+                                                <th> 70%</th>
+                                                <th> 65%</th>
+                                                <th> 60%</th>
+                                                <th> 55%</th>
+                                                <th> 50%</th>
+                                                <th> 45%</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Ağırlık (Brzycki)</td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_100"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_95"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_90"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_85"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_80"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_75"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_70"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_65"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_60"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_55"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_50"></td>
+                                                <td><input class="form-control" type="number" name="tableInp"
+                                                           step="0.01" id="row4_45"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Rep</td>
+                                                <td><input class="form-control" type="number" value="1" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="2" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="4" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="6" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="8" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="10" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="12" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="14" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="16" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="18" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="20" name="tableInp"
+                                                           step="1"></td>
+                                                <td><input class="form-control" type="number" value="22" name="tableInp"
+                                                           step="1"></td>
+                                            </tr>
+
+                                        </table>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="footer__block block no-margin-bottom">
+            </div>
+        </footer>
     </div>
 
-<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
 
-<script src="{{ url_for('static', filename='js/rm.js')}}"></script>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/rm.js') }}"></script>
 
 {% endblock %}

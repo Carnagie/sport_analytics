@@ -1,75 +1,90 @@
 {% extends "base.html" %}
 
-{% block links %}
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/saha.css')}}">
-{% endblock %}
-
-
 {% block content %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/saha.css') }}">
 
-    <div class="main_content">
-        <div class="header">Çıktı Almak İçin Ayarlayınız..</div>
-
-        <div class="info">
-
-        <div class="body_container">
-
-            <div class="header_bar" id="topdf1">
-                <input type="text" style="text-align: center;" placeholder="Başlık">
+    <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Field Design</h2>
             </div>
-
-            <div class="field" id="topdf2">
-
-            <ul class="element_bar">
-                <li id="baseElement">
-
-                      <div id="mydiv" class="elements" style="top: 500px;left: 50px;">
-                          <div id="mydivheader" class="elementsIn">
-                              <img  class="myImg" src="static/ball.png">
-                          </div>
-
-                      </div>
-
-                </li>
-
-
+        </div>
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Field Design</li>
             </ul>
+        </div>
+        <section class="no-padding-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Basic Form-->
+                    <div class="col-lg-12">
+                        <div class="block">
+                            <div class="title"><strong class="d-block">Field Design</strong><span class="d-block">Design and Print Field</span>
+                            </div>
+                            <div class="block-body">
+                                <div class="row">
+                                    <ul class="element_bar" style="list-style-type: none">
+                                        <li id="baseElement">
 
+                                            <div id="mydiv" class="elements" style="top: 500px;left: 50px;">
+                                                <div id="mydivheader" class="elementsIn">
+                                                    <img class="myImg" src="static/ball.png">
+                                                </div>
+
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row" style="margin-left: 10%;">
+
+                                    <div id="topdf2" class="field">
+
+                                    </div>
+
+                                </div>
+                                <div class="row" style="height: 2vh">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <button class="btn btn-success" id="addRow">ADD ELEMENT</button>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button class="btn btn-warning" id="delRow">DELETE ELEMENT</button>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button class="btn btn-info" id="addImg">CHANGE IMG</button>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button class="btn btn-secondary" id="pdf">SAVE PDF</button>
+                                    </div>
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <footer class="footer">
+            <div class="footer__block block no-margin-bottom">
             </div>
-
-            <ul class="control_bar">
-                <li>
-                    <button class="button_control" id="addRow">ADD ELEMENT</button>
-                </li>
-                <li>
-                    <button class="button_control2" id="delRow">DELETE ELEMENT</button>
-                </li>
-                <li>
-                    <button class="button_control3" id="addImg">CHANGE IMG</button>
-                </li>
-                <li>
-                    <button class="button_control4" id="pdf">SAVE PDF</button>
-                </li>
-            </ul>
-
-
-
-
-
-
-        </div>
-
-        </div>
-
+        </footer>
     </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 
-<script src="{{ url_for('static', filename='js/html2canvas.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>
 
-<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
 
-<script type="module" src="{{ url_for('static', filename='js/saha.js')}}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/saha.js') }}"></script>
 
 
 {% endblock %}

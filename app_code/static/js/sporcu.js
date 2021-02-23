@@ -6,7 +6,7 @@ function preview_image(event){
     }
     reader.readAsDataURL(event.target.files[0]);
     console.log(event.target.files[0].name);
-    document.querySelector('.sporcuPhoto').value = event.target.files[0].name;
+    document.querySelector('#sporcuPhoto').value = event.target.files[0].name;
     document.querySelector('.defaultPhoto').style.display = 'none';
 
 }

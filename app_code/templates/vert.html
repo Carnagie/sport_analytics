@@ -1,814 +1,873 @@
 {% extends "base.html" %}
 
-{% block links %}
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/vert.css')}}">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-{% endblock %}
-
-
 {% block content %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-    <div class="main_content">
-        <div class="header">Vert Genel Grafikleri </div>
-
-        <div class="info">
-
-        <div class="body_container">
-
-            <form action="/vert" method="post" autocomplete="off" enctype="multipart/form-data">
-            <div class="inputContainer">
-
-
-                <ul class="input_list">
-
-                    <li><h3>PROFİLLER ARASINDAN SEÇİM YAPINIZ:</h3></li>
-
-                    <li style="display: flex;">
-                        <select class="tableToChose" name="tableChosen">
-                            {% for k in jsonProfilDict %}
-                                <option>
-                                    {{k}}
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </li>
-                    <li>
-                         <input type="date" name="dateChosen">
-                    </li>
-
-                    <li>
-                    <button class="submitButton" type="submit" name="submitButton">Profili Getir</button>
-                    <button class="submitButton" type="button" id="pdf">Yazdır</button>
-                    </li>
-
-                </ul>
-
+    <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Vert Analyze Form</h2>
             </div>
-            </form>
-
-
-
-
-            <div class="vert_container" id="topdf">
-
-
-            <h2 class="nameTag" style="padding-top:10%;text-align:center;margin-left:5%;">{{nameChosen}}</h2>
-            <h2 class="nameTag" style="padding-top:2%;text-align:center;margin-left:3.3%;">{{dateChosen}} Ölçüm Sonuçları</h2>
-
-
-            <ul class="graphs_1">
-
-                <li>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVert"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgb(231,233,237)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                                    var config = {
-                                      type: 'bar',
-                                      data: {
-                                        labels: [
-                                        {% for k in vertTestsWeekLab %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Maximum",
-                                          backgroundColor: chartColors.red,
-                                          borderColor: chartColors.red,
-                                          data: [
-                                            {% for k in vertTestMax %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }, {
-                                          label: "Ortalama",
-                                          fill: false,
-                                          backgroundColor: chartColors.blue,
-                                          borderColor: chartColors.blue,
-                                          data: [
-                                            {% for k in vertTestOrt %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        },{
-                                          label: "Total",
-                                          fill: false,
-                                          backgroundColor: chartColors.yellow,
-                                          borderColor: chartColors.yellow,
-                                          data: [
-                                            {% for k in vertTestTotal %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Vert Test Sonuçları Son 52 Ölçüm'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 1000
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Tarihler'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Ölçümler (cm)'
-                                            },
-                                            ticks: {
-                                                beginAtZero: true
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
-
-
-                                    var ctx = document.getElementById("canvasVert").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
-
-                                </script>
-
-                </li>
-
-                <li>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVert2"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgb(231,233,237)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                                    var config = {
-                                      type: 'line',
-                                      data: {
-                                        labels: [
-                                        {% for k in vertTestsWeekLab %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Maximum",
-                                          backgroundColor: chartColors.red,
-                                          borderColor: chartColors.red,
-                                          data: [
-                                            {% for k in vertTestMax %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }, {
-                                          label: "Ortalama",
-                                          fill: false,
-                                          backgroundColor: chartColors.blue,
-                                          borderColor: chartColors.blue,
-                                          data: [
-                                            {% for k in vertTestOrt %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        },{
-                                          label: "Total",
-                                          fill: false,
-                                          backgroundColor: chartColors.yellow,
-                                          borderColor: chartColors.yellow,
-                                          data: [
-                                            {% for k in vertTestTotal %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Vert Test Sonuçları Son 52 Ölçüm'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 1000
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Tarihler'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Ölçümler (cm)'
-                                            },
-                                            ticks: {
-                                                beginAtZero: true
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
-
-
-                                    var ctx = document.getElementById("canvasVert2").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
-
-                                </script>
-
-                </li>
-
+        </div>
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Form</li>
             </ul>
+        </div>
+        <section class="no-padding-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Basic Form-->
+                    <div class="col-lg-12">
+                        <div class="block">
+                            <div class="title"><strong class="d-block">Chose Date to Analyze</strong>
+                            </div>
+                            <div class="block-body">
 
 
-            <ul class="graphs_2">
-
-                <li>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertMax"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgb(231,233,237)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var config = {
-                                      type: 'bar',
-                                      data: {
-                                        labels: [
-                                        {% for k in vertTestMaxLab %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Maximum",
-                                          backgroundColor: chartColors.orange,
-                                          borderColor: chartColors.orange,
-                                          data: [
-                                            {% for k in vertTestMaxValue %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Vert Test Maximum Ölçüm Sonuçları'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 1000
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Sporcular'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Ölçümler (cm)'
-                                            },
-                                            ticks: {
-                                                beginAtZero: true
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
+                                <form action="/vert" method="post" autocomplete="off" enctype="multipart/form-data">
+                                    <div class="row">
 
 
-                                    var ctx = document.getElementById("canvasVertMax").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
+                                        <div class="col-lg-12">
 
-                                </script>
+                                            <div class="col-lg-12"><h3>Choose Among Profiles</h3></div>
 
-                </li>
-
-                <li>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertMax2"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgb(231,233,237)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var config = {
-                                      type: 'line',
-                                      data: {
-                                        labels: [
-                                        {% for k in vertTestMaxLab %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Maximum",
-                                          backgroundColor: chartColors.orange,
-                                          borderColor: chartColors.orange,
-                                          data: [
-                                            {% for k in vertTestMaxValue %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Vert Test Maximum Ölçüm Sonuçları'
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Sporcular'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Ölçümler (cm)'
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
+                                            <div class="col-lg-12">
+                                                <select class="col-lg-12 form-control" name="tableChosen">
+                                                    {% for k in jsonProfilDict %}
+                                                        <option>
+                                                            {{ k }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
 
 
-                                    var ctx = document.getElementById("canvasVertMax2").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
+                                                <input class="form-control" type="date" name="dateChosen">
 
-                                </script>
+                                                <button class="btn btn-success col-lg-5" type="submit"
+                                                        name="submitButton">Profili
+                                                    Getir
+                                                </button>
+                                                <button class="btn btn-warning col-lg-5" type="button" id="pdf">Yazdır
+                                                </button>
+                                            </div>
+                                        </div>
 
-                </li>
-
-            </ul>
-
-
-            <ul class="graphs_3">
-
-                <li>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertOrt"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgb(231,233,237)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var config = {
-                                      type: 'bar',
-                                      data: {
-                                        labels: [
-                                        {% for k in vertTestOrtLab %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Maximum",
-                                          backgroundColor: chartColors.green,
-                                          borderColor: chartColors.green,
-                                          data: [
-                                            {% for k in vertTestOrtValue %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Vert Test Ortalama Ölçüm Sonuçları'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 1000
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Sporcular'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Ölçümler (cm)'
-                                            },
-                                            ticks: {
-                                                beginAtZero: true
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
+                                    </div>
+                                </form>
 
 
-                                    var ctx = document.getElementById("canvasVertOrt").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
-
-                                </script>
-
-                </li>
-
-                <li>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertOrt2"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgb(231,233,237)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var config = {
-                                      type: 'line',
-                                      data: {
-                                        labels: [
-                                        {% for k in vertTestOrtLab %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Maximum",
-                                          backgroundColor: chartColors.green,
-                                          borderColor: chartColors.green,
-                                          data: [
-                                            {% for k in vertTestOrtValue %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Vert Test Ortalama Ölçüm Sonuçları'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 1000
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Sporcular'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Ölçümler (cm)'
-                                            },
-                                            ticks: {
-                                                beginAtZero: true
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
+                                <div class="container-fluid" id="topdf">
 
 
-                                    var ctx = document.getElementById("canvasVertOrt2").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
-
-                                </script>
-
-                </li>
-
-            </ul>
-
-            <ul class="graphs_4">
-
-                <li>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertTotal"></canvas></div>
-
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgb(231,233,237)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var config = {
-                                      type: 'bar',
-                                      data: {
-                                        labels: [
-                                        {% for k in vertTestTotalLab|sort %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Maximum",
-                                          backgroundColor: chartColors.blue,
-                                          borderColor: chartColors.blue,
-                                          data: [
-                                            {% for k in vertTestTotalValue|sort %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Vert Test Total Sıçrama Sonuçları'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 1000
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Sporcular'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Ölçümler (adet)'
-                                            },
-                                            ticks: {
-                                                beginAtZero: true
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
+                                    <h2 class="nameTag"
+                                        style="padding-top:10%;text-align:center;margin-left:5%;">{{ nameChosen }}</h2>
+                                    <h2 class="nameTag"
+                                        style="padding-top:2%;text-align:center;margin-left:3.3%;">{{ dateChosen }}
+                                        Test Results</h2>
 
 
-                                    var ctx = document.getElementById("canvasVertTotal").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
+                                    <div class="row">
 
-                                </script>
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div>
+                                                        <canvas id="canvasVert"></canvas>
+                                                    </div>
+                                                </div>
 
-                </li>
+                                                <script>
 
-                <li>
-                                <div style="height: 18vh;width: 36vw;"><canvas id="canvasVertTotal2"></canvas></div>
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
 
-                                <script>
-
-                                    var chartColors = {
-                                      red: 'rgb(255, 99, 132)',
-                                      orange: 'rgb(255, 159, 64)',
-                                      yellow: 'rgb(255, 205, 86)',
-                                      green: 'rgb(75, 192, 192)',
-                                      blue: 'rgb(54, 162, 235)',
-                                      purple: 'rgb(153, 102, 255)',
-                                      grey: 'rgb(231,233,237)'
-                                    };
-
-                                    var randomScalingFactor = function() {
-                                      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                    }
-                                    var config = {
-                                      type: 'line',
-                                      data: {
-                                        labels: [
-                                        {% for k in vertTestTotalLab %}
-                                            "{{k}}",
-                                        {% endfor %}
-                                        ],
-                                        datasets: [{
-                                          label: "Maximum",
-                                          backgroundColor: chartColors.blue,
-                                          borderColor: chartColors.blue,
-                                          data: [
-                                            {% for k in vertTestTotalValue %}
-                                                "{{k}}",
-                                            {% endfor %}
-                                          ],
-                                          fill: false,
-                                        }]
-                                      },
-                                      options: {
-                                        responsive: true,
-                                        title: {
-                                          display: true,
-                                          text: 'Vert Test Total Sıçrama Sonuçları'
-                                        },
-                                        ticks: {
-                                          min: 0,
-                                          max: 1000
-                                        },
-                                        tooltips: {
-                                          mode: 'label',
-                                        },
-                                        hover: {
-                                          mode: 'nearest',
-                                          intersect: true
-                                        },
-                                        scales: {
-                                          xAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Sporcular'
-                                            }
-                                          }],
-                                          yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                              display: true,
-                                              labelString: 'Ölçümler (adet)'
-                                            },
-                                            ticks: {
-                                                beginAtZero: true
-                                            }
-                                          }]
-                                        }
-                                      }
-                                    };
-
-
-                                    var ctx = document.getElementById("canvasVertTotal2").getContext("2d");
-                                    window.myLine = new Chart(ctx, config);
-
-                                </script>
-
-                </li>
-
-            </ul>
-
+                                                    var randomScalingFactor = function () {
+                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                                    }
+                                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                                                    var config = {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in vertTestsWeekLab %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.red,
+                                                                borderColor: chartColors.red,
+                                                                data: [
+                                                                    {% for k in vertTestMax %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Ortalama",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.blue,
+                                                                borderColor: chartColors.blue,
+                                                                data: [
+                                                                    {% for k in vertTestOrt %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.yellow,
+                                                                borderColor: chartColors.yellow,
+                                                                data: [
+                                                                    {% for k in vertTestTotal %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Vert Test Sonuçları Son 52 Ölçüm'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Tarihler'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Ölçümler (cm)'
+                                                                    },
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
 
 
+                                                    var ctx = document.getElementById("canvasVert").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div>
+                                                        <canvas id="canvasVert2"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+
+                                                    var randomScalingFactor = function () {
+                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                                    }
+                                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                                                    var config = {
+                                                        type: 'line',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in vertTestsWeekLab %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.red,
+                                                                borderColor: chartColors.red,
+                                                                data: [
+                                                                    {% for k in vertTestMax %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Ortalama",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.blue,
+                                                                borderColor: chartColors.blue,
+                                                                data: [
+                                                                    {% for k in vertTestOrt %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.yellow,
+                                                                borderColor: chartColors.yellow,
+                                                                data: [
+                                                                    {% for k in vertTestTotal %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Vert Test Sonuçları Son 52 Ölçüm'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Tarihler'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Ölçümler (cm)'
+                                                                    },
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVert2").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+
+
+                                            <div class="col-lg-6">
+
+                                                <div class="chart block">
+                                                    <div>
+                                                        <canvas id="canvasVertMax"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+
+                                                    var randomScalingFactor = function () {
+                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                                    }
+                                                    var config = {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in vertTestMaxLab %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.orange,
+                                                                borderColor: chartColors.orange,
+                                                                data: [
+                                                                    {% for k in vertTestMaxValue %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Vert Test Maximum Ölçüm Sonuçları'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Sporcular'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Ölçümler (cm)'
+                                                                    },
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertMax").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div>
+                                                        <canvas id="canvasVertMax2"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+
+                                                    var randomScalingFactor = function () {
+                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                                    }
+                                                    var config = {
+                                                        type: 'line',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in vertTestMaxLab %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.orange,
+                                                                borderColor: chartColors.orange,
+                                                                data: [
+                                                                    {% for k in vertTestMaxValue %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Vert Test Maximum Ölçüm Sonuçları'
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Sporcular'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Ölçümler (cm)'
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertMax2").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+
+                                    </div>
+
+
+                                    <div class="row">
+
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div>
+                                                        <canvas id="canvasVertOrt"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+
+                                                    var randomScalingFactor = function () {
+                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                                    }
+                                                    var config = {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in vertTestOrtLab %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.green,
+                                                                borderColor: chartColors.green,
+                                                                data: [
+                                                                    {% for k in vertTestOrtValue %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Vert Test Ortalama Ölçüm Sonuçları'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Sporcular'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Ölçümler (cm)'
+                                                                    },
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertOrt").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div>
+                                                        <canvas id="canvasVertOrt2"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+
+                                                    var randomScalingFactor = function () {
+                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                                    }
+                                                    var config = {
+                                                        type: 'line',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in vertTestOrtLab %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.green,
+                                                                borderColor: chartColors.green,
+                                                                data: [
+                                                                    {% for k in vertTestOrtValue %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Vert Test Ortalama Ölçüm Sonuçları'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Sporcular'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Ölçümler (cm)'
+                                                                    },
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertOrt2").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div>
+                                                        <canvas id="canvasVertTotal"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+
+                                                    var randomScalingFactor = function () {
+                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                                    }
+                                                    var config = {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in vertTestTotalLab|sort %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.blue,
+                                                                borderColor: chartColors.blue,
+                                                                data: [
+                                                                    {% for k in vertTestTotalValue|sort %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Vert Test Total Sıçrama Sonuçları'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Sporcular'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Ölçümler (adet)'
+                                                                    },
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertTotal").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div>
+                                                        <canvas id="canvasVertTotal2"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+
+                                                    var randomScalingFactor = function () {
+                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+                                                    }
+                                                    var config = {
+                                                        type: 'line',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in vertTestTotalLab %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.blue,
+                                                                borderColor: chartColors.blue,
+                                                                data: [
+                                                                    {% for k in vertTestTotalValue %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Vert Test Total Sıçrama Sonuçları'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Sporcular'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Ölçümler (adet)'
+                                                                    },
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertTotal2").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-        </div>
-
-        </div>
-
+        </section>
+        <footer class="footer">
+            <div class="footer__block block no-margin-bottom">
+            </div>
+        </footer>
     </div>
 
-<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
-
-<script src="{{ url_for('static', filename='js/html2canvas.js')}}"></script>
-
-<script src="{{ url_for('static', filename='js/vert.js')}}"></script>
 
 
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+
+    <script src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/vert.js') }}"></script>
 
 {% endblock %}

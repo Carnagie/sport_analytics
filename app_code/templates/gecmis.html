@@ -1,868 +1,889 @@
 {% extends "base.html" %}
 
-{% block links %}
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/style_gecmis.css')}}">
-
-{% endblock %}
-
 {% block content %}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_gecmis.css') }}">
+
+
 
     <div class="bg-modal2">
 
-      <div class="modal-content2">
-        <div class="close2">+</div>
-
-        {% if 0 == testType %}
-
-          <div class="tableIn" id="toPDF">
-
-            <h3>{{dateKey}}</h3>
-
-            <img style="padding: 20px;" src="{{imageSource}}">
-
-            <h3 style="color: orange">{{sporcuFullName}}</h3>
-
-              <ul class="infoHeader2">
-                <li><h2>Son Ölçümler:</h2></li>
-              </ul>
-
-              <table class="infoTable0">
-              <tr>
-                <th> Squat </th>
-                <th> Bench Press </th>
-                <th> Row </th>
-                <th> Shoulder Press </th>
-                <th> Dead Lift </th>
-                <th> Hip Trust </th>
-              </tr>
-              <tr>
-
-                <td>{{ dataDict["squat"] }}</td>
-                <td>{{ dataDict["bench_press"] }}</td>
-                <td>{{ dataDict["row"] }}</td>
-                <td>{{ dataDict["shoulder_press"] }}</td>
-                <td>{{ dataDict["dead_lift"] }}</td>
-                <td>{{ dataDict["hip_trust"] }}</td>
-
-              </tr>
-            </table>
-
-              <ul class="infoHeader2">
-                <li><h2>Squat:</h2></li>
-              </ul>
-
-              <table class="infoTable0">
-              <tr>
-                <th> F. </th>
-                <th> 100% </th>
-                <th> 95% </th>
-                <th> 90% </th>
-                <th> 85% </th>
-                <th> 80% </th>
-                <th> 75% </th>
-                <th> 70% </th>
-                <th> 65% </th>
-                <th> 60% </th>
-                <th> 55% </th>
-                <th> 50% </th>
-                <th> 45% </th>
-              </tr>
-              <tr>
-                <td>Epley Formula</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-
-              </tr>
-            </table>
-
-
-              <ul class="infoHeader2">
-                <li><h2>Bench Press:</h2></li>
-              </ul>
-
-              <table class="infoTable0">
-              <tr>
-                <th> F. </th>
-                <th> 100% </th>
-                <th> 95% </th>
-                <th> 90% </th>
-                <th> 85% </th>
-                <th> 80% </th>
-                <th> 75% </th>
-                <th> 70% </th>
-                <th> 65% </th>
-                <th> 60% </th>
-                <th> 55% </th>
-                <th> 50% </th>
-                <th> 45% </th>
-              </tr>
-              <tr>
-                <td>Epley Formula</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-
-              </tr>
-            </table>
-
-              <ul class="infoHeader2">
-                <li><h2>Row:</h2></li>
-              </ul>
-
-              <table class="infoTable0">
-              <tr>
-                <th> F. </th>
-                <th> 100% </th>
-                <th> 95% </th>
-                <th> 90% </th>
-                <th> 85% </th>
-                <th> 80% </th>
-                <th> 75% </th>
-                <th> 70% </th>
-                <th> 65% </th>
-                <th> 60% </th>
-                <th> 55% </th>
-                <th> 50% </th>
-                <th> 45% </th>
-              </tr>
-              <tr>
-                <td>Epley Formula</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-
-              </tr>
-            </table>
-
-              <ul class="infoHeader2">
-                <li><h2>Shoulder:</h2></li>
-              </ul>
-
-              <table class="infoTable0">
-              <tr>
-                <th> F. </th>
-                <th> 100% </th>
-                <th> 95% </th>
-                <th> 90% </th>
-                <th> 85% </th>
-                <th> 80% </th>
-                <th> 75% </th>
-                <th> 70% </th>
-                <th> 65% </th>
-                <th> 60% </th>
-                <th> 55% </th>
-                <th> 50% </th>
-                <th> 45% </th>
-              </tr>
-              <tr>
-                <td>Epley Formula</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-
-              </tr>
-            </table>
-
-              <ul class="infoHeader2">
-                <li><h2>Dead Lift:</h2></li>
-              </ul>
-
-              <table class="infoTable0">
-              <tr>
-                <th> F. </th>
-                <th> 100% </th>
-                <th> 95% </th>
-                <th> 90% </th>
-                <th> 85% </th>
-                <th> 80% </th>
-                <th> 75% </th>
-                <th> 70% </th>
-                <th> 65% </th>
-                <th> 60% </th>
-                <th> 55% </th>
-                <th> 50% </th>
-                <th> 45% </th>
-              </tr>
-              <tr>
-                <td>Epley Formula</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-
-              </tr>
-            </table>
-
-              <ul class="infoHeader2">
-                <li><h2>Hip Trust:</h2></li>
-              </ul>
-
-              <table class="infoTable0">
-              <tr>
-                <th> F. </th>
-                <th> 100% </th>
-                <th> 95% </th>
-                <th> 90% </th>
-                <th> 85% </th>
-                <th> 80% </th>
-                <th> 75% </th>
-                <th> 70% </th>
-                <th> 65% </th>
-                <th> 60% </th>
-                <th> 55% </th>
-                <th> 50% </th>
-                <th> 45% </th>
-              </tr>
-              <tr>
-                <td>Epley Formula</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-                {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
-                <td>{{'%0.2f' % proc_err|float}}</td>
-
-              </tr>
-            </table>
-
-          </div>
-
-          <button class="buttonGecmisCikti" > SAVE PDF </button>
-
-        {% endif %}
-
-        {% if 1 == testType %}
-
-          <div class="tableIn" id="toPDF">
-
-            <h3>{{dateKey}}</h3>
-
-            <img style="padding: 20px;" src="{{imageSource}}">
-
-            <ul class="infoHeader2">
-              <li><h2>Total:</h2></li>
-              <li><h2>{{ dataDict["total"] }}</h2></li>
-            </ul>
-
-
-              <table class="infoTable0">
-              <tr>
-                <th> Test </th>
-                <th> Raw  </th>
-                <th> Final  </th>
-                <th> Not</th>
-              </tr>
-              <tr>
-                <td> Deep Squat </td>
-                {% for k in dataDict["deep_squat"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> P. Up Clearing </td>
-                {% for k in dataDict["press_up_clearing"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> T. S. Push Up </td>
-                {% for k in dataDict["trunk_stability_push_up"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> P. Rocking Clearing </td>
-                {% for k in dataDict["posterior_rocking_clearing"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              </table>
-
-              <table class="infoTable0">
-              <tr>
-                <th> Test </th>
-                <th> Raw Left </th>
-                <th> Raw Right </th>
-                <th> Final  </th>
-                <th> Not</th>
-              </tr>
-              <tr>
-                <td> Hudle Step </td>
-                {% for k in dataDict["hurdle_step"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> Inline Lunge </td>
-                {% for k in dataDict["inline_lunge"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> Shoulder Mobility </td>
-                {% for k in dataDict["shoulder_mobility"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> Impingement Clearing </td>
-                {% for k in dataDict["impingement_clearing"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> A. Straight Leg Raise </td>
-                {% for k in dataDict["act_str_leg_raise"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> Rotary Stability </td>
-                {% for k in dataDict["rotary_stability"] %}
-                <td> {{k}} </td>
-                {% endfor %}
-              </tr>
-              </table>
-
-
-          </div>
-
-            <button class="buttonGecmisCikti" > SAVE PDF </button>
-
-        {% endif %}
-
-        {% if 2 == testType %}
-
-          <div class="tableIn" id="toPDF">
-
-            <h3>{{dateKey}}</h3>
-
-            <img  style="padding: 20px;" src="{{imageSource}}">
-
-            <h3 style="color: orange">{{sporcuFullName}}</h3>
-
-            <ul class="infoHeader2">
-              <li><h2>Limb Length:</h2></li>
-              <li><h2>{{ dataDict["limb_length"] }}</h2></li>
-            </ul>
-            <ul class="infoHeader2">
-              <li><h2>Dominant Leg:</h2></li>
-              <li><h2>{{ dataDict["dominant_leg"] }}</h2></li>
-            </ul>
-              <table class="infoTable0">
-              <tr>
-                <th> Section </th>
-                <th> Left SL </th>
-                <th> Left SL </th>
-                <th> Left SL </th>
-                <th> Right X </th>
-                <th> Right X </th>
-                <th> Right X </th>
-                <th> Deficit </th>
-              </tr>
-              <tr>
-                <td> Anterior </td>
-                {% for k in dataDict["anterior"] %}
-                <td>{{ k }}</td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> Posteromedial </td>
-                {% for k in dataDict["posteromedial"] %}
-                <td>{{ k }}</td>
-                {% endfor %}
-              </tr>
-              <tr>
-                <td> Posterolateral </td>
-                {% for k in dataDict["posterolateral"] %}
-                <td>{{ k }}</td>
-                {% endfor %}
-              </tr>
-            </table>
-
-              <table class="infoTable0">
-              <tr>
-                <th> Total Left </th>
-                <th> Total Right </th>
-              </tr>
-
-              <tr>
-                <td>{{ dataDict["total"][0] }}</td>
-                <td>{{ dataDict["total"][1] }}</td>
-              </tr>
-              </table>
-
-          </div>
-
-            <button class="buttonGecmisCikti" > SAVE PDF </button>
-
-        {% endif %}
-
-
-        {% if 3 == testType %}
-
-          <div class="tableIn" style="margin-top: 10px;" id="toPDF">
-
-            <h3>{{dateKey}}</h3>
-
-
-            <img style="padding: 20px;" src="{{imageSource}}">
-
-
-            <h3 style="color: orange">{{sporcuFullName}}</h3>
-
-
-            <ul class="infoHeader2">
-              <li><h2>Time:</h2></li>
-              <li><h2>{{ dataDict["time"] }}</h2></li>
-            </ul>
-            <ul class="infoHeader2">
-              <li><h2>Location:</h2></li>
-              <li><h2>{{ dataDict["location"] }}</h2></li>
-            </ul>
-            <ul class="infoHeader2">
-              <li><h2>Position:</h2></li>
-              <li><h2>{{ dataDict["position"] }}</h2></li>
-            </ul>
-              <table class="infoTable0">
-              <tr>
-                <th> Jump 1 </th>
-                <th> Jump 2 </th>
-                <th> Jump 3 </th>
-              </tr>
-              <tr>
-                {% for k in dataDict["jumps"] %}
-                <td>{{ k }}</td>
-                {% endfor %}
-              </tr>
-
-            </table>
-
-
-            <button class="buttonGecmisCikti" > SAVE PDF </button>
-
-          </div>
-
-        {% endif %}
-
-
-        {% if 4 == testType %}
-
-          <div class="tableIn" style="margin-top: 10px;" id="toPDF">
-
-            <h3>{{dateKey}}</h3>
-
-
-            <img style="padding: 20px;" src="{{imageSource}}">
-
-
-            <h3 style="color: orange">{{sporcuFullName}}</h3>
-
-
-            <ul class="infoHeader2">
-              <li><h2>Vert Test Sonuçları:</h2></li>
-            </ul>
-              <table class="infoTable0">
-              <tr>
-                <th> Max Jump </th>
-                <th> Avg Jump </th>
-                <th> Jump Count </th>
-              </tr>
-              <tr>
-
-                <td>{{ dataDict["max"] }}</td>
-
-                <td>{{ dataDict["ort"] }}</td>
-
-                <td>{{ dataDict["total"] }}</td>
-
-              </tr>
-
-            </table>
-
-          </div>
-
-            <button class="buttonGecmisCikti" > SAVE PDF </button>
-
-        {% endif %}
-
-        {% if 5 == testType %}
-
-          <div class="tableIn" style="margin-top: 10px;" id="toPDF">
-
-            <h3>{{dateKey}}</h3>
-
-
-            <img style="padding: 20px;" src="{{imageSource}}">
-
-
-            <h3 style="color: orange">{{sporcuFullName}}</h3>
-
-
-            <ul class="infoHeader2">
-              <li><h2>Polar Test Sonuçları:</h2></li>
-            </ul>
-              <table class="infoTable0">
-              <tr>
-                <th> Max Beat </th>
-                <th> Avg Beat </th>
-                <th> Total Beat </th>
-              </tr>
-              <tr>
-
-                <td>{{ dataDict["max"] }}</td>
-
-                <td>{{ dataDict["ort"] }}</td>
-
-                <td>{{ dataDict["total"] }}</td>
-
-              </tr>
-
-            </table>
-
-
-
-          </div>
-
-        <button class="buttonGecmisCikti" > SAVE PDF </button>
-
-        {% endif %}
-
-        {% if 6 == testType %}
-
-          <div class="tableIn" style="margin-top: 10px;" id="toPDF">
-
-            <h3>{{dateKey}}</h3>
-
-
-            <img style="padding: 20px;" src="{{imageSource}}">
-
-
-            <h3 style="color: orange">{{sporcuFullName}}</h3>
-
-
-            <ul class="infoHeader2">
-              <li><h2>Ace Hızı Test Sonuçları:</h2></li>
-            </ul>
-              <table class="infoTable0">
-              <tr>
-                <th> Max Hız </th>
-                <th> Avg Hız </th>
-                <th> Total Ölçüm </th>
-              </tr>
-              <tr>
-
-                <td>{{ dataDict["ace"]["max"] }}</td>
-
-                <td>{{ dataDict["ace"]["avg"] }}</td>
-
-                <td>{{ dataDict["ace"]["total"] }}</td>
-
-              </tr>
-
-              </table>
-
-            <ul class="infoHeader2">
-              <li><h2>Hit Hızı Test Sonuçları:</h2></li>
-            </ul>
-              <table class="infoTable0">
-              <tr>
-                <th> Max Hız </th>
-                <th> Avg Hız </th>
-                <th> Total Ölçüm </th>
-              </tr>
-              <tr>
-
-                <td>{{ dataDict["hit"]["max"] }}</td>
-
-                <td>{{ dataDict["hit"]["avg"] }}</td>
-
-                <td>{{ dataDict["hit"]["total"] }}</td>
-
-              </tr>
-
-              </table>
-
-
-            <ul class="infoHeader2">
-              <li><h2>Servis Hızı Test Sonuçları:</h2></li>
-            </ul>
-              <table class="infoTable0">
-              <tr>
-                <th> Max Hız </th>
-                <th> Avg Hız </th>
-                <th> Total Ölçüm </th>
-              </tr>
-              <tr>
-
-                <td>{{ dataDict["servis"]["max"] }}</td>
-
-                <td>{{ dataDict["servis"]["avg"] }}</td>
-
-                <td>{{ dataDict["servis"]["total"] }}</td>
-
-              </tr>
-
-              </table>
-
-            <ul class="infoHeader2">
-              <li><h2>Hata Hızı Test Sonuçları:</h2></li>
-            </ul>
-              <table class="infoTable0">
-              <tr>
-                <th> Max Hız </th>
-                <th> Avg Hız </th>
-                <th> Total Ölçüm </th>
-              </tr>
-              <tr>
-
-                <td>{{ dataDict["hata"]["max"] }}</td>
-
-                <td>{{ dataDict["hata"]["avg"] }}</td>
-
-                <td>{{ dataDict["hata"]["total"] }}</td>
-
-              </tr>
-
-              </table>
-
-
-          </div>
-
-            <button class="buttonGecmisCikti" > SAVE PDF </button>
-
-        {% endif %}
-
-
-      </div>
-
-    </div>
-
-
-    <div class="bg-modal">
-      <form action="/gecmis" method="post" autocomplete="off">
-                <input  style="display: none;" type="text" class="rowDataInput" name="rowDataInput" value="">
-      <div class="modal-content">
-        <div class="close">+</div>
-
-        <h2 class="title">İlgili Tarihi Girin:</h2>
-        <ul class="radios">
-          <li>
-            <input type="radio" class="maximal" name="testType" value="0"> <h2>Maximal Test Sonuçları</h2>
-          </li>
-          <li>
-            <input type="radio" class="fms" name="testType" value="1"> <h2>FMS Test Sonuçları</h2>
-          </li>
-          <li>
-            <input type="radio" class="ybalance" name="testType" value="2"> <h2>Y-Balance Test Sonuçları</h2>
-          </li>
-          <li>
-            <input type="radio" class="jump" name="testType" value="3"> <h2>Sıçrama Test Sonuçları</h2>
-          </li>
-          <li>
-            <input type="radio" class="vert" name="testType" value="4"> <h2>Vert Test Sonuçları</h2>
-          </li>
-          <li>
-            <input type="radio" class="polar" name="testType" value="5"> <h2>Polar Test Sonuçları</h2>
-          </li>
-          <li>
-            <input type="radio" class="servis" name="testType" value="6"> <h2>Servis Hızı Test Sonuçları</h2>
-          </li>
-        </ul>
-        <input type="text" name="dateInputText" placeholder="DD/MM/YYYY veya SON">
-        <input type="submit" class="dateButton" name="dateButton" value="GETİR" onclick="getDefaultSelected2();">
-
-      </div>
-
-    </form>
-    </div>
-
-    <div class="main_content">
-        <div class="header">Ölçüm eklemek istediğiniz kişiyi seçip devam edin..</div>
-
-
-
-        <div class="info">
-
-          <div class="body_container">
-
-              <div class="tableSQL">
-
-
-
-                <table class="customers">
-                  <tr>
-                      <th> <i class="fa fa-list" aria-hidden="true"></i> </th>
-                    {% for hd in tableHeader %}
-                      <th>{{hd}}</th>
-                    {% endfor %}
-                  </tr>
-                  {% for row in table %}
-
-                  <tr>
-
-
-                      <td>  <button class="button" onclick="getID({{loop.index}});">  <h2 style="color: green">✔</h2> </button>  </td>
-
-                      <input style="display: none;" type="text" name="rowDatas" value="{{ row }}">
-
-                    {% for rowData in row %}
-
-                      <td>{{rowData}}</td>
-
-                    {% endfor %}
-
-                  </tr>
-
-                  {% endfor %}
-
-
-                </table>
-
-
-            </div>
-
-          </div>
-
-
-
-
-
-
+        <div class="modal-content2">
+            <div class="close2">+</div>
+
+            {% if 0 == testType %}
+
+                <div class="tableIn" id="toPDF">
+
+                    <h3>{{ dateKey }}</h3>
+
+                    <img style="padding: 20px;" src="{{ imageSource }}">
+
+                    <h3 style="color: orange">{{ sporcuFullName }}</h3>
+
+                    <ul class="infoHeader2" style="list-style-type: none" style="list-style-type: none">
+                        <li><h2>Latest Results:</h2></li>
+                    </ul>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Squat</th>
+                            <th> Bench Press</th>
+                            <th> Row</th>
+                            <th> Shoulder Press</th>
+                            <th> Dead Lift</th>
+                            <th> Hip Trust</th>
+                        </tr>
+                        <tr>
+
+                            <td>{{ dataDict["squat"] }}</td>
+                            <td>{{ dataDict["bench_press"] }}</td>
+                            <td>{{ dataDict["row"] }}</td>
+                            <td>{{ dataDict["shoulder_press"] }}</td>
+                            <td>{{ dataDict["dead_lift"] }}</td>
+                            <td>{{ dataDict["hip_trust"] }}</td>
+
+                        </tr>
+                    </table>
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Squat:</h2></li>
+                    </ul>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> F.</th>
+                            <th> 100%</th>
+                            <th> 95%</th>
+                            <th> 90%</th>
+                            <th> 85%</th>
+                            <th> 80%</th>
+                            <th> 75%</th>
+                            <th> 70%</th>
+                            <th> 65%</th>
+                            <th> 60%</th>
+                            <th> 55%</th>
+                            <th> 50%</th>
+                            <th> 45%</th>
+                        </tr>
+                        <tr>
+                            <td>Epley Formula</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["squat"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+
+                        </tr>
+                    </table>
+
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Bench Press:</h2></li>
+                    </ul>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> F.</th>
+                            <th> 100%</th>
+                            <th> 95%</th>
+                            <th> 90%</th>
+                            <th> 85%</th>
+                            <th> 80%</th>
+                            <th> 75%</th>
+                            <th> 70%</th>
+                            <th> 65%</th>
+                            <th> 60%</th>
+                            <th> 55%</th>
+                            <th> 50%</th>
+                            <th> 45%</th>
+                        </tr>
+                        <tr>
+                            <td>Epley Formula</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["bench_press"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+
+                        </tr>
+                    </table>
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Row:</h2></li>
+                    </ul>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> F.</th>
+                            <th> 100%</th>
+                            <th> 95%</th>
+                            <th> 90%</th>
+                            <th> 85%</th>
+                            <th> 80%</th>
+                            <th> 75%</th>
+                            <th> 70%</th>
+                            <th> 65%</th>
+                            <th> 60%</th>
+                            <th> 55%</th>
+                            <th> 50%</th>
+                            <th> 45%</th>
+                        </tr>
+                        <tr>
+                            <td>Epley Formula</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["row"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+
+                        </tr>
+                    </table>
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Shoulder:</h2></li>
+                    </ul>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> F.</th>
+                            <th> 100%</th>
+                            <th> 95%</th>
+                            <th> 90%</th>
+                            <th> 85%</th>
+                            <th> 80%</th>
+                            <th> 75%</th>
+                            <th> 70%</th>
+                            <th> 65%</th>
+                            <th> 60%</th>
+                            <th> 55%</th>
+                            <th> 50%</th>
+                            <th> 45%</th>
+                        </tr>
+                        <tr>
+                            <td>Epley Formula</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["shoulder_press"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+
+                        </tr>
+                    </table>
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Dead Lift:</h2></li>
+                    </ul>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> F.</th>
+                            <th> 100%</th>
+                            <th> 95%</th>
+                            <th> 90%</th>
+                            <th> 85%</th>
+                            <th> 80%</th>
+                            <th> 75%</th>
+                            <th> 70%</th>
+                            <th> 65%</th>
+                            <th> 60%</th>
+                            <th> 55%</th>
+                            <th> 50%</th>
+                            <th> 45%</th>
+                        </tr>
+                        <tr>
+                            <td>Epley Formula</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["dead_lift"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+
+                        </tr>
+                    </table>
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Hip Trust:</h2></li>
+                    </ul>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> F.</th>
+                            <th> 100%</th>
+                            <th> 95%</th>
+                            <th> 90%</th>
+                            <th> 85%</th>
+                            <th> 80%</th>
+                            <th> 75%</th>
+                            <th> 70%</th>
+                            <th> 65%</th>
+                            <th> 60%</th>
+                            <th> 55%</th>
+                            <th> 50%</th>
+                            <th> 45%</th>
+                        </tr>
+                        <tr>
+                            <td>Epley Formula</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 95 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 90 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 85 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 80 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 75 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 70 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 65 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 60 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 55 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 50 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+                            {% set proc_err = dataDict["hip_trust"]|int * ( 1 + 1 / 30 ) * 45 / 100 %}
+                            <td>{{ '%0.2f' % proc_err|float }}</td>
+
+                        </tr>
+                    </table>
+
+                </div>
+
+                <button class="buttonGecmisCikti"> SAVE PDF</button>
+
+            {% endif %}
+
+            {% if 1 == testType %}
+
+                <div class="tableIn" id="toPDF">
+
+                    <h3>{{ dateKey }}</h3>
+
+                    <img style="padding: 20px;" src="{{ imageSource }}">
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Total:</h2></li>
+                        <li><h2>{{ dataDict["total"] }}</h2></li>
+                    </ul>
+
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Test</th>
+                            <th> Raw</th>
+                            <th> Final</th>
+                            <th> Not</th>
+                        </tr>
+                        <tr>
+                            <td> Deep Squat</td>
+                            {% for k in dataDict["deep_squat"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> P. Up Clearing</td>
+                            {% for k in dataDict["press_up_clearing"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> T. S. Push Up</td>
+                            {% for k in dataDict["trunk_stability_push_up"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> P. Rocking Clearing</td>
+                            {% for k in dataDict["posterior_rocking_clearing"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Test</th>
+                            <th> Raw Left</th>
+                            <th> Raw Right</th>
+                            <th> Final</th>
+                            <th> Not</th>
+                        </tr>
+                        <tr>
+                            <td> Hudle Step</td>
+                            {% for k in dataDict["hurdle_step"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> Inline Lunge</td>
+                            {% for k in dataDict["inline_lunge"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> Shoulder Mobility</td>
+                            {% for k in dataDict["shoulder_mobility"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> Impingement Clearing</td>
+                            {% for k in dataDict["impingement_clearing"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> A. Straight Leg Raise</td>
+                            {% for k in dataDict["act_str_leg_raise"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> Rotary Stability</td>
+                            {% for k in dataDict["rotary_stability"] %}
+                                <td> {{ k }} </td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+
+
+                </div>
+
+                <button class="buttonGecmisCikti"> SAVE PDF</button>
+
+            {% endif %}
+
+            {% if 2 == testType %}
+
+                <div class="tableIn" id="toPDF">
+
+                    <h3>{{ dateKey }}</h3>
+
+                    <img style="padding: 20px;" src="{{ imageSource }}">
+
+                    <h3 style="color: orange">{{ sporcuFullName }}</h3>
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Limb Length:</h2></li>
+                        <li><h2>{{ dataDict["limb_length"] }}</h2></li>
+                    </ul>
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Dominant Leg:</h2></li>
+                        <li><h2>{{ dataDict["dominant_leg"] }}</h2></li>
+                    </ul>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Section</th>
+                            <th> Left SL</th>
+                            <th> Left SL</th>
+                            <th> Left SL</th>
+                            <th> Right X</th>
+                            <th> Right X</th>
+                            <th> Right X</th>
+                            <th> Deficit</th>
+                        </tr>
+                        <tr>
+                            <td> Anterior</td>
+                            {% for k in dataDict["anterior"] %}
+                                <td>{{ k }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> Posteromedial</td>
+                            {% for k in dataDict["posteromedial"] %}
+                                <td>{{ k }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td> Posterolateral</td>
+                            {% for k in dataDict["posterolateral"] %}
+                                <td>{{ k }}</td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Total Left</th>
+                            <th> Total Right</th>
+                        </tr>
+
+                        <tr>
+                            <td>{{ dataDict["total"][0] }}</td>
+                            <td>{{ dataDict["total"][1] }}</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <button class="buttonGecmisCikti"> SAVE PDF</button>
+
+            {% endif %}
+
+
+            {% if 3 == testType %}
+
+                <div class="tableIn" style="margin-top: 10px;" id="toPDF">
+
+                    <h3>{{ dateKey }}</h3>
+
+
+                    <img style="padding: 20px;" src="{{ imageSource }}">
+
+
+                    <h3 style="color: orange">{{ sporcuFullName }}</h3>
+
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Time:</h2></li>
+                        <li><h2>{{ dataDict["time"] }}</h2></li>
+                    </ul>
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Location:</h2></li>
+                        <li><h2>{{ dataDict["location"] }}</h2></li>
+                    </ul>
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Position:</h2></li>
+                        <li><h2>{{ dataDict["position"] }}</h2></li>
+                    </ul>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Jump 1</th>
+                            <th> Jump 2</th>
+                            <th> Jump 3</th>
+                        </tr>
+                        <tr>
+                            {% for k in dataDict["jumps"] %}
+                                <td>{{ k }}</td>
+                            {% endfor %}
+                        </tr>
+
+                    </table>
+
+
+                    <button class="buttonGecmisCikti"> SAVE PDF</button>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if 4 == testType %}
+
+                <div class="tableIn" style="margin-top: 10px;" id="toPDF">
+
+                    <h3>{{ dateKey }}</h3>
+
+
+                    <img style="padding: 20px;" src="{{ imageSource }}">
+
+
+                    <h3 style="color: orange">{{ sporcuFullName }}</h3>
+
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Vert Test Sonuçları:</h2></li>
+                    </ul>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Max Jump</th>
+                            <th> Avg Jump</th>
+                            <th> Jump Count</th>
+                        </tr>
+                        <tr>
+
+                            <td>{{ dataDict["max"] }}</td>
+
+                            <td>{{ dataDict["ort"] }}</td>
+
+                            <td>{{ dataDict["total"] }}</td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <button class="buttonGecmisCikti"> SAVE PDF</button>
+
+            {% endif %}
+
+            {% if 5 == testType %}
+
+                <div class="tableIn" style="margin-top: 10px;" id="toPDF">
+
+                    <h3>{{ dateKey }}</h3>
+
+
+                    <img style="padding: 20px;" src="{{ imageSource }}">
+
+
+                    <h3 style="color: orange">{{ sporcuFullName }}</h3>
+
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Polar Test Results:</h2></li>
+                    </ul>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Max Beat</th>
+                            <th> Avg Beat</th>
+                            <th> Total Beat</th>
+                        </tr>
+                        <tr>
+
+                            <td>{{ dataDict["max"] }}</td>
+
+                            <td>{{ dataDict["ort"] }}</td>
+
+                            <td>{{ dataDict["total"] }}</td>
+
+                        </tr>
+
+                    </table>
+
+
+                </div>
+
+                <button class="buttonGecmisCikti"> SAVE PDF</button>
+
+            {% endif %}
+
+            {% if 6 == testType %}
+
+                <div class="tableIn" style="margin-top: 10px;" id="toPDF">
+
+                    <h3>{{ dateKey }}</h3>
+
+
+                    <img style="padding: 20px;" src="{{ imageSource }}">
+
+
+                    <h3 style="color: orange">{{ sporcuFullName }}</h3>
+
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Ace Speed Test Results</h2></li>
+                    </ul>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Max Speed</th>
+                            <th> Avg Speed</th>
+                            <th> Total Count</th>
+                        </tr>
+                        <tr>
+
+                            <td>{{ dataDict["ace"]["max"] }}</td>
+
+                            <td>{{ dataDict["ace"]["avg"] }}</td>
+
+                            <td>{{ dataDict["ace"]["total"] }}</td>
+
+                        </tr>
+
+                    </table>
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Slash Speed Test Results:</h2></li>
+                    </ul>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Max Speed</th>
+                            <th> Avg Speed</th>
+                            <th> Total Count</th>
+                        </tr>
+                        <tr>
+
+                            <td>{{ dataDict["hit"]["max"] }}</td>
+
+                            <td>{{ dataDict["hit"]["avg"] }}</td>
+
+                            <td>{{ dataDict["hit"]["total"] }}</td>
+
+                        </tr>
+
+                    </table>
+
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Servis Speed Test Results:</h2></li>
+                    </ul>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Max Speed</th>
+                            <th> Avg Speed</th>
+                            <th> Total Results</th>
+                        </tr>
+                        <tr>
+
+                            <td>{{ dataDict["servis"]["max"] }}</td>
+
+                            <td>{{ dataDict["servis"]["avg"] }}</td>
+
+                            <td>{{ dataDict["servis"]["total"] }}</td>
+
+                        </tr>
+
+                    </table>
+
+                    <ul class="infoHeader2" style="list-style-type: none">
+                        <li><h2>Hata Speed Test Results:</h2></li>
+                    </ul>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th> Max Speed</th>
+                            <th> Avg Speed</th>
+                            <th> Total Results</th>
+                        </tr>
+                        <tr>
+
+                            <td>{{ dataDict["hata"]["max"] }}</td>
+
+                            <td>{{ dataDict["hata"]["avg"] }}</td>
+
+                            <td>{{ dataDict["hata"]["total"] }}</td>
+
+                        </tr>
+
+                    </table>
+
+
+                </div>
+
+                <button class="buttonGecmisCikti"> SAVE PDF</button>
+
+            {% endif %}
 
 
         </div>
 
     </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 
-<script src="{{ url_for('static', filename='js/html2canvas.js')}}"></script>
 
-<script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+    <div class="bg-modal">
+        <form action="/gecmis" method="post" autocomplete="off">
+            <input style="display: none;" type="text" class="rowDataInput" name="rowDataInput" value="">
+            <div class="modal-content">
+                <div class="close">+</div>
 
-<script src="{{ url_for('static', filename='js/gecmis.js')}}"></script>
+                <label class="form-control-label"> <h1 style="color: #BABABB">Enter The Date And Chose Athlete</h1></label>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="form-control-label"><h3>Maximal Test</h3></label>
+                        <input type="radio" class="maximal" name="testType" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label"><h3>FMS Test</h3></label>
+                        <input type="radio" class="fms" name="testType" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label"><h3>Y-Balance Test</h3></label>
+                        <input type="radio" class="ybalance" name="testType" value="2">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label"><h3>Jump Test</h3></label>
+                        <input type="radio" class="jump" name="testType" value="3">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label"><h3>Vert Test</h3></label>
+                        <input type="radio" class="vert" name="testType" value="4">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label"><h3>Polar Test</h3></label>
+                        <input type="radio" class="polar" name="testType" value="5">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label"><h3>Serve Speed Test</h3></label>
+                        <input type="radio" class="servis" name="testType" value="6">
+                    </div>
+                    <input class="form-control" type="text" name="dateInputText" style="color: whitesmoke" placeholder="DD/MM/YYYY veya SON">
+                    <input type="submit" class="form-control btn btn-success" name="dateButton" value="GET"
+                           onclick="getDefaultSelected2();">
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+
+
+    <!-- Sidebar Navigation end-->
+    <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Past Tests</h2>
+            </div>
+        </div>
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Past Tests</li>
+            </ul>
+        </div>
+        <section class="no-padding-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="block margin-bottom-sm">
+                            <div class="title"><strong>Athlete Test Forms</strong></div>
+                            <div class="table-responsive">
+
+                                <table class="table">
+                                    <tr>
+                                        <th><i class="fa fa-list" aria-hidden="true"></i></th>
+                                        {% for hd in tableHeader %}
+                                            <th>{{ hd }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    {% for row in table %}
+
+                                        <tr>
+
+
+                                            <td style="text-align: center">
+                                                <button class="btn btn-info" style="width: 100%"
+                                                        onclick="getID({{ loop.index }});"><i class="fa fa-check-square"
+                                                                                              aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+
+                                            <input style="display: none;" type="text" name="rowDatas" value="{{ row }}">
+
+                                            {% for rowData in row %}
+
+                                                <td>{{ rowData }}</td>
+
+                                            {% endfor %}
+
+                                        </tr>
+
+                                    {% endfor %}
+
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="footer__block block no-margin-bottom">
+            </div>
+        </footer>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+
+    <script src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/gecmis.js') }}"></script>
 
 {% endblock %}

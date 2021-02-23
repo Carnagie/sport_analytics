@@ -1,164 +1,191 @@
 {% extends "base.html" %}
 
-{% block links %}
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='css/style_sporcu.css')}}">
-<script src="{{ url_for('static', filename='js/sporcu.js')}}"></script>
-{% endblock %}
-
 {% block content %}
-    <form action="/sporcu" method="post" autocomplete="off" enctype="multipart/form-data">
-    <div class="main_content">
-        <div class="header">Sporcu eklemek için kayit formu..</div>
-        <div class="info">
 
-        <div class="body_container">
+    <script src="{{ url_for('static', filename='js/sporcu.js') }}"></script>
 
-            <div class="inputContainer">
-                <div class="backgroundWrapped">
-                <label for="file_photo" class="file">
-                    <div id="camera_icon" class="camera_icon">
-                    <img class="defaultPhoto" src="static/athlete_images/default.png">
-                    </div>
-                    <label class="file_photo_sporcu">
-                    <h3>Fotoğraf Yükle</h3>
-                    <input style="display: none;" type="file" id="file_photo" class="file_photo" onchange="preview_image(event)" name="item_image"/>
-                    </label>
-                </label>
-
-                <ul class="infoWrap">
-                <li>
-                    <ul class="infoList">
-
-                        <li>
-                            <h2>Ad:</h2>
-                            <input type="text" name="SporcuInf" >
-                        </li>
-                        <li>
-                            <h2>Soyad:</h2>
-                            <input type="text" name="SporcuInf" >
-                        </li>
-                        <li>
-                            <h2>Kilo:</h2>
-                            <input type="number" name="SporcuInf" placeholder="  100.0" step="0.01">
-                        </li>
-                        <li>
-                            <h2>Boy:</h2>
-                            <input type="number" name="SporcuInf" placeholder="  2.05" step="0.01">
-                        </li>
-                        <li>
-                            <h2>Mevki:</h2>
-                            <input type="text" name="SporcuInf" placeholder="  Pasör)">
-                        </li>
-                        <li>
-                            <h2>Cinsiyet:</h2>
-                            <select  class="selectBox" name="SporcuInf2">
-                                <option value="erkek">
-                                    Erkek
-                                </option>
-                                <option value="kadin">
-                                    Kadın
-                                </option>
-                            </select>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="infoList2">
-                    <li>
-                        <li>
-                            <h2>Sağlık:</h2>
-                            <select  class="selectBox2" name="SporcuInf">
-                                <option value="İYİ">
-                                    İYİ
-                                </option>
-                                <option value="ORTA">
-                                    ORTA
-                                </option>
-                                <option value="KÖTÜ">
-                                    KÖTÜ
-                                </option>
-                            </select>
-                        </li>
-                        <li>
-                            <h2>Kan:</h2>
-                            <select  class="selectBox2" name="SporcuInf">
-                                <option value="0 rh-">
-                                    0 rh-
-                                </option>
-                                <option value="0 rh+">
-                                    0 rh+
-                                </option>
-                                <option value="A rh-">
-                                    A rh-
-                                </option>
-                                <option value="A rh+">
-                                    A rh+
-                                </option>
-                                <option value="B rh-">
-                                    B rh-
-                                </option>
-                                <option value="B rh+">
-                                    B rh+
-                                </option>
-                                <option value="AB rh-">
-                                    AB rh-
-                                </option>
-                                <option value="AB rh+">
-                                    AB rh+
-                                </option>
-                                <option value="---">
-                                    ---
-                                </option>
-                            </select>
-                        </li>
-                        <li>
-                            <h2>Beden:</h2>
-                            <select  class="selectBox2" name="SporcuInf">
-                                <option value="XL">
-                                    XL
-                                </option>
-                                <option value="L">
-                                    L
-                                </option>
-                                <option value="M">
-                                    M
-                                </option>
-                                <option value="S">
-                                    S
-                                </option>
-                            </select>
-                        </li>
-                        <li>
-                            <h2>Tel:</h2>
-                            <input type="text" name="SporcuInf" placeholder="  xxx xxx xx xx">
-                        </li>
-                        <li style="display:none;">
-                            <h2>Sporcu Fotoğrafı:</h2>
-                            <input type="text" class="sporcuPhoto" name="SporcuInf" placeholder="  default">
-                        </li>
-                        <li>
-                            <h2>Yas:</h2>
-                            <input type="text" class="sporcuInf" name="SporcuInf2" placeholder=" 21">
-                        </li>
-                        <li>
-                            <h2>Notlar:</h2>
-                            <input type="text" class="sporcuInf" name="SporcuInf2" placeholder="  sağlık">
-                        </li>
-                    </ul>
-                </li>
-                </ul>
-                <input type="submit" name="submitSporcu" value="KAYDET" class="buttonSporcu">
-                </div>
-
-
-
-
-
+    <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Athlete Adding Form</h2>
             </div>
+        </div>
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Form</li>
+            </ul>
+        </div>
+        <section class="no-padding-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Basic Form-->
+                    <div class="col-lg-12">
+                        <div class="block">
+                            <div class="title"><strong class="d-block">Athlete Form</strong><span class="d-block">Enter Athlete Information.</span>
+                            </div>
+                            <div class="block-body">
+                                <form action="/sporcu" method="post" autocomplete="off" enctype="multipart/form-data">
 
-        </div>
-        </div>
+                                    <div class="form-group">
+                                    <label for="file_photo" class="form-control-label">
+                                        <div id="camera_icon" class="camera_icon">
+                                        <img class="defaultPhoto" src="static/athlete_images/default.png">
+                                        </div>
+                                        <label class="file_photo_sporcu">
+                                        <input style="display: none;" type="file" id="file_photo" class="file_photo" onchange="preview_image(event)" name="item_image"/>
+                                        </label>
+                                    </label>
+                                    </div>
+
+
+                                    <style>
+                                        .defaultPhoto {
+                                            background-repeat: no-repeat;
+                                            object-fit: cover;
+                                            width: 100%;
+                                            height: 100%;
+                                        }
+                                        .camera_icon {
+                                            background-repeat: no-repeat;
+                                            border: 2px solid #6C0000;
+                                            height: 25vh;
+                                            width: 50vw;
+                                        }
+                                    </style>
+
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Name</label>
+                                        <input type="text" name="SporcuInf" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Surname</label>
+                                        <input type="text" name="SporcuInf" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Weight</label>
+                                        <input type="number" name="SporcuInf" placeholder="  100.0" step="0.01"
+                                               class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Height</label>
+                                        <input type="number" name="SporcuInf" placeholder="  2.05" step="0.01"
+                                               class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Position</label>
+                                        <input type="text" name="SporcuInf" placeholder="" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Sex</label>
+                                        <select name="SporcuInf2" class="form-control">
+                                            <option value="erkek">
+                                                Erkek
+                                            </option>
+                                            <option value="kadin">
+                                                Kadın
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Health</label>
+                                        <select name="SporcuInf" class="form-control">
+                                            <option value="GOOD">
+                                                İYİ
+                                            </option>
+                                            <option value="MID">
+                                                ORTA
+                                            </option>
+                                            <option value="BAD">
+                                                KÖTÜ
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Blood Type</label>
+                                        <select name="SporcuInf" class="form-control">
+                                            <option value="0 rh-">
+                                                0 rh-
+                                            </option>
+                                            <option value="0 rh+">
+                                                0 rh+
+                                            </option>
+                                            <option value="A rh-">
+                                                A rh-
+                                            </option>
+                                            <option value="A rh+">
+                                                A rh+
+                                            </option>
+                                            <option value="B rh-">
+                                                B rh-
+                                            </option>
+                                            <option value="B rh+">
+                                                B rh+
+                                            </option>
+                                            <option value="AB rh-">
+                                                AB rh-
+                                            </option>
+                                            <option value="AB rh+">
+                                                AB rh+
+                                            </option>
+                                            <option value="---">
+                                                ---
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Size</label>
+                                        <select name="SporcuInf" class="form-control">
+                                            <option value="XL">
+                                                XL
+                                            </option>
+                                            <option value="L">
+                                                L
+                                            </option>
+                                            <option value="M">
+                                                M
+                                            </option>
+                                            <option value="S">
+                                                S
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Phone</label>
+                                        <input type="text" name="SporcuInf"
+                                               class="form-control">
+                                    </div>
+                                    <div class="form-group" style="display: none">
+                                        <label class="form-control-label">Athlete Picture</label>
+                                        <input type="text" name="SporcuInf" class="form-control" id="sporcuPhoto">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Age</label>
+                                        <input type="text" name="SporcuInf2" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Athlete Notes</label>
+                                        <input type="text" name="SporcuInf2"
+                                               class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="ADD" class="form-control btn btn-primary">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="footer__block block no-margin-bottom">
+            </div>
+        </footer>
     </div>
-    </form>
+
 
 {% endblock %}
+

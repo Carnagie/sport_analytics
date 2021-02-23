@@ -1,8 +1,4 @@
-$(document).on('click','#add',
-function() {
-    var itm = document.querySelector('#base').cloneNode( true );
-    document.getElementById("dynamicInputs").appendChild(itm);
-});
+
 
 
 $(document).on('click','.button',
@@ -12,98 +8,84 @@ function() {
 
 
 
-$(document).on('click','.maximalTestForm',
+$(document).on('click','#maximalTestForm',
 function() {
-    document.querySelector('.maximalTest').style.display = 'flex';
+    document.querySelector('.maximalTest').style.display = 'inline';
     document.querySelector('.fmsTest').style.display = 'none';
     document.querySelector('.ybalanceTest').style.display = 'none';
     document.querySelector('.jumpTest').style.display = 'none';
     document.querySelector('.vertTest').style.display = 'none';
-    document.querySelector('.modal-content').style.height = '780px';
-    document.querySelector('.modal-content').style.width = '1000px';
     document.querySelector('.polarTest').style.display = 'none';
     document.querySelector('.servisTest').style.display = 'none';
 });
 
-$(document).on('click','.fmsTestForm',
+$(document).on('click','#fmsTestForm',
 function() {
     document.querySelector('.maximalTest').style.display = 'none';
-    document.querySelector('.fmsTest').style.display = 'flex';
+    document.querySelector('.fmsTest').style.display = 'inline';
     document.querySelector('.ybalanceTest').style.display = 'none';
     document.querySelector('.jumpTest').style.display = 'none';
     document.querySelector('.vertTest').style.display = 'none';
-    document.querySelector('.modal-content').style.height = '1140px';
-    document.querySelector('.modal-content').style.width = '1000px';
     document.querySelector('.polarTest').style.display = 'none';
     document.querySelector('.servisTest').style.display = 'none';
 
 });
 
-$(document).on('click','.ybalanceTestForm',
+$(document).on('click','#ybalanceTestForm',
 function() {
     document.querySelector('.maximalTest').style.display = 'none';
     document.querySelector('.fmsTest').style.display = 'none';
-    document.querySelector('.ybalanceTest').style.display = 'flex';
+    document.querySelector('.ybalanceTest').style.display = 'inline';
     document.querySelector('.jumpTest').style.display = 'none';
     document.querySelector('.vertTest').style.display = 'none';
-    document.querySelector('.modal-content').style.height = '840px';
-    document.querySelector('.modal-content').style.width = '1000px';
     document.querySelector('.polarTest').style.display = 'none';
     document.querySelector('.servisTest').style.display = 'none';
 });
 
-$(document).on('click','.jumpTestForm',
+$(document).on('click','#jumpTestForm',
 function() {
     document.querySelector('.maximalTest').style.display = 'none';
     document.querySelector('.fmsTest').style.display = 'none';
     document.querySelector('.ybalanceTest').style.display = 'none';
-    document.querySelector('.jumpTest').style.display = 'flex';
+    document.querySelector('.jumpTest').style.display = 'inline';
     document.querySelector('.vertTest').style.display = 'none';
-    document.querySelector('.modal-content').style.height = '645px';
-    document.querySelector('.modal-content').style.width = '1000px';
     document.querySelector('.polarTest').style.display = 'none';
     document.querySelector('.servisTest').style.display = 'none';
 
 });
 
-$(document).on('click','.vertTestForm',
+$(document).on('click','#vertTestForm',
 function() {
-    document.querySelector('.vertTest').style.display = 'flex';
+    document.querySelector('.vertTest').style.display = 'inline';
     document.querySelector('.maximalTest').style.display = 'none';
     document.querySelector('.fmsTest').style.display = 'none';
     document.querySelector('.ybalanceTest').style.display = 'none';
     document.querySelector('.jumpTest').style.display = 'none';
-    document.querySelector('.modal-content').style.height = '545px';
-    document.querySelector('.modal-content').style.width = '1000px';
     document.querySelector('.polarTest').style.display = 'none';
     document.querySelector('.servisTest').style.display = 'none';
 
 });
 
-$(document).on('click','.polarTestForm',
+$(document).on('click','#polarTestForm',
 function() {
-    document.querySelector('.polarTest').style.display = 'flex';
+    document.querySelector('.polarTest').style.display = 'inline';
     document.querySelector('.vertTest').style.display = 'none';
     document.querySelector('.maximalTest').style.display = 'none';
     document.querySelector('.fmsTest').style.display = 'none';
     document.querySelector('.ybalanceTest').style.display = 'none';
     document.querySelector('.jumpTest').style.display = 'none';
-    document.querySelector('.modal-content').style.height = '545px';
-    document.querySelector('.modal-content').style.width = '1000px';
     document.querySelector('.servisTest').style.display = 'none';
 
 });
-$(document).on('click','.servisTestForm',
+$(document).on('click','#servisTestForm',
 function() {
-    document.querySelector('.servisTest').style.display = 'flex';
+    document.querySelector('.servisTest').style.display = 'inline';
     document.querySelector('.polarTest').style.display = 'none';
     document.querySelector('.vertTest').style.display = 'none';
     document.querySelector('.maximalTest').style.display = 'none';
     document.querySelector('.fmsTest').style.display = 'none';
     document.querySelector('.ybalanceTest').style.display = 'none';
     document.querySelector('.jumpTest').style.display = 'none';
-    document.querySelector('.modal-content').style.height = '545px';
-    document.querySelector('.modal-content').style.width = '1000px';
 
 });
 

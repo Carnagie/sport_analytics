@@ -1,5 +1,5 @@
 var defaultSelected;
-$(document).on('click','.button',
+$(document).on('click','.btn.btn-info',
 function() {
     document.querySelector('.bg-modal').style.display = 'flex';
 });
@@ -21,9 +21,9 @@ function() {
     localStorage.setItem("width", "70%");
 });
 
+
 $(document).on('click','.fms',
 function() {
-    console.log("fms")
     localStorage.setItem("height", "80vh");
     localStorage.setItem("width", "50%");
 });
@@ -56,9 +56,6 @@ function() {
     localStorage.setItem("height", "65vh");
     localStorage.setItem("width", "60%");
 });
-
-
-
 
 function getID(params){
     console.log(params);
