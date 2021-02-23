@@ -56,7 +56,7 @@ $(document).on('click','#pdf',
         var imgData = canvas.toDataURL("image/jpeg",0.9);
         console.log(imgData)
 
-        var items = document.getElementsByClassName("graphs");
+        var items = document.getElementsByClassName("row graphs");
         var rowNum = 1;
 
 
@@ -82,7 +82,7 @@ function listImagePaste(index, maxindex, rowindex) {
 
         console.log("entered html2canvas li");
         var imgData2 = canvas2.toDataURL("image/jpeg",0.9);
-        doc.addImage(imgData2, 'JPEG', 0, 17 + (rowindex-1)*74, 200, 55);
+        doc.addImage(imgData2, 'JPEG', 10, 17 + (rowindex-1)*74, 200, 55);
         if ( rowindex == 4 ){
             doc.addPage();
         }

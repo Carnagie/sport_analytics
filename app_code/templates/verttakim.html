@@ -2,6 +2,14 @@
 
 {% block content %}
 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/verttakim.css') }}">
+    <link href="{{ url_for('static', filename='lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
     <!-- Sidebar Navigation end-->
     <div class="page-content">
         <!-- Page Header-->
@@ -19,21 +27,987 @@
         </div>
         <section class="no-padding-top">
             <div class="container-fluid">
+
                 <div class="row">
-
-                    <div class="col-lg-12">
+                    <form action="/verttakim" style="width: 100%" method="post" autocomplete="off"
+                          enctype="multipart/form-data">
+                        <div class="col-lg-12">
                             <div style="text-align: center">
-                            <input  id="checkboxCustom1" type="radio" name="testType" value="5" class="checkbox-template">
-                            <label for="checkboxCustom1">Polar Test Data</label>
+                                <input id="checkboxCustom1" type="radio" name="testType" value="5"
+                                       class="checkbox-template">
+                                <label for="checkboxCustom1">Polar Test Data</label>
 
-                            <input  id="checkboxCustom2" type="radio" name="testType" value="4" class="checkbox-template">
-                            <label for="checkboxCustom2">Vert Test Data</label>
+                                <input id="checkboxCustom2" type="radio" name="testType" value="4"
+                                       class="checkbox-template">
+                                <label for="checkboxCustom2">Vert Test Data</label>
 
-                            <input id="checkboxCustom3" type="radio" name="testType" value="6" class="checkbox-template">
-                            <label for="checkboxCustom3">Serve Speed Data</label>
+                                <input id="checkboxCustom3" type="radio" name="testType" value="6"
+                                       class="checkbox-template">
+                                <label for="checkboxCustom3">Serve Speed Data</label>
                             </div>
-                    </div>
+                        </div>
 
+                        <div class="col-lg-12">
+
+                            <div class="form-group">
+                                <label class="form-control-label">Start Date: </label>
+                                <input class="form-control" type="date" name="startDate">
+
+                                <label class="form-control-label">End Date: </label>
+                                <input class="form-control" type="date" name="endDate">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-secondary form-control" style="color: white">GETİR
+                            </button>
+
+                            <button type="button" id="pdf" class="btn btn-danger form-control" style="color: white">
+                                KAYDET
+                            </button>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input class="form-control" type='file' id="imgInp"/>
+                            </div>
+                        </div>
+
+
+                        <section id="portfolio" class="section-bg">
+                            <div class="container">
+
+
+                                <div class="col-lg-12">
+                                    <ul id="portfolio-flters">
+                                        <li data-filter="*" class="filter-active">Hepsi</li>
+                                        {% for f in filterNames %}
+                                            <li data-filter=".filter-{{ f }}">{{ f }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                                <div class="portfolio-container" style="width: 100%">
+
+                                    {% for ath in jsonProfilDict %}
+
+                                        <div class="col-lg-6 col-md-6 portfolio-item filter-{{ jsonProfilDict[ath]['mevki'] }} wow fadeInUp"
+                                             data-wow-delay="0.1s">
+                                            <div class="portfolio-wrap">
+                                                <figure style="background-color: white;">
+                                                    <img src="{{ jsonProfilDict[ath]['photo'] }}" class="img-fluid"
+                                                         alt="" style="width: 80%; margin-left: 10%;margin-right: 10%;">
+                                                    <a class="link-preview" title="Düzenle" id="buttonPop2"><i
+                                                            class="ion ion-eye"></i></a>
+                                                    <a class="link-details" title="İncele" id="buttonPop2_text"><i
+                                                            class="ion ion-android-open"></i></a>
+                                                </figure>
+
+                                                <div class="portfolio-info">
+                                                    <h4><a href="#"> {{ ath[2:] }} </a></h4>
+                                                    <p>{{ jsonProfilDict[ath]['mevki'] }}</p>
+                                                    <input type="checkbox" name="pdfTo"
+                                                           value="{{ jsonProfilDict[ath]['json'] }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+                        </section>
+
+
+                        <div id="topdf"></div>
+
+
+                        <div class="col-lg-12" id="startPage">
+                            <ul style="justify-content:center;text-align:center;width: 100%;">
+                                <li style="padding: 2%;">
+
+                                    <form id="form1" runat="server">
+                                        <img id="blah" src="#" alt="your image"/>
+                                    </form>
+
+
+                                </li>
+                                <li><input type="text"
+                                           style="text-align:center;width:60%;font-size:20px;color:black;background-color: inherit;border:none;border-bottom: 2px solid red;"
+                                           value="  ( {{ sdateHTML }} / {{ edateHTML }} ) ARASI TEST SONUÇLARI"></li>
+                                <li style="padding: 2%;"><input style="width:60%;" class="baslikText" type="text"
+                                                                placeholder="Başlık"></li>
+                                <li style="padding: 2%;"><input style="width:60%;" class="baslikText" type="text"
+                                                                placeholder="Başlık"></li>
+
+                            </ul>
+                        </div>
+
+
+                        <div class="col-lg-12" id="topdf2">
+
+
+                            <input style="display:none" type="text" name="pageCounter" value="{{ outputJson|length }}">
+
+                            {% for ath in outputJson %}
+
+                                {% if testType == 4 %}
+
+                                <div id="div{{ loop.index }}">
+
+                                    <h3 style="color:black;margin-left: 43%"> {{ outputJson[ath]['name'][2:] }}</h3>
+
+                                    <div class="row graphs">
+
+                                        <div class="col-lg-6">
+                                            <div class="chart block">
+                                                <div class="bar-chart chart margin-bottom-sm">
+                                                    <canvas id="canvasVertBar{{ loop.index }}"></canvas>
+                                                </div>
+                                            </div>
+
+                                            <script>
+
+                                                var chartColors = {
+                                                    red: 'rgb(255, 99, 132)',
+                                                    orange: 'rgb(255, 159, 64)',
+                                                    yellow: 'rgb(255, 205, 86)',
+                                                    green: 'rgb(75, 192, 192)',
+                                                    blue: 'rgb(54, 162, 235)',
+                                                    purple: 'rgb(153, 102, 255)',
+                                                    grey: 'rgb(231,233,237)'
+                                                };
+
+                                                var config = {
+                                                    type: 'bar',
+                                                    data: {
+                                                        labels: [
+                                                            {% for k in outputJson[ath]['max']['label'] %}
+                                                                "{{k}}",
+                                                            {% endfor %}
+                                                        ],
+                                                        datasets: [{
+                                                            label: "Maximum",
+                                                            backgroundColor: chartColors.red,
+                                                            borderColor: chartColors.red,
+                                                            data: [
+                                                                {% for k in outputJson[ath]['max']['value'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            fill: false,
+                                                        }, {
+                                                            label: "Average",
+                                                            fill: false,
+                                                            backgroundColor: chartColors.blue,
+                                                            borderColor: chartColors.blue,
+                                                            data: [
+                                                                {% for k in outputJson[ath]['ort']['value'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                        }, {
+                                                            label: "Total",
+                                                            fill: false,
+                                                            backgroundColor: chartColors.yellow,
+                                                            borderColor: chartColors.yellow,
+                                                            data: [
+                                                                {% for k in outputJson[ath]['total']['value'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        responsive: true,
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Vert Test Results'
+                                                        },
+                                                        ticks: {
+                                                            min: 0,
+                                                            max: 1000
+                                                        },
+                                                        tooltips: {
+                                                            mode: 'label',
+                                                        },
+                                                        hover: {
+                                                            mode: 'nearest',
+                                                            intersect: true
+                                                        },
+                                                        scales: {
+                                                            xAxes: [{
+                                                                display: true,
+                                                                scaleLabel: {
+                                                                    display: true,
+                                                                    labelString: 'Dates'
+                                                                }
+                                                            }],
+                                                            yAxes: [{
+                                                                display: true,
+                                                                ticks: {
+                                                                    beginAtZero: true
+                                                                },
+                                                                scaleLabel: {
+                                                                    display: true,
+                                                                    labelString: 'Results (cm)'
+                                                                }
+                                                            }]
+                                                        }
+                                                    }
+                                                };
+
+
+                                                var ctx = document.getElementById("canvasVertBar{{loop.index}}").getContext("2d");
+                                                window.myLine = new Chart(ctx, config);
+
+                                            </script>
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="chart block">
+                                                <div class="bar-chart chart margin-bottom-sm">
+                                                    <canvas id="canvasVertLine{{ loop.index }}"></canvas>
+                                                </div>
+                                            </div>
+
+                                            <script>
+
+                                                var chartColors = {
+                                                    red: 'rgb(255, 99, 132)',
+                                                    orange: 'rgb(255, 159, 64)',
+                                                    yellow: 'rgb(255, 205, 86)',
+                                                    green: 'rgb(75, 192, 192)',
+                                                    blue: 'rgb(54, 162, 235)',
+                                                    purple: 'rgb(153, 102, 255)',
+                                                    grey: 'rgb(231,233,237)'
+                                                };
+
+                                                var config = {
+                                                    type: 'line',
+                                                    data: {
+                                                        labels: [
+                                                            {% for k in outputJson[ath]['max']['label'] %}
+                                                                "{{k}}",
+                                                            {% endfor %}
+                                                        ],
+                                                        datasets: [{
+                                                            label: "Maximum",
+                                                            backgroundColor: chartColors.red,
+                                                            borderColor: chartColors.red,
+                                                            data: [
+                                                                {% for k in outputJson[ath]['max']['value'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            fill: false,
+                                                        }, {
+                                                            label: "Average",
+                                                            fill: false,
+                                                            backgroundColor: chartColors.blue,
+                                                            borderColor: chartColors.blue,
+                                                            data: [
+                                                                {% for k in outputJson[ath]['ort']['value'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                        }, {
+                                                            label: "Total",
+                                                            fill: false,
+                                                            backgroundColor: chartColors.yellow,
+                                                            borderColor: chartColors.yellow,
+                                                            data: [
+                                                                {% for k in outputJson[ath]['total']['value'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        responsive: true,
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Vert Test Results'
+                                                        },
+                                                        ticks: {
+                                                            min: 0,
+                                                            max: 1000
+                                                        },
+                                                        tooltips: {
+                                                            mode: 'label',
+                                                        },
+                                                        hover: {
+                                                            mode: 'nearest',
+                                                            intersect: true
+                                                        },
+                                                        scales: {
+                                                            xAxes: [{
+                                                                display: true,
+                                                                scaleLabel: {
+                                                                    display: true,
+                                                                    labelString: 'Dates'
+                                                                }
+                                                            }],
+                                                            yAxes: [{
+                                                                display: true,
+                                                                scaleLabel: {
+                                                                    display: true,
+                                                                    labelString: 'Results (cm)'
+                                                                }
+                                                            }]
+                                                        }
+                                                    }
+                                                };
+
+
+                                                var ctx = document.getElementById("canvasVertLine{{loop.index}}").getContext("2d");
+                                                window.myLine = new Chart(ctx, config);
+
+                                            </script>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                {% elif testType == 5 %}
+
+                                    <div id="div{{ loop.index }}">
+
+                                        <h3 style="color:black;margin-left: 43%"> {{ outputJson[ath]['name'][2:] }}</h3>
+
+                                        <div class="row graphs">
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div class="bar-chart chart margin-bottom-sm">
+                                                        <canvas id="canvasVertBar{{ loop.index }}"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+                                                    var config = {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in outputJson[ath]['max']['label'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.red,
+                                                                borderColor: chartColors.red,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['max']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Average",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.blue,
+                                                                borderColor: chartColors.blue,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['ort']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.yellow,
+                                                                borderColor: chartColors.yellow,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['total']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Polar Test Results'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Dates'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    },
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Results (cm)'
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertBar{{loop.index}}").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div class="bar-chart chart margin-bottom-sm">
+                                                        <canvas id="canvasVertLine{{ loop.index }}"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgb(255, 99, 132)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        yellow: 'rgb(255, 205, 86)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgb(231,233,237)'
+                                                    };
+
+                                                    var config = {
+                                                        type: 'line',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in outputJson[ath]['max']['label'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Maximum",
+                                                                backgroundColor: chartColors.red,
+                                                                borderColor: chartColors.red,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['max']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Average",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.blue,
+                                                                borderColor: chartColors.blue,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['ort']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.yellow,
+                                                                borderColor: chartColors.yellow,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['total']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Polar Test Results'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Dates'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Results (cm)'
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertLine{{loop.index}}").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+
+
+
+                                {% else %}
+
+
+                                    <div id="div{{ loop.index }}">
+
+                                        <h3 style="color:black;margin-left: 43%"> {{ outputJson[ath]['name'][2:] }}</h3>
+
+                                        <div class="row graphs">
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div class="bar-chart chart margin-bottom-sm">
+                                                        <canvas id="canvasVertBar{{ loop.index }}"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgba(255, 10, 63, 1)',
+                                                        lightred: 'rgba(255, 122, 151, 1)',
+                                                        lightblue: 'rgba(148, 206, 244, 1)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        darkyellow: 'rgba(209, 202, 0, 1)',
+                                                        yellow: 'rgba(250, 242, 0, 1)',
+                                                        lightyellow: 'rgba(255, 250, 112, 1)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgba(87, 87, 87, 1)',
+                                                        lightgreen: 'rgba(251, 193, 235, 1)',
+                                                        lightpink: 'rgba(247, 120, 215, 1)',
+                                                        pink: 'rgba(245, 81, 204, 1)',
+                                                        darkblue: 'rgba(16, 104, 162, 1)',
+                                                        darkpink: 'rgba(198, 12, 151, 1)',
+                                                        darkred: 'rgba(168, 0, 36, 1)',
+                                                        brown: 'rgba(173, 99, 56, 1)'
+                                                    };
+
+                                                    var config = {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in outputJson[ath]['ace']['max']['label'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Ace Max",
+                                                                backgroundColor: chartColors.darkred,
+                                                                borderColor: chartColors.darkred,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['ace']['max']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Ace Avg",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.red,
+                                                                borderColor: chartColors.red,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['ace']['ort']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Ace Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.lightred,
+                                                                borderColor: chartColors.lightred,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['ace']['total']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Slash Max",
+                                                                backgroundColor: chartColors.darkblue,
+                                                                borderColor: chartColors.darkblue,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['hit']['max']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Slash Avg",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.blue,
+                                                                borderColor: chartColors.blue,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['hit']['ort']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Flash Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.lightblue,
+                                                                borderColor: chartColors.lightblue,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['hit']['total']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Serve Max",
+                                                                backgroundColor: chartColors.darkpink,
+                                                                borderColor: chartColors.darkpink,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['servis']['max']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Serve Avg",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.pink,
+                                                                borderColor: chartColors.pink,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['servis']['ort']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Serve Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.lightpink,
+                                                                borderColor: chartColors.lightpink,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['servis']['total']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            },
+                                                                {
+                                                                    label: "Error Max",
+                                                                    backgroundColor: chartColors.darkyellow,
+                                                                    borderColor: chartColors.darkyellow,
+                                                                    data: [
+                                                                        {% for k in outputJson[ath]['hata']['max']['value'] %}
+                                                                            "{{k}}",
+                                                                        {% endfor %}
+                                                                    ],
+                                                                    fill: false,
+                                                                }, {
+                                                                    label: "Error Avg",
+                                                                    fill: false,
+                                                                    backgroundColor: chartColors.yellow,
+                                                                    borderColor: chartColors.yellow,
+                                                                    data: [
+                                                                        {% for k in outputJson[ath]['hata']['ort']['value'] %}
+                                                                            "{{k}}",
+                                                                        {% endfor %}
+                                                                    ],
+                                                                }, {
+                                                                    label: "Error Total",
+                                                                    fill: false,
+                                                                    backgroundColor: chartColors.lightyellow,
+                                                                    borderColor: chartColors.lightyellow,
+                                                                    data: [
+                                                                        {% for k in outputJson[ath]['hata']['total']['value'] %}
+                                                                            "{{k}}",
+                                                                        {% endfor %}
+                                                                    ],
+                                                                }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Test Results'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Dates'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Results (km/h)'
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertBar{{loop.index}}").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="chart block">
+                                                    <div class="bar-chart chart margin-bottom-sm">
+                                                        <canvas id="canvasVertLine{{ loop.index }}"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+
+                                                    var chartColors = {
+                                                        red: 'rgba(255, 10, 63, 1)',
+                                                        lightred: 'rgba(255, 122, 151, 1)',
+                                                        lightblue: 'rgba(148, 206, 244, 1)',
+                                                        orange: 'rgb(255, 159, 64)',
+                                                        darkyellow: 'rgba(209, 202, 0, 1)',
+                                                        yellow: 'rgba(250, 242, 0, 1)',
+                                                        lightyellow: 'rgba(255, 250, 112, 1)',
+                                                        green: 'rgb(75, 192, 192)',
+                                                        blue: 'rgb(54, 162, 235)',
+                                                        purple: 'rgb(153, 102, 255)',
+                                                        grey: 'rgba(87, 87, 87, 1)',
+                                                        lightgreen: 'rgba(251, 193, 235, 1)',
+                                                        lightpink: 'rgba(247, 120, 215, 1)',
+                                                        pink: 'rgba(245, 81, 204, 1)',
+                                                        darkblue: 'rgba(16, 104, 162, 1)',
+                                                        darkpink: 'rgba(198, 12, 151, 1)',
+                                                        darkred: 'rgba(168, 0, 36, 1)',
+                                                        brown: 'rgba(173, 99, 56, 1)'
+                                                    };
+                                                    var config = {
+                                                        type: 'line',
+                                                        data: {
+                                                            labels: [
+                                                                {% for k in outputJson[ath]['ace']['max']['label'] %}
+                                                                    "{{k}}",
+                                                                {% endfor %}
+                                                            ],
+                                                            datasets: [{
+                                                                label: "Ace Max",
+                                                                backgroundColor: chartColors.darkred,
+                                                                borderColor: chartColors.darkred,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['ace']['max']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Ace Avg",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.red,
+                                                                borderColor: chartColors.red,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['ace']['ort']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Ace Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.lightred,
+                                                                borderColor: chartColors.lightred,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['ace']['total']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Slash Max",
+                                                                backgroundColor: chartColors.darkblue,
+                                                                borderColor: chartColors.darkblue,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['hit']['max']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Slash Avg",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.blue,
+                                                                borderColor: chartColors.blue,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['hit']['ort']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Slash Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.lightblue,
+                                                                borderColor: chartColors.lightblue,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['hit']['total']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Serve Max",
+                                                                backgroundColor: chartColors.darkyellow,
+                                                                borderColor: chartColors.darkyellow,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['servis']['max']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                                fill: false,
+                                                            }, {
+                                                                label: "Serve Avg",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.yellow,
+                                                                borderColor: chartColors.yellow,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['servis']['ort']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }, {
+                                                                label: "Serve Total",
+                                                                fill: false,
+                                                                backgroundColor: chartColors.lightyellow,
+                                                                borderColor: chartColors.lightyellow,
+                                                                data: [
+                                                                    {% for k in outputJson[ath]['servis']['total']['value'] %}
+                                                                        "{{k}}",
+                                                                    {% endfor %}
+                                                                ],
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                text: 'Test Results'
+                                                            },
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 1000
+                                                            },
+                                                            tooltips: {
+                                                                mode: 'label',
+                                                            },
+                                                            hover: {
+                                                                mode: 'nearest',
+                                                                intersect: true
+                                                            },
+                                                            scales: {
+                                                                xAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Dates'
+                                                                    }
+                                                                }],
+                                                                yAxes: [{
+                                                                    display: true,
+                                                                    scaleLabel: {
+                                                                        display: true,
+                                                                        labelString: 'Results (km/h)'
+                                                                    }
+                                                                }]
+                                                            }
+                                                        }
+                                                    };
+
+
+                                                    var ctx = document.getElementById("canvasVertLine{{loop.index}}").getContext("2d");
+                                                    window.myLine = new Chart(ctx, config);
+
+                                                </script>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+
+
+
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </section>
@@ -44,5 +1018,25 @@
     </div>
 
 
+    <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jquery/jquery-migrate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/superfish/hoverIntent.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/superfish/superfish.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/isotope/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/lightbox/js/lightbox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/touchSwipe/jquery.touchSwipe.min.js') }}"></script>
 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+
+    <script src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/verttakim.js') }}"></script>
 {% endblock %}
