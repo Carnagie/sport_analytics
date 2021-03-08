@@ -16,8 +16,8 @@ h3{
 .modal-content {
   text-align: center;
   width: 70vw;
-  height: 60vh;
-  background-color: #605E6B;
+  height: 70vh;
+  background-color: black;
   position: relative;
   padding: 20px;
 }

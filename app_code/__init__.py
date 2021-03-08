@@ -4,7 +4,7 @@ import csv, json, sys
 import psycopg2
 from datetime import date, timedelta, datetime
 import collections
-
+import glob
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -34,6 +34,11 @@ diseaseDataCodeList = list()
 
 connectionList = list()
 
+
+@app.route('/logout', methods=["GET","POST"])
+def logout():
+    session.pop("admin", None)
+    return render_template('main_page.html')
 
 @app.route('/', methods=["GET","POST"])
 def index():
@@ -1180,6 +1185,7 @@ def index10():
     if "admin" not in session:
         return render_template('main_page.html')
     else:
+
     	sporcuData = {}
     	#--------------------------
     	squatList = []
@@ -1225,6 +1231,8 @@ def index10():
     	print(jsonProfilDict)
 
     	cur.close()
+
+        files = glob.glob('static/punponePicture/**/*.png', recursive=True)
 
     	if request.method == 'POST':
 
@@ -1441,7 +1449,7 @@ def index13():
 
     		pdfList = request.form.getlist("pdfTo")
     		print("len",len(pdfList))
-    		if len(pdfList) == 0:
+    		if len(pdfList) == 0 or len(sdate) < 6 or len(edate) < 6:
     			return render_template('verttakim.html',jsonProfilDict=jsonProfilDict,filterNames=filterNames)
 
 

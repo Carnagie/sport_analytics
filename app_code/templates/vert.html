@@ -49,10 +49,9 @@
                                                 <input class="form-control" type="date" name="dateChosen">
 
                                                 <button class="btn btn-success col-lg-5" type="submit"
-                                                        name="submitButton">Profili
-                                                    Getir
+                                                        name="submitButton">Bring Profile
                                                 </button>
-                                                <button class="btn btn-warning col-lg-5" type="button" id="pdf">Yazdır
+                                                <button class="btn btn-warning col-lg-5" type="button" id="pdf">Print
                                                 </button>
                                             </div>
                                         </div>
@@ -74,7 +73,7 @@
                                     <div class="row">
 
                                             <div class="col-lg-6">
-                                                <div class="chart block">
+                                                <div class="chart block" style="background-color: white">
                                                     <div>
                                                         <canvas id="canvasVert"></canvas>
                                                     </div>
@@ -92,10 +91,6 @@
                                                         grey: 'rgb(231,233,237)'
                                                     };
 
-                                                    var randomScalingFactor = function () {
-                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                                    }
-                                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                                                     var config = {
                                                         type: 'bar',
                                                         data: {
@@ -140,7 +135,7 @@
                                                             responsive: true,
                                                             title: {
                                                                 display: true,
-                                                                text: 'Vert Test Sonuçları Son 52 Ölçüm'
+                                                                text: 'Vert Test Results Last 52'
                                                             },
                                                             ticks: {
                                                                 min: 0,
@@ -158,14 +153,14 @@
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Tarihler'
+                                                                        labelString: 'Dates'
                                                                     }
                                                                 }],
                                                                 yAxes: [{
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Ölçümler (cm)'
+                                                                        labelString: 'Results (cm)'
                                                                     },
                                                                     ticks: {
                                                                         beginAtZero: true
@@ -184,7 +179,7 @@
                                             </div>
 
                                             <div class="col-lg-6">
-                                                <div class="chart block">
+                                                <div class="chart block" style="background-color: white">
                                                     <div>
                                                         <canvas id="canvasVert2"></canvas>
                                                     </div>
@@ -202,10 +197,6 @@
                                                         grey: 'rgb(231,233,237)'
                                                     };
 
-                                                    var randomScalingFactor = function () {
-                                                        return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-                                                    }
-                                                    var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                                                     var config = {
                                                         type: 'line',
                                                         data: {
@@ -250,7 +241,7 @@
                                                             responsive: true,
                                                             title: {
                                                                 display: true,
-                                                                text: 'Vert Test Sonuçları Son 52 Ölçüm'
+                                                                text: 'Vert Test Results Last 52'
                                                             },
                                                             ticks: {
                                                                 min: 0,
@@ -268,14 +259,14 @@
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Tarihler'
+                                                                        labelString: 'Dates'
                                                                     }
                                                                 }],
                                                                 yAxes: [{
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Ölçümler (cm)'
+                                                                        labelString: 'Results (cm)'
                                                                     },
                                                                     ticks: {
                                                                         beginAtZero: true
@@ -301,7 +292,7 @@
 
                                             <div class="col-lg-6">
 
-                                                <div class="chart block">
+                                                <div class="chart block" style="background-color: white">
                                                     <div>
                                                         <canvas id="canvasVertMax"></canvas>
                                                     </div>
@@ -346,7 +337,7 @@
                                                             responsive: true,
                                                             title: {
                                                                 display: true,
-                                                                text: 'Vert Test Maximum Ölçüm Sonuçları'
+                                                                text: 'Vert Test Maximum Results'
                                                             },
                                                             ticks: {
                                                                 min: 0,
@@ -364,14 +355,14 @@
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Sporcular'
+                                                                        labelString: 'Athletes'
                                                                     }
                                                                 }],
                                                                 yAxes: [{
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Ölçümler (cm)'
+                                                                        labelString: 'Results (cm)'
                                                                     },
                                                                     ticks: {
                                                                         beginAtZero: true
@@ -390,7 +381,7 @@
                                             </div>
 
                                             <div class="col-lg-6">
-                                                <div class="chart block">
+                                                <div class="chart block" style="background-color: white">
                                                     <div>
                                                         <canvas id="canvasVertMax2"></canvas>
                                                     </div>
@@ -435,7 +426,7 @@
                                                             responsive: true,
                                                             title: {
                                                                 display: true,
-                                                                text: 'Vert Test Maximum Ölçüm Sonuçları'
+                                                                text: 'Vert Test Maximum Results'
                                                             },
                                                             tooltips: {
                                                                 mode: 'label',
@@ -449,14 +440,14 @@
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Sporcular'
+                                                                        labelString: 'Athletes'
                                                                     }
                                                                 }],
                                                                 yAxes: [{
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Ölçümler (cm)'
+                                                                        labelString: 'Results (cm)'
                                                                     }
                                                                 }]
                                                             }
@@ -479,7 +470,7 @@
 
 
                                             <div class="col-lg-6">
-                                                <div class="chart block">
+                                                <div class="chart block" style="background-color: white">
                                                     <div>
                                                         <canvas id="canvasVertOrt"></canvas>
                                                     </div>
@@ -509,7 +500,7 @@
                                                                 {% endfor %}
                                                             ],
                                                             datasets: [{
-                                                                label: "Maximum",
+                                                                label: "Average",
                                                                 backgroundColor: chartColors.green,
                                                                 borderColor: chartColors.green,
                                                                 data: [
@@ -524,7 +515,7 @@
                                                             responsive: true,
                                                             title: {
                                                                 display: true,
-                                                                text: 'Vert Test Ortalama Ölçüm Sonuçları'
+                                                                text: 'Vert Test Average Results'
                                                             },
                                                             ticks: {
                                                                 min: 0,
@@ -542,14 +533,14 @@
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Sporcular'
+                                                                        labelString: 'Athletes'
                                                                     }
                                                                 }],
                                                                 yAxes: [{
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Ölçümler (cm)'
+                                                                        labelString: 'Results (cm)'
                                                                     },
                                                                     ticks: {
                                                                         beginAtZero: true
@@ -569,7 +560,7 @@
 
 
                                             <div class="col-lg-6">
-                                                <div class="chart block">
+                                                <div class="chart block" style="background-color: white">
                                                     <div>
                                                         <canvas id="canvasVertOrt2"></canvas>
                                                     </div>
@@ -599,7 +590,7 @@
                                                                 {% endfor %}
                                                             ],
                                                             datasets: [{
-                                                                label: "Maximum",
+                                                                label: "Average",
                                                                 backgroundColor: chartColors.green,
                                                                 borderColor: chartColors.green,
                                                                 data: [
@@ -614,7 +605,7 @@
                                                             responsive: true,
                                                             title: {
                                                                 display: true,
-                                                                text: 'Vert Test Ortalama Ölçüm Sonuçları'
+                                                                text: 'Vert Test Average Results'
                                                             },
                                                             ticks: {
                                                                 min: 0,
@@ -632,14 +623,14 @@
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Sporcular'
+                                                                        labelString: 'Athletes'
                                                                     }
                                                                 }],
                                                                 yAxes: [{
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Ölçümler (cm)'
+                                                                        labelString: 'Results (cm)'
                                                                     },
                                                                     ticks: {
                                                                         beginAtZero: true
@@ -664,7 +655,7 @@
 
 
                                             <div class="col-lg-6">
-                                                <div class="chart block">
+                                                <div class="chart block" style="background-color: white">
                                                     <div>
                                                         <canvas id="canvasVertTotal"></canvas>
                                                     </div>
@@ -694,7 +685,7 @@
                                                                 {% endfor %}
                                                             ],
                                                             datasets: [{
-                                                                label: "Maximum",
+                                                                label: "Total",
                                                                 backgroundColor: chartColors.blue,
                                                                 borderColor: chartColors.blue,
                                                                 data: [
@@ -709,7 +700,7 @@
                                                             responsive: true,
                                                             title: {
                                                                 display: true,
-                                                                text: 'Vert Test Total Sıçrama Sonuçları'
+                                                                text: 'Vert Test Total Jump Results'
                                                             },
                                                             ticks: {
                                                                 min: 0,
@@ -727,14 +718,14 @@
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Sporcular'
+                                                                        labelString: 'Athletes'
                                                                     }
                                                                 }],
                                                                 yAxes: [{
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Ölçümler (adet)'
+                                                                        labelString: 'Results (pcs)'
                                                                     },
                                                                     ticks: {
                                                                         beginAtZero: true
@@ -753,7 +744,7 @@
                                             </div>
 
                                             <div class="col-lg-6">
-                                                <div class="chart block">
+                                                <div class="chart block" style="background-color: white">
                                                     <div>
                                                         <canvas id="canvasVertTotal2"></canvas>
                                                     </div>
@@ -783,7 +774,7 @@
                                                                 {% endfor %}
                                                             ],
                                                             datasets: [{
-                                                                label: "Maximum",
+                                                                label: "Total",
                                                                 backgroundColor: chartColors.blue,
                                                                 borderColor: chartColors.blue,
                                                                 data: [
@@ -798,7 +789,7 @@
                                                             responsive: true,
                                                             title: {
                                                                 display: true,
-                                                                text: 'Vert Test Total Sıçrama Sonuçları'
+                                                                text: 'Vert Test Total Jump Results'
                                                             },
                                                             ticks: {
                                                                 min: 0,
@@ -816,14 +807,14 @@
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Sporcular'
+                                                                        labelString: 'Athletes'
                                                                     }
                                                                 }],
                                                                 yAxes: [{
                                                                     display: true,
                                                                     scaleLabel: {
                                                                         display: true,
-                                                                        labelString: 'Ölçümler (adet)'
+                                                                        labelString: 'Results (pcs)'
                                                                     },
                                                                     ticks: {
                                                                         beginAtZero: true
