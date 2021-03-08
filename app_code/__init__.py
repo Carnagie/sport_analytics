@@ -1232,8 +1232,6 @@ def index10():
 
     	cur.close()
 
-        files = glob.glob('static/punponePicture/**/*.png', recursive=True)
-
     	if request.method == 'POST':
 
     		jsonName = jsonProfilDict[request.form.get("tableChosen")]["json"]
@@ -1315,6 +1313,8 @@ def index10():
 
     			hiptrustList = [ int(dataPercent["hip_trust"]) , int(dataPercent["hip_trust"])*9/10, int(dataPercent["hip_trust"])*85/100, int(dataPercent["hip_trust"])* 80/100, int(dataPercent["hip_trust"])*75/100, int(dataPercent["hip_trust"])*70/100,int(dataPercent["hip_trust"])*65/100,int(dataPercent["hip_trust"])*6/10,int(dataPercent["hip_trust"])*55/100, int(dataPercent["hip_trust"])*5/10 ]
 
+    	files = glob.glob('static/punponePicture/**/*.png', recursive=True)
+    	print(files)
     	return render_template('cikti.html',nameChosen=nameChosen,jsonProfilDict=jsonProfilDict,def_img=def_img,tempProfileDict=tempProfileDict,squatList=squatList,
     		benchList=benchList,rowList=rowList,shoulderList=shoulderList,deadliftList=deadliftList,hiptrustList=hiptrustList)
 
